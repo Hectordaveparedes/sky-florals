@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKY Florals — Luxury Atelier & Architectural Floral Sculptures (US)</title>
+  <meta name="description" content="SKY Florals is a luxury floral atelier offering bespoke sculptural floral arrangements, scent-infused unboxing experiences, and same-day white-glove delivery across NYC, LA, Miami, and major US cities.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span>
+      <span class="pulse-dot"></span>
+      White-Glove Courier Delivery Available Today in NYC, LA, Miami & Chicago
+    </span>
+    <span style="font-size:0.72rem; opacity:0.8;">
+      US DOLLARS ($ USD) | FREE GIFT CALLIGRAPHY CARD WITH EVERY ORDER
+    </span>
+  </div>
+
+  <!-- Main Luxury Navigation -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      SKY FLORALS
+      <span>NEW YORK • LOS ANGELES • MIAMI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#customizer" class="nav-link">Atelier Customizer</a></li>
+      <li><a href="#quiz" class="nav-link">Emotional Matcher</a></li>
+      <li><a href="#sculptures" class="nav-link">Sculptures</a></li>
+      <li><a href="#unboxing" class="nav-link">The Unboxing</a></li>
+      <li><a href="#subscriptions" class="nav-link">Subscriptions</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon" onclick="openCartDrawer()">
+        <span>Shopping Bag</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span>✨</span> High-Fashion Floral Atelier
+        </div>
+        <h1 class="heading-xl">
+          When Words Fall Short, Flowers Speak in <span class="italic">Sculpture</span>.
+        </h1>
+        <p class="hero-description">
+          Forget generic, forgettable flowers. SKY Florals crafts architectural, scent-infused floral sculptures designed to express deep devotion, sincere apologies, and quiet luxury moments across America’s top cities.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#customizer" class="btn-primary">Design Your Sky Bouquet →</a>
+          <a href="#quiz" class="btn-secondary">Find Emotional Solution</a>
+        </div>
+        
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <span class="trust-number">7-10 Days</span>
+            <span class="trust-label">Guaranteed Freshness</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-number">Same-Day</span>
+            <span class="trust-label">US Metro Courier</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-number">100% Wax-Sealed</span>
+            <span class="trust-label">Calligraphy Notes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-image-card">
+          <img src="assets/hero.jpg" alt="SKY Florals Signature Arrangement">
+          <div class="floating-badge">
+            <div class="floating-badge-title">Hailey Bieber Pick</div>
+            <div class="floating-badge-text">The Alabaster Calla & Blush Rose Sculpture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Emotional Copywriting Manifesto -->
+  <section class="emotional-manifesto">
+    <div class="container manifesto-content">
+      <span class="quote-mark">“</span>
+      <h2 class="manifesto-text">
+        Most flowers are bought to celebrate a moment. <br>
+        SKY Florals is created to <span class="manifesto-highlight">immortalize a feeling</span>—making someone feel truly seen, deeply cherished, and unforgettably moved.
+      </h2>
+      <p style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.2em; color:var(--text-secondary);">— The SKY Florals Philosophy</p>
+    </div>
+  </section>
+
+  <!-- Problem vs Solution Matrix -->
+  <section class="matrix-section container">
+    <div class="section-header">
+      <span class="subheading">Why Standard Flowers Fail</span>
+      <h2 class="heading-lg">The Problem vs. The SKY Experience</h2>
+      <p style="color:var(--text-secondary);">We solved the frustration of mass-market online florists so your gesture never falls flat.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- Standard Florists -->
+      <div class="comparison-card card-problem">
+        <span class="card-badge">Standard Online Florists</span>
+        <h3 class="comparison-title">Generic & Disappointing</h3>
+        <ul class="comparison-list">
+          <li><span class="icon-cross">✕</span> Arrive crushed in tight cardboard boxes with dying stems</li>
+          <li><span class="icon-cross">✕</span> Printed cheap paper receipts with generic machine text</li>
+          <li><span class="icon-cross">✕</span> Wilt within 48 hours leaving a sad mess</li>
+          <li><span class="icon-cross">✕</span> Lack artistic form, looking like supermarket budget bundles</li>
+          <li><span class="icon-cross">✕</span> Unreliable delivery windows that ruin special occasions</li>
+        </ul>
+      </div>
+
+      <!-- SKY Florals -->
+      <div class="comparison-card card-solution">
+        <span class="card-badge">The SKY Florals Standard</span>
+        <h3 class="comparison-title">Sculptural & Unforgettable</h3>
+        <ul class="comparison-list">
+          <li><span class="icon-check">✓</span> Temperature-controlled white-glove courier delivery</li>
+          <li><span class="icon-check">✓</span> Hand-written wax-sealed heavy parchment calligraphy card</li>
+          <li><span class="icon-check">✓</span> 7 to 10 day freshness guarantee with proprietary botanical elixir</li>
+          <li><span class="icon-check">✓</span> Hailey Bieber-inspired minimalist aesthetic in ceramic & crystal vessels</li>
+          <li><span class="icon-check">✓</span> Signature French Vanilla & Damask Rose room misting spray</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Quiz Section -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <div class="section-header">
+        <span class="subheading">Interactive Emotional Matcher</span>
+        <h2 class="heading-lg">Find Your Emotional Solution</h2>
+        <p style="color:var(--text-secondary);">Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.</p>
+      </div>
+
+      <div class="quiz-container">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="quizProgressBar"></div>
+        </div>
+        <div id="quizContent">
+          <!-- Quiz steps rendered via quiz.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atelier Bouquet Customizer Studio -->
+  <section class="customizer-section container" id="customizer">
+    <div class="section-header">
+      <span class="subheading">Live Design Studio</span>
+      <h2 class="heading-lg">Design Your Custom Sky Bouquet</h2>
+      <p style="color:var(--text-secondary);">Build a bespoke arrangement stem-by-stem with live price updates and personal card preview.</p>
+    </div>
+
+    <div class="customizer-layout">
+      <!-- Live Preview Side -->
+      <div class="customizer-preview">
+        <div class="preview-image-container">
+          <img id="customizerPreviewImg" src="assets/hero.jpg" alt="Custom Bouquet Live Preview">
+        </div>
+        <div class="live-card-preview">
+          <div class="live-card-title">Handwritten Wax-Sealed Stationery Preview</div>
+          <div class="live-card-text" id="liveCardText">To my favorite person, with all my love.</div>
+        </div>
+      </div>
+
+      <!-- Controls Side -->
+      <div class="customizer-controls">
+        <!-- Palette Selection -->
+        <div class="control-group">
+          <div class="control-label">
+            1. Select Stem Palette
+            <span id="paletteLabel">Ivory & Alabaster</span>
+          </div>
+          <div class="option-pills" id="palettePills">
+            <button class="pill-btn active" data-value="ivory" onclick="setPalette('ivory')">
+              <span class="color-dot" style="background:#FBF9F5;"></span> Ivory & Alabaster
+            </button>
+            <button class="pill-btn" data-value="blush" onclick="setPalette('blush')">
+              <span class="color-dot" style="background:#EADCD6;"></span> Muted Peony Blush (+$25)
+            </button>
+            <button class="pill-btn" data-value="terracotta" onclick="setPalette('terracotta')">
+              <span class="color-dot" style="background:#D4A373;"></span> Sunset Terracotta (+$30)
+            </button>
+            <button class="pill-btn" data-value="midnight" onclick="setPalette('midnight')">
+              <span class="color-dot" style="background:#3D2645;"></span> Midnight Velvet (+$40)
+            </button>
+          </div>
+        </div>
+
+        <!-- Vessel Selection -->
+        <div class="control-group">
+          <div class="control-label">
+            2. Choose Architectural Vessel
+            <span>Included or Upgrade</span>
+          </div>
+          <div class="option-pills" id="vesselPills">
+            <button class="pill-btn active" data-value="alabaster" onclick="setVessel('alabaster')">Matte Alabaster Ceramic</button>
+            <button class="pill-btn" data-value="crystal" onclick="setVessel('crystal')">Fluted Italian Crystal (+$20)</button>
+            <button class="pill-btn" data-value="travertine" onclick="setVessel('travertine')">Raw Travertine Stone (+$35)</button>
+          </div>
+        </div>
+
+        <!-- Ribbon Ribbon Selection -->
+        <div class="control-group">
+          <div class="control-label">
+            3. Choose Ribbon Accent
+          </div>
+          <div class="option-pills" id="ribbonPills">
+            <button class="pill-btn active" data-value="silk-cream" onclick="setRibbon('silk-cream')">Raw Silk Cream</button>
+            <button class="pill-btn" data-value="velvet-espresso" onclick="setRibbon('velvet-espresso')">Espresso Velvet (+$10)</button>
+            <button class="pill-btn" data-value="gold-metal" onclick="setRibbon('gold-metal')">Monogram Gold Band (+$15)</button>
+          </div>
+        </div>
+
+        <!-- Signature Scent Spray -->
+        <div class="control-group">
+          <div class="control-label">
+            4. Unboxing Scent Infusion
+          </div>
+          <div class="option-pills" id="scentPills">
+            <button class="pill-btn active" data-value="vanilla-rose" onclick="setScent('vanilla-rose')">French Vanilla & Rose</button>
+            <button class="pill-btn" data-value="sandalwood" onclick="setScent('sandalwood')">Smoked Sandalwood (+$12)</button>
+            <button class="pill-btn" data-value="none" onclick="setScent('none')">Unscented Natural</button>
+          </div>
+        </div>
+
+        <!-- Calligraphy Note Input -->
+        <div class="control-group">
+          <div class="control-label">
+            5. Personalized Calligraphy Note
+          </div>
+          <textarea class="note-input" id="noteInput" placeholder="Type your heartfelt message here..."></textarea>
+        </div>
+
+        <!-- Price & CTA -->
+        <div class="price-summary-bar">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Total Investment</div>
+            <div class="price-display" id="customizerPriceDisplay">$175</div>
+          </div>
+          <button class="btn-primary" onclick="addCustomArrangementToCart()">Add Custom Creation to Bag →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Catalog -->
+  <section class="catalog-section" id="sculptures">
+    <div class="container">
+      <div class="section-header">
+        <span class="subheading">Curated Floral Sculptures</span>
+        <h2 class="heading-lg">Signature SKY Collection</h2>
+        <p style="color:var(--text-secondary);">Hand-selected stems arranged by master florists for immediate delivery across the United States.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCatalog('all', this)">All Sculptures</button>
+        <button class="filter-btn" onclick="filterCatalog('minimalist', this)">Minimalist Chic</button>
+        <button class="filter-btn" onclick="filterCatalog('grand', this)">Grand Declarations</button>
+        <button class="filter-btn" onclick="filterCatalog('rituals', this)">Monthly Rituals</button>
+      </div>
+
+      <!-- Catalog Grid -->
+      <div class="catalog-grid" id="catalogGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Unboxing Experience Showcase -->
+  <section class="unboxing-section" id="unboxing">
+    <div class="container unboxing-grid">
+      <div class="unboxing-image">
+        <img src="assets/unboxing.jpg" alt="SKY Florals Luxury Packaging Unboxing">
+      </div>
+
+      <div class="unboxing-steps">
+        <span class="subheading" style="color:var(--accent-rose);">Sensory Unboxing Experience</span>
+        <h2 class="heading-lg" style="color:var(--text-white);">Designed to Elevate the Unboxing Ritual</h2>
+        
+        <div class="step-item">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <h4>Signature Heavy Matte Box</h4>
+            <p>Crafted from rigid sustainably-sourced paper with magnetic closure and subtle gold-embossed SKY logo.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <h4>Botanical Scent Infusion</h4>
+            <p>Every box is misted with our proprietary French Damask Rose & Vanilla essential oil blend prior to sealing.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <h4>Wax-Sealed Hand Letter</h4>
+            <p>Your custom note is individually hand-written by a calligrapher and sealed with official SKY metallic wax.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery ZIP Code Checker -->
+  <section class="container section-padding">
+    <div class="zip-checker-card">
+      <span class="subheading">US Courier Verification</span>
+      <h2 class="heading-lg" style="margin-top:8px;">Check Same-Day Delivery in Your US City</h2>
+      <p style="color:var(--text-secondary); max-width:500px; margin:12px auto 0;">
+        Enter your 5-digit US ZIP Code to confirm real-time white-glove courier availability.
+      </p>
+
+      <div class="zip-input-group">
+        <input type="text" class="zip-input" id="zipInput" placeholder="Enter ZIP Code (e.g. 10001, 90210, 33139)" maxlength="5">
+        <button class="btn-primary" onclick="checkDeliveryZip()">Check Availability</button>
+      </div>
+
+      <div class="zip-status-msg" id="zipStatusMsg"></div>
+    </div>
+  </section>
+
+  <!-- Subscriptions Section -->
+  <section class="subscription-section" id="subscriptions">
+    <div class="container">
+      <div class="section-header">
+        <span class="subheading">The SKY VIP Membership</span>
+        <h2 class="heading-lg">Elevate Your Residence Every Month</h2>
+        <p style="color:var(--text-secondary);">Enjoy recurring deliveries of seasonal floral sculptures with exclusive member perks.</p>
+      </div>
+
+      <div class="sub-grid">
+        <!-- Tier 1 -->
+        <div class="sub-card">
+          <div class="sub-tier">The Minimalist</div>
+          <div class="sub-price">$125 <span>/ delivery</span></div>
+          <ul class="sub-features">
+            <li>Fresh stem bouquet delivered every month</li>
+            <li>Complementary sleek ceramic vase rotation</li>
+            <li>Free priority white-glove delivery</li>
+            <li>Cancel or pause anytime</li>
+          </ul>
+          <button class="btn-secondary" onclick="addToCart({id:'sub-1', name:'The Minimalist Subscription', price:125, image:'assets/lifestyle.jpg', meta:'Monthly Subscription'})">Choose Minimalist Tier</button>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="sub-card popular">
+          <span class="sub-badge">Most Popular</span>
+          <div class="sub-tier">The Sanctuary</div>
+          <div class="sub-price">$195 <span>/ delivery</span></div>
+          <ul class="sub-features">
+            <li>Bi-weekly fresh floral sculpture delivery</li>
+            <li>Italian crystal & marble vase access</li>
+            <li>Complimentary signature room scent spray</li>
+            <li>15% off all additional gift orders</li>
+          </ul>
+          <button class="btn-primary" onclick="addToCart({id:'sub-2', name:'The Sanctuary Subscription', price:195, image:'assets/signature_blush.jpg', meta:'Bi-Weekly Subscription'})">Join Sanctuary Club</button>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="sub-card">
+          <div class="sub-tier">The Atelier VIP</div>
+          <div class="sub-price">$350 <span>/ delivery</span></div>
+          <ul class="sub-features">
+            <li>Weekly grand architectural floral arrangement</li>
+            <li>Dedicated master florist consultation</li>
+            <li>Custom color palette requested per week</li>
+            <li>20% off all gift orders + priority holiday slots</li>
+          </ul>
+          <button class="btn-secondary" onclick="addToCart({id:'sub-3', name:'The Atelier VIP Subscription', price:350, image:'assets/hero.jpg', meta:'Weekly Subscription'})">Join VIP Atelier</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Press & Quotes -->
+  <section class="container section-padding">
+    <div class="press-bar">
+      <span class="press-logo">VOGUE</span>
+      <span class="press-logo">HARPER'S BAZAAR</span>
+      <span class="press-logo">ELLE DECOR</span>
+      <span class="press-logo">ARCHITECTURAL DIGEST</span>
+    </div>
+  </section>
+
+  <!-- Slide-Over Shopping Bag Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="if(event.target === this) closeCartDrawer()">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3 class="cart-title">Your Shopping Bag</h3>
+        <span class="close-btn" onclick="closeCartDrawer()">✕</span>
+      </div>
+
+      <div class="cart-body" id="cartBody">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0</span>
+        </div>
+        <div class="summary-row">
+          <span>White-Glove Courier Delivery</span>
+          <span>$15</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="cartTotal">$0</span>
+        </div>
+
+        <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="openCheckoutModal()">Proceed to Express Checkout →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Express Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card" id="modalCardContent">
+      <span class="close-btn" style="position:absolute; top:20px; right:20px;" onclick="closeCheckoutModal()">✕</span>
+      <div class="hero-tag" style="margin:0 auto 16px;">Express Checkout</div>
+      <h3 class="heading-lg" style="margin-bottom:8px;">Complete Your Sky Experience</h3>
+      <p style="color:var(--text-secondary); font-size:0.88rem; margin-bottom:24px;">Enter your delivery details for immediate courier dispatch.</p>
+
+      <form onsubmit="submitCheckout(event)" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Recipient Full Name</label>
+          <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Hailey Bieber">
+        </div>
+
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Delivery Address (US)</label>
+          <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="Street address, Apt, Suite">
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">City</label>
+            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Los Angeles">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">ZIP Code</label>
+            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="90210">
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Preferred Delivery Date</label>
+          <input type="date" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);">
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%; margin-top:12px;">Confirm & Pay via Apple Pay / Card</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-title">SKY FLORALS</div>
+        <p class="footer-sub">
+          The premier luxury floral atelier in the United States. Transforming floral gifting into unforgettable sculptural art and unboxing rituals.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul class="footer-links">
+          <li><a href="#customizer">Atelier Customizer</a></li>
+          <li><a href="#quiz">Emotional Matcher</a></li>
+          <li><a href="#sculptures">Signature Sculptures</a></li>
+          <li><a href="#subscriptions">VIP Membership</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>US Cities</h5>
+        <ul class="footer-links">
+          <li><a href="#">New York City (NYC)</a></li>
+          <li><a href="#">Los Angeles (LA)</a></li>
+          <li><a href="#">Miami & Palm Beach</a></li>
+          <li><a href="#">Chicago & Dallas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h5>Join the Sky Club</h5>
+        <p style="color:#A8A29E; font-size:0.82rem; margin-bottom:12px;">Enjoy 10% off your first luxury floral creation.</p>
+        <input type="email" placeholder="Enter your email address...">
+        <button class="btn-primary" style="width:100%; padding:12px; font-size:0.78rem;">Subscribe →</button>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 SKY Florals Atelier LLC. All rights reserved.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Courier Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/quiz.js"></script>
+  <script src="js/customizer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
