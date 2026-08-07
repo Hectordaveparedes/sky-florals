@@ -9,17 +9,17 @@
 </head>
 <body>
 
-  <!-- Top Announcement Bar with Region Switcher -->
+  <!-- Top Announcement Bar with Region & Language Switcher -->
   <div class="announcement-bar">
     <span>
       <span class="pulse-dot"></span>
-      <span id="locationBarText">White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)</span>
+      <span id="locationBarText" data-i18n="locationBar">White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)</span>
     </span>
     <div style="display:flex; align-items:center; gap:12px;">
       <span style="font-size:0.7rem; opacity:0.85;">ATELIER REGION:</span>
       <select class="location-dropdown" onchange="switchLocation(this.value)">
-        <option value="NJ">🇺🇸 New Jersey & NYC Metro</option>
-        <option value="LOJA">🇪🇨 Loja, Ecuador Atelier</option>
+        <option value="NJ">🇺🇸 New Jersey & NYC Metro (English)</option>
+        <option value="LOJA">🇪🇨 Loja, Ecuador Atelier (Español)</option>
       </select>
     </div>
   </div>
@@ -28,21 +28,21 @@
   <nav class="navbar">
     <a href="#" class="nav-logo">
       SKY FLORALS
-      <span id="regionLabel">NEW JERSEY & NYC ATELIER</span>
+      <span id="regionLabel" data-i18n="regionLabel">NEW JERSEY & NYC ATELIER</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#customizer" class="nav-link">Atelier Customizer</a></li>
-      <li><a href="#quiz" class="nav-link">Emotional Matcher</a></li>
-      <li><a href="#sculptures" class="nav-link">Sculptures</a></li>
-      <li><a href="#subscriptions" class="nav-link">Subscriptions</a></li>
-      <li><a href="javascript:void(0)" onclick="openAboutModal('story')" class="nav-link" style="font-weight:500;">About Us / The House</a></li>
+      <li><a href="#customizer" class="nav-link" data-i18n="navCustomizer">Atelier Customizer</a></li>
+      <li><a href="#quiz" class="nav-link" data-i18n="navQuiz">Emotional Matcher</a></li>
+      <li><a href="#sculptures" class="nav-link" data-i18n="navSculptures">Sculptures</a></li>
+      <li><a href="#subscriptions" class="nav-link" data-i18n="navSubscriptions">Subscriptions</a></li>
+      <li><a href="javascript:void(0)" onclick="openAboutModal('story')" class="nav-link" data-i18n="navAbout" style="font-weight:500;">About Us / The House</a></li>
     </ul>
     <div class="nav-actions">
       <button class="btn-icon" onclick="openAboutModal('story')" title="About SKY FLORALS">
-        <span>Our House</span>
+        <span data-i18n="navAbout">Our House</span>
       </button>
       <button class="btn-icon" onclick="openCartDrawer()">
-        <span>Bag</span>
+        <span data-i18n="bagTitle">Bag</span>
         <span class="cart-badge" id="cartBadge">0</span>
       </button>
     </div>
@@ -53,31 +53,31 @@
     <div class="container hero-grid">
       <div class="hero-content">
         <div class="hero-tag">
-          <span>✨</span> The Curator of Floral Artistry
+          <span data-i18n="heroTag">✨ The Curator of Floral Artistry</span>
         </div>
-        <h1 class="heading-xl">
+        <h1 class="heading-xl" data-i18n="heroHeadline">
           Flowers Are Not Chosen From a Menu. They Are <span class="italic">Curated From a Story</span>.
         </h1>
-        <p class="hero-description">
+        <p class="hero-description" data-i18n="heroDesc">
           At SKY FLORALS, we believe every bloom is amongst creation's greatest masterpieces. We exist to transform flowers from simple expressions of beauty into timeless works of art that inspire quiet sophistication, reverence, and wonder.
         </p>
         <div class="hero-cta-group">
-          <a href="#customizer" class="btn-primary">Design Your Sky Bouquet →</a>
-          <button class="btn-secondary" onclick="openAboutModal('story')">Explore The House Story</button>
+          <a href="#customizer" class="btn-primary" data-i18n="heroCtaCustom">Design Your Sky Bouquet →</a>
+          <button class="btn-secondary" onclick="openAboutModal('story')" data-i18n="heroCtaAbout">Explore The House Story</button>
         </div>
         
         <div class="hero-trust-bar">
           <div class="trust-item">
-            <span class="trust-number">7-10 Days</span>
-            <span class="trust-label">Guaranteed Freshness</span>
+            <span class="trust-number" data-i18n="trustFreshness">7-10 Days</span>
+            <span class="trust-label" data-i18n="trustFreshnessLabel">Guaranteed Freshness</span>
           </div>
           <div class="trust-item">
-            <span class="trust-number">Certificate</span>
-            <span class="trust-label">Of Curation Included</span>
+            <span class="trust-number" data-i18n="trustCert">Certificate</span>
+            <span class="trust-label" data-i18n="trustCertLabel">Of Curation Included</span>
           </div>
           <div class="trust-item">
-            <span class="trust-number">100% Cotton</span>
-            <span class="trust-label">Natural Linen Packaging</span>
+            <span class="trust-number" data-i18n="trustWrap">100% Cotton</span>
+            <span class="trust-label" data-i18n="trustWrapLabel">Natural Linen Packaging</span>
           </div>
         </div>
       </div>
@@ -108,9 +108,9 @@
   <section class="quiz-section" id="quiz">
     <div class="container">
       <div class="section-header">
-        <span class="subheading">Interactive Emotional Matcher</span>
-        <h2 class="heading-lg">Find Your Emotional Solution</h2>
-        <p style="color:var(--text-secondary);">Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.</p>
+        <span class="subheading" data-i18n="quizSubhead">Interactive Emotional Matcher</span>
+        <h2 class="heading-lg" data-i18n="quizTitle">Find Your Emotional Solution</h2>
+        <p style="color:var(--text-secondary);" data-i18n="quizDesc">Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.</p>
       </div>
 
       <div class="quiz-container">
@@ -128,17 +128,17 @@
   <section class="catalog-section" id="sculptures">
     <div class="container">
       <div class="section-header">
-        <span class="subheading">Curated Floral Sculptures</span>
-        <h2 class="heading-lg">Signature SKY Collection</h2>
-        <p style="color:var(--text-secondary);">Hand-selected stems arranged by master florists for white-glove courier delivery.</p>
+        <span class="subheading" data-i18n="catalogSubhead">Curated Floral Sculptures</span>
+        <h2 class="heading-lg" data-i18n="catalogTitle">Signature SKY Collection</h2>
+        <p style="color:var(--text-secondary);" data-i18n="catalogDesc">Hand-selected stems arranged by master florists for white-glove courier delivery.</p>
       </div>
 
       <!-- Filter Tabs -->
       <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterCatalog('all', this)">All Sculptures</button>
-        <button class="filter-btn" onclick="filterCatalog('minimalist', this)">Minimalist Chic</button>
-        <button class="filter-btn" onclick="filterCatalog('grand', this)">Grand Declarations</button>
-        <button class="filter-btn" onclick="filterCatalog('rituals', this)">Monthly Rituals</button>
+        <button class="filter-btn active" onclick="filterCatalog('all', this)" data-i18n="filterAll">All Sculptures</button>
+        <button class="filter-btn" onclick="filterCatalog('minimalist', this)" data-i18n="filterMinimalist">Minimalist Chic</button>
+        <button class="filter-btn" onclick="filterCatalog('grand', this)" data-i18n="filterGrand">Grand Declarations</button>
+        <button class="filter-btn" onclick="filterCatalog('rituals', this)" data-i18n="filterRituals">Monthly Rituals</button>
       </div>
 
       <!-- Catalog Grid -->
@@ -151,9 +151,9 @@
   <!-- Atelier Bouquet Customizer Studio -->
   <section class="customizer-section container" id="customizer">
     <div class="section-header">
-      <span class="subheading">Live Design Studio</span>
-      <h2 class="heading-lg">Design Your Custom Sky Creation</h2>
-      <p style="color:var(--text-secondary);">Build a bespoke arrangement with real-time Certificate of Curation preview and price breakdown.</p>
+      <span class="subheading" data-i18n="customizerSubhead">Live Design Studio</span>
+      <h2 class="heading-lg" data-i18n="customizerTitle">Design Your Custom Sky Creation</h2>
+      <p style="color:var(--text-secondary);" data-i18n="customizerDesc">Build a bespoke arrangement with real-time Certificate of Curation preview and price breakdown.</p>
     </div>
 
     <div class="customizer-layout">
@@ -166,22 +166,22 @@
         <!-- Live Certificate Preview inside Customizer -->
         <div class="certificate-preview-box">
           <div class="cert-header">SKY FLORALS</div>
-          <div class="cert-sub">Certificate of Curation</div>
+          <div class="cert-sub" data-i18n="certTitle">Certificate of Curation</div>
           
           <div class="cert-row">
-            <span>Curated for</span>
+            <span data-i18n="certRowFor">Curated for</span>
             <span id="certRecipient">Emily Chasi</span>
           </div>
           <div class="cert-row">
-            <span>Occasion</span>
+            <span data-i18n="certRowOccasion">Occasion</span>
             <span id="certOccasion">Special Celebration</span>
           </div>
           <div class="cert-row">
-            <span>Collection</span>
+            <span data-i18n="certRowCollection">Collection</span>
             <span id="certCollection">Ivory & Alabaster Stems</span>
           </div>
           <div class="cert-row">
-            <span>Designed</span>
+            <span data-i18n="certRowDesigned">Designed</span>
             <span id="certDate">August 7, 2026</span>
           </div>
         </div>
@@ -192,11 +192,11 @@
         <!-- Recipient & Occasion Inputs -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
           <div class="control-group">
-            <div class="control-label">Recipient Name</div>
+            <div class="control-label" data-i18n="lblRecipient">Recipient Name</div>
             <input type="text" class="note-input" id="recipientInput" style="min-height:auto; padding:10px;" placeholder="e.g. Emily Chasi">
           </div>
           <div class="control-group">
-            <div class="control-label">Occasion</div>
+            <div class="control-label" data-i18n="lblOccasion">Occasion</div>
             <input type="text" class="note-input" id="occasionInput" style="min-height:auto; padding:10px;" placeholder="e.g. Birthday Celebration">
           </div>
         </div>
@@ -204,7 +204,7 @@
         <!-- Palette Selection -->
         <div class="control-group">
           <div class="control-label">
-            1. Select Stem Palette
+            <span data-i18n="step1Palette">1. Select Stem Palette</span>
             <span id="paletteLabel">Ivory & Alabaster</span>
           </div>
           <div class="option-pills" id="palettePills">
@@ -225,7 +225,7 @@
 
         <!-- Vessel Selection -->
         <div class="control-group">
-          <div class="control-label">
+          <div class="control-label" data-i18n="step2Vessel">
             2. Choose Architectural Vessel
           </div>
           <div class="option-pills" id="vesselPills">
@@ -237,7 +237,7 @@
 
         <!-- Ribbon Accent -->
         <div class="control-group">
-          <div class="control-label">
+          <div class="control-label" data-i18n="step3Wrap">
             3. Signature Wrap & Accent
           </div>
           <div class="option-pills" id="ribbonPills">
@@ -249,7 +249,7 @@
 
         <!-- Signature Scent Spray -->
         <div class="control-group">
-          <div class="control-label">
+          <div class="control-label" data-i18n="step4Scent">
             4. Unboxing Scent Infusion
           </div>
           <div class="option-pills" id="scentPills">
@@ -262,10 +262,10 @@
         <!-- Price & CTA -->
         <div class="price-summary-bar">
           <div>
-            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Total Investment</div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);" data-i18n="lblInvestment">Total Investment</div>
             <div class="price-display" id="customizerPriceDisplay">$175</div>
           </div>
-          <button class="btn-primary" onclick="addCustomArrangementToCart()">Add Custom Creation to Bag →</button>
+          <button class="btn-primary" onclick="addCustomArrangementToCart()" data-i18n="btnAddCustom">Add Custom Creation to Bag →</button>
         </div>
       </div>
     </div>
@@ -279,30 +279,30 @@
       </div>
 
       <div class="unboxing-steps">
-        <span class="subheading" style="color:var(--accent-gold);">Sensory Unboxing Experience</span>
-        <h2 class="heading-lg" style="color:var(--text-white);">Designed to Elevate the Unboxing Ritual</h2>
+        <span class="subheading" style="color:var(--accent-gold);" data-i18n="unboxingSubhead">Sensory Unboxing Experience</span>
+        <h2 class="heading-lg" style="color:var(--text-white);" data-i18n="unboxingTitle">Designed to Elevate the Unboxing Ritual</h2>
         
         <div class="step-item">
           <span class="step-num">01</span>
           <div class="step-content">
-            <h4>Signature Natural Linen Box</h4>
-            <p>Crafted from rigid sustainably-sourced paper wrapped in soft oat linen with gold-embossed SKY logo.</p>
+            <h4 data-i18n="unboxingStep1Title">Signature Natural Linen Box</h4>
+            <p data-i18n="unboxingStep1Desc">Crafted from rigid sustainably-sourced paper wrapped in soft oat linen with gold-embossed SKY logo.</p>
           </div>
         </div>
 
         <div class="step-item">
           <span class="step-num">02</span>
           <div class="step-content">
-            <h4>French Damask Rose Mist</h4>
-            <p>Every box is misted with our proprietary French Damask Rose & Vanilla essential oil blend prior to sealing.</p>
+            <h4 data-i18n="unboxingStep2Title">French Damask Rose Mist</h4>
+            <p data-i18n="unboxingStep2Desc">Every box is misted with our proprietary French Damask Rose & Vanilla essential oil blend prior to sealing.</p>
           </div>
         </div>
 
         <div class="step-item">
           <span class="step-num">03</span>
           <div class="step-content">
-            <h4>Cotton Certificate of Curation</h4>
-            <p>Your arrangement arrives with an official Certificate of Curation detailing the recipient, occasion, date, and artisan sign-off.</p>
+            <h4 data-i18n="unboxingStep3Title">Cotton Certificate of Curation</h4>
+            <p data-i18n="unboxingStep3Desc">Your arrangement arrives with an official Certificate of Curation detailing the recipient, occasion, date, and artisan sign-off.</p>
           </div>
         </div>
       </div>
@@ -312,15 +312,15 @@
   <!-- Delivery ZIP / Zone Checker -->
   <section class="container section-padding">
     <div class="zip-checker-card">
-      <span class="subheading">Atelier Courier Verification</span>
-      <h2 class="heading-lg" style="margin-top:6px;">Check Courier Delivery in Your City</h2>
-      <p style="color:var(--text-secondary); max-width:520px; margin:10px auto 0;">
+      <span class="subheading" data-i18n="zipSubhead">Atelier Courier Verification</span>
+      <h2 class="heading-lg" style="margin-top:6px;" data-i18n="zipTitle">Check Courier Delivery in Your City</h2>
+      <p style="color:var(--text-secondary); max-width:520px; margin:10px auto 0;" data-i18n="zipDesc">
         Confirm real-time white-glove courier availability across New Jersey, NYC Metro, and Loja, Ecuador.
       </p>
 
       <div class="zip-input-group">
         <input type="text" class="zip-input" id="zipInput" placeholder="Enter 5-Digit US ZIP Code (e.g. 07030, 10001, 90210)">
-        <button class="btn-primary" onclick="checkDeliveryZip()">Check Availability</button>
+        <button class="btn-primary" onclick="checkDeliveryZip()" data-i18n="zipBtn">Check Availability</button>
       </div>
 
       <div class="zip-status-msg" id="zipStatusMsg"></div>
@@ -331,9 +331,9 @@
   <section class="subscription-section" id="subscriptions">
     <div class="container">
       <div class="section-header">
-        <span class="subheading">The SKY VIP Membership</span>
-        <h2 class="heading-lg">Elevate Your Residence Every Month</h2>
-        <p style="color:var(--text-secondary);">Enjoy recurring deliveries of seasonal floral sculptures with exclusive member perks.</p>
+        <span class="subheading" data-i18n="subSubhead">The SKY VIP Membership</span>
+        <h2 class="heading-lg" data-i18n="subTitle">Elevate Your Residence Every Month</h2>
+        <p style="color:var(--text-secondary);" data-i18n="subDesc">Enjoy recurring deliveries of seasonal floral sculptures with exclusive member perks.</p>
       </div>
 
       <div class="sub-grid">
@@ -386,13 +386,13 @@
       <span class="close-btn" style="position:absolute; top:24px; right:28px;" onclick="closeAboutModal()">✕</span>
       
       <div class="subheading" style="color:var(--accent-gold);">The House of SKY FLORALS</div>
-      <h2 class="heading-lg" style="margin-top:6px;">Quiet Sophistication & Heritage</h2>
+      <h2 class="heading-lg" style="margin-top:6px;" data-i18n="aboutHeading">Quiet Sophistication & Heritage</h2>
 
       <!-- Modal Tabs -->
       <div class="about-tabs">
-        <button class="about-tab-btn active" id="tabBtn-story" onclick="switchAboutTab('story')">Brand Story</button>
-        <button class="about-tab-btn" id="tabBtn-mission" onclick="switchAboutTab('mission')">Mission & Vision</button>
-        <button class="about-tab-btn" id="tabBtn-values" onclick="switchAboutTab('values')">The 5 Pillars</button>
+        <button class="about-tab-btn active" id="tabBtn-story" onclick="switchAboutTab('story')" data-i18n="aboutTabStory">Brand Story</button>
+        <button class="about-tab-btn" id="tabBtn-mission" onclick="switchAboutTab('mission')" data-i18n="aboutTabMission">Mission & Vision</button>
+        <button class="about-tab-btn" id="tabBtn-values" onclick="switchAboutTab('values')" data-i18n="aboutTabValues">The 5 Pillars</button>
       </div>
 
       <!-- Tab 1: Story -->
@@ -462,7 +462,7 @@
   <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="if(event.target === this) closeCartDrawer()">
     <div class="cart-drawer">
       <div class="cart-header">
-        <h3 class="cart-title">Your Shopping Bag</h3>
+        <h3 class="cart-title" data-i18n="bagTitle">Your Shopping Bag</h3>
         <span class="close-btn" onclick="closeCartDrawer()">✕</span>
       </div>
 
@@ -484,7 +484,7 @@
           <span id="cartTotal">$0</span>
         </div>
 
-        <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="openCheckoutModal()">Proceed to Express Checkout →</button>
+        <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="openCheckoutModal()" data-i18n="btnCheckout">Proceed to Express Checkout →</button>
       </div>
     </div>
   </div>
@@ -545,11 +545,11 @@
       <div class="footer-col">
         <h5>Explore</h5>
         <ul class="footer-links">
-          <li><a href="javascript:void(0)" onclick="openAboutModal('story')">The House Story</a></li>
-          <li><a href="javascript:void(0)" onclick="openAboutModal('values')">Core Values</a></li>
-          <li><a href="#customizer">Atelier Customizer</a></li>
-          <li><a href="#quiz">Emotional Matcher</a></li>
-          <li><a href="#sculptures">Signature Sculptures</a></li>
+          <li><a href="javascript:void(0)" onclick="openAboutModal('story')" data-i18n="aboutTabStory">The House Story</a></li>
+          <li><a href="javascript:void(0)" onclick="openAboutModal('values')" data-i18n="aboutTabValues">Core Values</a></li>
+          <li><a href="#customizer" data-i18n="navCustomizer">Atelier Customizer</a></li>
+          <li><a href="#quiz" data-i18n="navQuiz">Emotional Matcher</a></li>
+          <li><a href="#sculptures" data-i18n="navSculptures">Signature Sculptures</a></li>
         </ul>
       </div>
 

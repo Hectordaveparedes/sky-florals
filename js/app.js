@@ -1,6 +1,146 @@
-// SKY FLORALS - MAIN E-COMMERCE & INTERACTIVE APP LOGIC
+// SKY FLORALS - MAIN E-COMMERCE, I18N & INTERACTIVE APP LOGIC
 
-// Products Data Catalog
+// i18n Translation Dictionary (EN for New Jersey USA / ES for Loja Ecuador)
+const i18nDict = {
+  EN: {
+    locationBar: "White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)",
+    regionLabel: "NEW JERSEY & NYC ATELIER",
+    navCustomizer: "Atelier Customizer",
+    navQuiz: "Emotional Matcher",
+    navSculptures: "Sculptures",
+    navSubscriptions: "Subscriptions",
+    navAbout: "About Us / The House",
+    heroTag: "✨ The Curator of Floral Artistry",
+    heroHeadline: 'Flowers Are Not Chosen From a Menu. They Are <span class="italic">Curated From a Story</span>.',
+    heroDesc: "At SKY FLORALS, we believe every bloom is amongst creation's greatest masterpieces. We exist to transform flowers from simple expressions of beauty into timeless works of art that inspire quiet sophistication, reverence, and wonder.",
+    heroCtaCustom: "Design Your Sky Bouquet →",
+    heroCtaAbout: "Explore The House Story",
+    trustFreshness: "7-10 Days",
+    trustFreshnessLabel: "Guaranteed Freshness",
+    trustCert: "Certificate",
+    trustCertLabel: "Of Curation Included",
+    trustWrap: "100% Cotton",
+    trustWrapLabel: "Natural Linen Packaging",
+    quizSubhead: "Interactive Emotional Matcher",
+    quizTitle: "Find Your Emotional Solution",
+    quizDesc: "Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.",
+    catalogSubhead: "Curated Floral Sculptures",
+    catalogTitle: "Signature SKY Collection",
+    catalogDesc: "Hand-selected stems arranged by master florists for white-glove courier delivery.",
+    filterAll: "All Sculptures",
+    filterMinimalist: "Minimalist Chic",
+    filterGrand: "Grand Declarations",
+    filterRituals: "Monthly Rituals",
+    customizerSubhead: "Live Design Studio",
+    customizerTitle: "Design Your Custom Sky Creation",
+    customizerDesc: "Build a bespoke arrangement with real-time Certificate of Curation preview and price breakdown.",
+    certTitle: "Certificate of Curation",
+    certRowFor: "Curated for",
+    certRowOccasion: "Occasion",
+    certRowCollection: "Collection",
+    certRowDesigned: "Designed",
+    lblRecipient: "Recipient Name",
+    lblOccasion: "Occasion",
+    step1Palette: "1. Select Stem Palette",
+    step2Vessel: "2. Choose Architectural Vessel",
+    step3Wrap: "3. Signature Wrap & Accent",
+    step4Scent: "4. Unboxing Scent Infusion",
+    lblInvestment: "Total Investment",
+    btnAddCustom: "Add Custom Creation to Bag →",
+    unboxingSubhead: "Sensorial Unboxing Experience",
+    unboxingTitle: "Designed to Elevate the Unboxing Ritual",
+    unboxingStep1Title: "Signature Natural Linen Box",
+    unboxingStep1Desc: "Crafted from rigid sustainably-sourced paper wrapped in soft oat linen with gold-embossed SKY logo.",
+    unboxingStep2Title: "French Damask Rose Mist",
+    unboxingStep2Desc: "Every box is misted with our proprietary French Damask Rose & Vanilla essential oil blend prior to sealing.",
+    unboxingStep3Title: "Cotton Certificate of Curation",
+    unboxingStep3Desc: "Your arrangement arrives with an official Certificate of Curation detailing the recipient, occasion, date, and artisan sign-off.",
+    zipSubhead: "Atelier Courier Verification",
+    zipTitle: "Check Courier Delivery in Your City",
+    zipDesc: "Confirm real-time white-glove courier availability across New Jersey, NYC Metro, and Loja, Ecuador.",
+    zipPlaceholder: "Enter 5-Digit US ZIP Code (e.g. 07030, 10001, 90210)",
+    zipBtn: "Check Availability",
+    subSubhead: "The SKY VIP Membership",
+    subTitle: "Elevate Your Residence Every Month",
+    subDesc: "Enjoy recurring deliveries of seasonal floral sculptures with exclusive member perks.",
+    aboutHeading: "Quiet Sophistication & Heritage",
+    aboutTabStory: "Brand Story",
+    aboutTabMission: "Mission & Vision",
+    aboutTabValues: "The 5 Pillars",
+    bagTitle: "Your Shopping Bag",
+    btnCheckout: "Proceed to Express Checkout →"
+  },
+  ES: {
+    locationBar: "Entrega Especializada Disponible Hoy en Loja y Área Metropolitana ($ USD)",
+    regionLabel: "ATELIER LOJA, ECUADOR",
+    navCustomizer: "Estudio Personalizado",
+    navQuiz: "Buscador Emocional",
+    navSculptures: "Esculturas",
+    navSubscriptions: "Suscripciones",
+    navAbout: "Sobre Nosotros",
+    heroTag: "✨ Curaduría de Arte Floral",
+    heroHeadline: 'Las Flores No Se Eligen de un Menú. Se <span class="italic">Curan a Partir de una Historia</span>.',
+    heroDesc: "En SKY FLORALS, creemos que cada flor se encuentra entre las mayores obras maestras de la creación. Transformamos las flores de simples expresiones de belleza en obras de arte atemporales que inspiran sofisticación silenciosa y admiración.",
+    heroCtaCustom: "Diseña Tu Arreglo Sky →",
+    heroCtaAbout: "Explorar Nuestra Historia",
+    trustFreshness: "7-10 Días",
+    trustFreshnessLabel: "Frescura Garantizada",
+    trustCert: "Certificado",
+    trustCertLabel: "De Curaduría Incluido",
+    trustWrap: "100% Algodón",
+    trustWrapLabel: "Empaque de Lino Natural",
+    quizSubhead: "Buscador Emocional Interactivo",
+    quizTitle: "Encuentra Tu Solución Emocional",
+    quizDesc: "Responde 3 preguntas rápidas para descubrir el arreglo floral y nota de caligrafía perfectos adaptados a tu momento exacto.",
+    catalogSubhead: "Esculturas Florales Curadas",
+    catalogTitle: "Colección Insignia SKY",
+    catalogDesc: "Tallos seleccionados a mano y arreglados por maestros floristas para entrega especializada.",
+    filterAll: "Todas las Esculturas",
+    filterMinimalist: "Minimalista Chic",
+    filterGrand: "Grandes Declaraciones",
+    filterRituals: "Rituales Mensuales",
+    customizerSubhead: "Estudio de Diseño en Vivo",
+    customizerTitle: "Diseña Tu Creación Personalizada",
+    customizerDesc: "Construye un arreglo personalizado con previsualización del Certificado de Curaduría y desglose de precio en tiempo real.",
+    certTitle: "Certificado de Curaduría",
+    certRowFor: "Curado para",
+    certRowOccasion: "Ocasión",
+    certRowCollection: "Colección",
+    certRowDesigned: "Diseñado el",
+    lblRecipient: "Nombre del Destinatario",
+    lblOccasion: "Ocasión del Regalo",
+    step1Palette: "1. Selecciona la Paleta de Flores",
+    step2Vessel: "2. Elige la Vasija Arquitectónica",
+    step3Wrap: "3. Envoltura e Insignia",
+    step4Scent: "4. Infusión de Aroma de Unboxing",
+    lblInvestment: "Inversión Total",
+    btnAddCustom: "Agregar Creación a la Bolsa →",
+    unboxingSubhead: "Experiencia Sensorial de Unboxing",
+    unboxingTitle: "Diseñado para Elevar el Ritual de Desempaque",
+    unboxingStep1Title: "Caja Insignia de Lino Natural",
+    unboxingStep1Desc: "Elaborada con papel rígido sostenible envuelto en lino color avena suave con el logo SKY repujado en oro.",
+    unboxingStep2Title: "Bruma de Rosa de Damasco Francesa",
+    unboxingStep2Desc: "Cada caja es perfumada con nuestra bruma exclusiva de aceites esenciales de Rosa de Damasco y Vainilla antes de sellarla.",
+    unboxingStep3Title: "Certificado de Curaduría en Algodón",
+    unboxingStep3Desc: "Tu arreglo llega con un Certificado de Curaduría oficial impreso en algodón que detalla el destinatario, ocasión y fecha.",
+    zipSubhead: "Verificación de Cobertura Atelier",
+    zipTitle: "Comprueba la Entrega en Tu Ciudad",
+    zipDesc: "Confirma la disponibilidad de entrega inmediata en New Jersey, NYC Metro y Loja, Ecuador.",
+    zipPlaceholder: "Ingresa tu sector en Loja (ej: Centro, El Valle, San Sebastián)",
+    zipBtn: "Comprobar Disponibilidad",
+    subSubhead: "Membresía VIP SKY",
+    subTitle: "Eleva Tu Residencia Cada Mes",
+    subDesc: "Disfruta de entregas recurrentes de esculturas florales de temporada con beneficios exclusivos para miembros.",
+    aboutHeading: "Sofisticación Silenciosa y Herencia",
+    aboutTabStory: "Nuestra Historia",
+    aboutTabMission: "Misión y Visión",
+    aboutTabValues: "Los 5 Pilares",
+    bagTitle: "Tu Bolsa de Compras",
+    btnCheckout: "Proceder al Pago Expres →"
+  }
+};
+
+// Products Catalog Data
 const catalogProducts = [
   {
     id: "sky-01",
@@ -10,6 +150,7 @@ const catalogProducts = [
     tag: "Bestseller",
     image: "assets/pal_blush.jpg",
     desc: "A sculptured monochrome study in blush peonies and garden roses wrapped in natural linen.",
+    descEs: "Un estudio escultórico monocromático en peonías rosadas y rosas de jardín envueltas en lino natural.",
     stemCount: "18 Premium Stems",
     longevity: "7-10 Days Fresh Guarantee"
   },
@@ -21,6 +162,7 @@ const catalogProducts = [
     tag: "Signature",
     image: "assets/pal_ivory.jpg",
     desc: "32 long-stemmed white calla lilies and garden roses in a textured alabaster stone vase.",
+    descEs: "32 calas blancas de tallo largo y rosas de jardín en un florero de piedra alabastro texturizado.",
     stemCount: "32 Grand Stems",
     longevity: "8-12 Days Fresh Guarantee"
   },
@@ -32,6 +174,7 @@ const catalogProducts = [
     tag: "Hailey Favorite",
     image: "assets/lifestyle.jpg",
     desc: "Crisp white ranunculus paired with silver eucalyptus. Subdued, serene, and effortlessly stylish.",
+    descEs: "Ranúnculos blancos crujientes combinados con eucalipto plateado. Sereno y elegante.",
     stemCount: "15 Stems",
     longevity: "7 Days Fresh Guarantee"
   },
@@ -43,6 +186,7 @@ const catalogProducts = [
     tag: "Luxury Gift Set",
     image: "assets/unboxing.jpg",
     desc: "Includes our signature floral sculpture, magnetic oat linen box, Cotton Certificate of Curation, and French Rose spray.",
+    descEs: "Incluye escultura floral insignia, caja magnética de lino avena, Certificado de Curaduría en algodón y spray de rosas.",
     stemCount: "22 Curated Stems",
     longevity: "10 Days Fresh Guarantee"
   },
@@ -54,6 +198,7 @@ const catalogProducts = [
     tag: "New Season",
     image: "assets/pal_terracotta.jpg",
     desc: "Warm peach tones, terracotta garden roses, and wild oats in a raw travertine stone vessel.",
+    descEs: "Cálidos tonos melocotón, rosas de jardín terracota y avena silvestre en vasija de piedra travertino.",
     stemCount: "24 Stems",
     longevity: "8-10 Days Fresh Guarantee"
   },
@@ -65,6 +210,7 @@ const catalogProducts = [
     tag: "Haute Couture",
     image: "assets/pal_midnight.jpg",
     desc: "Deep burgundy calla lilies and dark scabiosa in a matte black ceramic vase.",
+    descEs: "Calas borgoña profundas y escabiosas oscuras en un florero de cerámica negra mate.",
     stemCount: "20 Stems",
     longevity: "8 Days Fresh Guarantee"
   }
@@ -74,28 +220,45 @@ const catalogProducts = [
 let cart = [];
 let selectedCategory = 'all';
 let activeRegion = 'NJ'; // 'NJ' (New Jersey/NYC USA) or 'LOJA' (Loja, Ecuador)
+let currentLang = 'EN';   // 'EN' or 'ES'
 
-// Location Selector Switcher
+// Location & Language Switcher Function
 function switchLocation(region) {
   activeRegion = region;
-  const barText = document.getElementById("locationBarText");
-  const zipInput = document.getElementById("zipInput");
-  const regionLabel = document.getElementById("regionLabel");
+  currentLang = (region === 'LOJA') ? 'ES' : 'EN';
+  
+  applyTranslations();
+  renderCatalog();
+  if (window.updateQuizLang) window.updateQuizLang(currentLang);
+  if (window.updateCustomizerUI) window.updateCustomizerUI();
 
   if (region === 'LOJA') {
-    if (barText) barText.innerText = "White-Glove Atelier Delivery Available Today in Loja & Metropolitan Area ($ USD)";
-    if (zipInput) zipInput.placeholder = "Enter Delivery Zone in Loja (e.g. Centro, El Valle, San Sebastian)";
-    if (regionLabel) regionLabel.innerText = "Loja, Ecuador Atelier";
-    showToast("Switched active region to Loja, Ecuador Atelier");
+    showToast("Ubicación y lenguaje cambiados a Atelier Loja, Ecuador (Español)");
   } else {
-    if (barText) barText.innerText = "White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)";
-    if (zipInput) zipInput.placeholder = "Enter 5-Digit US ZIP Code (e.g. 07030, 10001, 90210)";
-    if (regionLabel) regionLabel.innerText = "New Jersey & NYC Atelier";
-    showToast("Switched active region to New Jersey / NYC Atelier");
+    showToast("Switched location and language to New Jersey / NYC Atelier (English)");
   }
 }
 
-// About Us Modal Handler
+function applyTranslations() {
+  const dict = i18nDict[currentLang];
+  if (!dict) return;
+
+  // Elements with data-i18n attribute
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key]) {
+      el.innerHTML = dict[key];
+    }
+  });
+
+  // Specific Placeholders
+  const zipInput = document.getElementById("zipInput");
+  if (zipInput) {
+    zipInput.placeholder = dict.zipPlaceholder;
+  }
+}
+
+// About Us Modal Handlers
 function openAboutModal(tab = 'story') {
   const modal = document.getElementById("aboutModal");
   if (modal) modal.classList.add("active");
@@ -132,7 +295,7 @@ function addToCart(item) {
     cart.push({ ...item, qty: 1 });
   }
   updateCartUI();
-  showToast(`Added "${item.name}" to your Bag.`);
+  showToast(currentLang === 'ES' ? `Agregado "${item.name}" a tu bolsa.` : `Added "${item.name}" to your Bag.`);
 }
 
 function updateCartQty(id, delta) {
@@ -159,7 +322,9 @@ function updateCartUI() {
 
   if (body) {
     if (cart.length === 0) {
-      body.innerHTML = `<div class="cart-empty">Your shopping bag is empty.<br><span style="font-size:0.85rem; color:var(--text-light);">Explore our curated sculptures to begin.</span></div>`;
+      body.innerHTML = currentLang === 'ES'
+        ? `<div class="cart-empty">Tu bolsa de compras está vacía.<br><span style="font-size:0.85rem; color:var(--text-light);">Explora nuestras esculturas curadas para comenzar.</span></div>`
+        : `<div class="cart-empty">Your shopping bag is empty.<br><span style="font-size:0.85rem; color:var(--text-light);">Explore our curated sculptures to begin.</span></div>`;
     } else {
       body.innerHTML = cart.map(item => `
         <div class="cart-item">
@@ -210,13 +375,15 @@ function renderCatalog() {
       </div>
       <div class="product-info">
         <h3 class="product-name">${p.name}</h3>
-        <p class="product-desc">${p.desc}</p>
+        <p class="product-desc">${currentLang === 'ES' ? p.descEs : p.desc}</p>
         <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
           <span>${p.stemCount}</span> • <span>${p.longevity}</span>
         </div>
         <div class="product-meta">
           <div class="product-price">$${p.price}</div>
-          <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', price: ${p.price}, image: '${p.image}'})">Add to Bag</button>
+          <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', price: ${p.price}, image: '${p.image}'})">
+            ${currentLang === 'ES' ? 'Agregar a Bolsa' : 'Add to Bag'}
+          </button>
         </div>
       </div>
     </div>
@@ -242,7 +409,7 @@ function checkDeliveryZip() {
   if (activeRegion === 'LOJA') {
     if (val.length > 2) {
       msg.className = "zip-status-msg success";
-      msg.innerHTML = `✨ Servicio de Entregas Especializado Disponible en Loja (${val}). Entrega en 2 a 4 horas.`;
+      msg.innerHTML = `✨ Servicio de Entregas Especializado Disponible en Loja (${val}). Entrega garantizada en 2 a 4 horas.`;
     } else {
       msg.className = "zip-status-msg error";
       msg.innerHTML = `Por favor ingresa tu sector o zona en Loja (ej: Centro, El Valle, San Sebastián).`;
@@ -267,7 +434,7 @@ function checkDeliveryZip() {
 // Simulated Checkout Modal Flow
 function openCheckoutModal() {
   if (cart.length === 0) {
-    showToast("Your shopping bag is empty! Add an arrangement first.");
+    showToast(currentLang === 'ES' ? "¡Tu bolsa está vacía! Agrega un arreglo primero." : "Your shopping bag is empty! Add an arrangement first.");
     return;
   }
   closeCartDrawer();
@@ -286,17 +453,16 @@ function submitCheckout(e) {
   if (modalContent) {
     modalContent.innerHTML = `
       <div style="font-size:3rem; margin-bottom:16px;">🌿</div>
-      <div class="hero-tag" style="margin:0 auto 16px;">Order Confirmed</div>
-      <h3 class="heading-lg" style="margin-bottom:12px;">Thank You for Choosing SKY FLORALS</h3>
+      <div class="hero-tag" style="margin:0 auto 16px;">${currentLang === 'ES' ? 'Pedido Confirmado' : 'Order Confirmed'}</div>
+      <h3 class="heading-lg" style="margin-bottom:12px;">${currentLang === 'ES' ? 'Gracias por Elegir SKY FLORALS' : 'Thank You for Choosing SKY FLORALS'}</h3>
       <p style="color:var(--text-secondary); line-height:1.6; font-size:0.95rem;">
-        Your order <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> has been received by our master floral artisans. 
-        A courier confirmation text and Cotton Certificate of Curation preview have been dispatched.
+        ${currentLang === 'ES' ? 'Tu orden' : 'Your order'} <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> ${currentLang === 'ES' ? 'ha sido recibida por nuestros maestros floristas.' : 'has been received by our master floral artisans.'}
       </p>
       <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary); border:1px solid var(--border-light);">
-        <div><strong>Delivery Region:</strong> ${activeRegion === 'LOJA' ? 'Loja Atelier Direct Courier' : 'New Jersey / NYC White-Glove Courier'}</div>
-        <div style="margin-top:6px;"><strong>Recipient Experience:</strong> Natural Linen Unboxing Box with Cotton Certificate of Curation</div>
+        <div><strong>${currentLang === 'ES' ? 'Ubicación:' : 'Delivery Region:'}</strong> ${activeRegion === 'LOJA' ? 'Entrega Especializada en Loja, Ecuador' : 'New Jersey / NYC White-Glove Courier'}</div>
+        <div style="margin-top:6px;"><strong>${currentLang === 'ES' ? 'Experiencia:' : 'Recipient Experience:'}</strong> ${currentLang === 'ES' ? 'Caja de Lino Natural con Certificado de Curaduría en Algodón' : 'Natural Linen Unboxing Box with Cotton Certificate of Curation'}</div>
       </div>
-      <button class="btn-primary" onclick="finishCheckoutOrder()">Return to Atelier</button>
+      <button class="btn-primary" onclick="finishCheckoutOrder()">${currentLang === 'ES' ? 'Volver al Atelier' : 'Return to Atelier'}</button>
     `;
   }
   cart = [];
@@ -324,7 +490,7 @@ function showToast(message) {
   }, 3500);
 }
 
-// Expose globals for onclick handlers
+// Expose globals
 window.addToCart = addToCart;
 window.updateCartQty = updateCartQty;
 window.openCartDrawer = openCartDrawer;
@@ -339,6 +505,7 @@ window.switchLocation = switchLocation;
 window.openAboutModal = openAboutModal;
 window.closeAboutModal = closeAboutModal;
 window.switchAboutTab = switchAboutTab;
+window.getCurrentLang = () => currentLang;
 
 // Initialize on DOM load
 document.addEventListener("DOMContentLoaded", () => {
