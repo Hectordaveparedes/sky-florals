@@ -5,7 +5,7 @@ const customizerState = {
   vessel: 'alabaster',
   ribbon: 'silk-cream',
   scent: 'vanilla-rose',
-  cardText: 'To my favorite person, with all my love.',
+  cardText: 'Emily',
   basePrice: 175
 };
 
@@ -73,7 +73,15 @@ function updateCustomizerUI() {
   // Update Live Card Text
   const liveCardText = document.getElementById("liveCardText");
   if (liveCardText) {
-    liveCardText.innerText = customizerState.cardText || "Your personal note will appear here...";
+    const palData = palettesData[customizerState.palette];
+    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const name = customizerState.cardText || "Your Recipient";
+    liveCardText.innerHTML = `
+      Curated for: <strong>${name}</strong><br>
+      Collection: <strong>${palData.name}</strong><br>
+      Designed: <strong>${today}</strong><br>
+      Curated by: <strong>SKY FLORALS</strong>
+    `;
   }
 
   // Calculate Price
