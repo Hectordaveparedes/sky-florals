@@ -5,7 +5,9 @@ const customizerState = {
   vessel: 'alabaster',
   ribbon: 'silk-cream',
   scent: 'vanilla-rose',
-  cardText: 'Emily',
+  recipientName: 'Emily Chasi',
+  occasion: 'Special Celebration',
+  cardText: 'To my favorite person, with all my love.',
   basePrice: 175
 };
 
@@ -70,18 +72,18 @@ function updateCustomizerUI() {
     }, 150);
   }
 
-  // Update Live Card Text
-  const liveCardText = document.getElementById("liveCardText");
-  if (liveCardText) {
-    const palData = palettesData[customizerState.palette];
+  // Update Live Certificate of Curation Text
+  const certRecipient = document.getElementById("certRecipient");
+  const certOccasion = document.getElementById("certOccasion");
+  const certCollection = document.getElementById("certCollection");
+  const certDate = document.getElementById("certDate");
+
+  if (certRecipient) certRecipient.innerText = customizerState.recipientName || "Valued Recipient";
+  if (certOccasion) certOccasion.innerText = customizerState.occasion || "Meaningful Moment";
+  if (certCollection) certCollection.innerText = palettesData[customizerState.palette].name;
+  if (certDate) {
     const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    const name = customizerState.cardText || "Your Recipient";
-    liveCardText.innerHTML = `
-      Curated for: <strong>${name}</strong><br>
-      Collection: <strong>${palData.name}</strong><br>
-      Designed: <strong>${today}</strong><br>
-      Curated by: <strong>SKY FLORALS</strong>
-    `;
+    certDate.innerText = today;
   }
 
   // Calculate Price
@@ -137,8 +139,13 @@ function setScent(val) {
   updateCustomizerUI();
 }
 
-function onNoteInput(val) {
-  customizerState.cardText = val;
+function onRecipientInput(val) {
+  customizerState.recipientName = val;
+  updateCustomizerUI();
+}
+
+function onOccasionInput(val) {
+  customizerState.occasion = val;
   updateCustomizerUI();
 }
 
@@ -160,7 +167,7 @@ function addCustomArrangementToCart() {
       name: `Atelier Custom Arrangement (${palData.name})`,
       price: totalPrice,
       image: palData.image,
-      meta: `Vessel: ${vesData.name} | Ribbon: ${ribData.name} | Scent: ${sceData.name}`
+      meta: `Curated for: ${customizerState.recipientName || 'Valued Guest'} | Includes Certificate of Curation`
     });
     window.openCartDrawer();
   }
@@ -168,10 +175,16 @@ function addCustomArrangementToCart() {
 
 // Bind customizer events on load
 document.addEventListener("DOMContentLoaded", () => {
-  const noteInput = document.getElementById("noteInput");
-  if (noteInput) {
-    noteInput.value = customizerState.cardText;
-    noteInput.addEventListener("input", (e) => onNoteInput(e.target.value));
+  const recipientInput = document.getElementById("recipientInput");
+  const occasionInput = document.getElementById("occasionInput");
+
+  if (recipientInput) {
+    recipientInput.value = customizerState.recipientName;
+    recipientInput.addEventListener("input", (e) => onRecipientInput(e.target.value));
+  }
+  if (occasionInput) {
+    occasionInput.value = customizerState.occasion;
+    occasionInput.addEventListener("input", (e) => onOccasionInput(e.target.value));
   }
   updateCustomizerUI();
 });
