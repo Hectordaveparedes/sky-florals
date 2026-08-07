@@ -4,39 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKY FLORALS — Quiet Sophistication & Luxury Floral Atelier</title>
-  <meta name="description" content="SKY FLORALS is a luxury floral house and curator of architectural floral experiences. Transforming flowers into timeless expressions of artistry, quiet sophistication, and meaningful connection across New Jersey, New York, and global destinations.">
+  <meta name="description" content="SKY FLORALS is a luxury floral house and curator of architectural floral experiences. Transforming flowers into timeless expressions of artistry, quiet sophistication, and meaningful connection across New Jersey, NYC, and Loja, Ecuador.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar with Region Switcher -->
   <div class="announcement-bar">
     <span>
       <span class="pulse-dot"></span>
-      White-Glove Courier Delivery & Atelier Curation Available in New Jersey, NYC & Metro Regions
+      <span id="locationBarText">White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)</span>
     </span>
-    <span style="font-size:0.72rem; opacity:0.85;">
-      CURATED WITH PURPOSE • INCLUDES COTTON CERTIFICATE OF CURATION
-    </span>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span style="font-size:0.7rem; opacity:0.85;">ATELIER REGION:</span>
+      <select class="location-dropdown" onchange="switchLocation(this.value)">
+        <option value="NJ">🇺🇸 New Jersey & NYC Metro</option>
+        <option value="LOJA">🇪🇨 Loja, Ecuador Atelier</option>
+      </select>
+    </div>
   </div>
 
   <!-- Main Luxury Navigation -->
   <nav class="navbar">
     <a href="#" class="nav-logo">
       SKY FLORALS
-      <span>QUIET SOPHISTICATION • PARIS • FLORENCE • NEW YORK</span>
+      <span id="regionLabel">NEW JERSEY & NYC ATELIER</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#heritage" class="nav-link">The House</a></li>
-      <li><a href="#values" class="nav-link">Values</a></li>
       <li><a href="#customizer" class="nav-link">Atelier Customizer</a></li>
       <li><a href="#quiz" class="nav-link">Emotional Matcher</a></li>
       <li><a href="#sculptures" class="nav-link">Sculptures</a></li>
       <li><a href="#subscriptions" class="nav-link">Subscriptions</a></li>
+      <li><a href="javascript:void(0)" onclick="openAboutModal('story')" class="nav-link" style="font-weight:500;">About Us / The House</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="btn-icon" onclick="openAboutModal('story')" title="About SKY FLORALS">
+        <span>Our House</span>
+      </button>
       <button class="btn-icon" onclick="openCartDrawer()">
-        <span>Shopping Bag</span>
+        <span>Bag</span>
         <span class="cart-badge" id="cartBadge">0</span>
       </button>
     </div>
@@ -57,7 +63,7 @@
         </p>
         <div class="hero-cta-group">
           <a href="#customizer" class="btn-primary">Design Your Sky Bouquet →</a>
-          <a href="#heritage" class="btn-secondary">Explore The House Story</a>
+          <button class="btn-secondary" onclick="openAboutModal('story')">Explore The House Story</button>
         </div>
         
         <div class="hero-trust-bar">
@@ -88,171 +94,13 @@
     </div>
   </header>
 
-  <!-- Brand Story & House Heritage Section -->
-  <section class="brand-heritage" id="heritage">
-    <div class="container heritage-grid">
-      <div>
-        <span class="heritage-badge">The House & Philosophy</span>
-        <h2 class="heading-lg">Quiet Sophistication Born From Reverence</h2>
-        <div class="heritage-quote">
-          “Every creation begins with purpose—not with petals. Every arrangement is interpreted through design, guided by emotion, and finished with quiet sophistication.”
-        </div>
-        <p class="heritage-text">
-          SKY FLORALS was born from a profound admiration for the beauty of creation and the belief that flowers are among the greatest masterpieces ever designed. Drawing inspiration from the world's most prestigious floral houses—from the haute couture ateliers of Paris to the classical renaissance proportions of Florence—we invite you to experience flowers as timeless expressions of art.
-        </p>
-        <p class="heritage-text" style="margin-top:12px;">
-          Rooted in family values and guided by integrity, we believe true beauty is found in thoughtful details, genuine care, and authenticity. Flowers are more than a gift—they are a reminder that the greatest masterpieces already exist in creation.
-        </p>
-      </div>
-
-      <!-- Certificate of Curation Callout -->
-      <div class="certificate-preview-box">
-        <div class="cert-header">SKY FLORALS</div>
-        <div class="cert-sub">Certificate of Curation</div>
-        
-        <div style="margin:20px 0; text-align:left;">
-          <div class="cert-row">
-            <span>Curated for</span>
-            <span id="certSampleRecipient">Emily Chasi</span>
-          </div>
-          <div class="cert-row">
-            <span>Occasion</span>
-            <span id="certSampleOccasion">Birthday Celebration</span>
-          </div>
-          <div class="cert-row">
-            <span>Collection</span>
-            <span>Morning Light</span>
-          </div>
-          <div class="cert-row">
-            <span>Designed</span>
-            <span>August 7, 2026</span>
-          </div>
-          <div class="cert-row">
-            <span>Curated By</span>
-            <span>SKY FLORALS Master Artisan</span>
-          </div>
-        </div>
-
-        <p style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4; font-family:var(--font-body);">
-          Printed on heavyweight 100% natural cotton paper. Kept and cherished as a timeless keepsake with every creation.
-        </p>
-
-        <div class="cert-seal">
-          <span>★ ★ ★ ★ ★</span> Certificate of Curation
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission, Vision & Promise -->
-  <section class="section-padding container" style="text-align:center;">
-    <div style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; gap:40px;">
-      
-      <div>
-        <span class="subheading">Our Mission</span>
-        <h3 class="heading-lg" style="margin-top:8px;">
-          To thoughtfully curate floral experiences that transform flowers into timeless expressions of beauty, artistry, and quiet sophistication.
-        </h3>
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; text-align:left; margin-top:20px;">
-        <div style="background:var(--bg-card); border-radius:var(--radius-md); padding:32px; border:1px solid var(--border-light);">
-          <span class="subheading" style="color:var(--accent-gold);">Our Vision</span>
-          <h4 style="font-family:var(--font-serif); font-size:1.3rem; margin:12px 0 8px;">A Global House of Floral Artistry</h4>
-          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6;">
-            To become a globally recognized floral house that transforms the way the world experiences flowers—elevating them to timeless works of art that inspire elegance, connection, and wonder.
-          </p>
-        </div>
-
-        <div style="background:var(--bg-card); border-radius:var(--radius-md); padding:32px; border:1px solid var(--border-light);">
-          <span class="subheading" style="color:var(--accent-gold);">Our Promise</span>
-          <h4 style="font-family:var(--font-serif); font-size:1.3rem; margin:12px 0 8px;">Beyond Simple Beauty</h4>
-          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6;">
-            We promise to create floral experiences thoughtfully crafted with artistry, timeless elegance, and exceptional care, leaving every client with an unforgettable impression.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Brand Values Section (5 Pillars) -->
-  <section class="values-section" id="values">
-    <div class="container">
-      <div class="section-header">
-        <span class="subheading">The 5 Pillars of SKY FLORALS</span>
-        <h2 class="heading-lg">Our Core Values</h2>
-        <p style="color:var(--text-secondary);">Guided by purpose, family integrity, and refined craftsmanship in every bloom we touch.</p>
-      </div>
-
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-num">01</div>
-          <h3 class="value-title">Artistry</h3>
-          <p class="value-desc">We approach every floral creation as a work of art, thoughtfully composed with creativity, balance, and intention.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-num">02</div>
-          <h3 class="value-title">Sophistication</h3>
-          <p class="value-desc">True sophistication is quiet, timeless, and intentional—expressed through every detail, from design to experience.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-num">03</div>
-          <h3 class="value-title">Integrity</h3>
-          <p class="value-desc">We act with honesty, transparency, and respect, honoring our promises through exceptional quality and genuine care.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-num">04</div>
-          <h3 class="value-title">Intentionality</h3>
-          <p class="value-desc">Every decision is made with purpose. From the selection of each bloom to the final presentation, nothing is left to chance.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-num">05</div>
-          <h3 class="value-title">Family</h3>
-          <p class="value-desc">We cultivate meaningful relationships through warmth, trust, and care, building a brand rooted in family values and lasting connections.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Problem vs Solution Matrix -->
-  <section class="matrix-section container">
-    <div class="section-header">
-      <span class="subheading">Why Standard Florists Fail</span>
-      <h2 class="heading-lg">Mass Production vs. Intentional Curation</h2>
-      <p style="color:var(--text-secondary);">We solved the frustration of ordinary flower delivery so your meaningful moment leaves a lasting impression.</p>
-    </div>
-
-    <div class="comparison-grid">
-      <!-- Standard Florists -->
-      <div class="comparison-card card-problem">
-        <span class="card-badge">Ordinary Florists</span>
-        <h3 class="comparison-title">Generic & Disappointing</h3>
-        <ul class="comparison-list">
-          <li><span class="icon-cross">✕</span> Flowers selected blindly from a generic menu</li>
-          <li><span class="icon-cross">✕</span> Crushed in cardboard boxes with cheap machine paper receipts</li>
-          <li><span class="icon-cross">✕</span> Wilt within 48 hours leaving a sad mess</li>
-          <li><span class="icon-cross">✕</span> Lack artistic form, looking like budget supermarket bundles</li>
-          <li><span class="icon-cross">✕</span> Loud, pushy marketing with no emotional depth</li>
-        </ul>
-      </div>
-
-      <!-- SKY FLORALS -->
-      <div class="comparison-card card-solution">
-        <span class="card-badge">The SKY FLORALS Standard</span>
-        <h3 class="comparison-title">Thoughtfully Curated Artistry</h3>
-        <ul class="comparison-list">
-          <li><span class="icon-check">✓</span> Every arrangement starts with purpose and story, not petals</li>
-          <li><span class="icon-check">✓</span> Includes Cotton Certificate of Curation keepsake</li>
-          <li><span class="icon-check">✓</span> 7 to 10 day freshness guarantee with proprietary botanical elixir</li>
-          <li><span class="icon-check">✓</span> Natural Linen (#E8DFD2) signature wrap & travertine vessels</li>
-          <li><span class="icon-check">✓</span> Quiet sophistication inspired by Parisian and Florentine ateliers</li>
-        </ul>
-      </div>
+  <!-- Press & Recognition Bar -->
+  <section class="container">
+    <div class="press-bar">
+      <span class="press-logo">VOGUE</span>
+      <span class="press-logo">HARPER'S BAZAAR</span>
+      <span class="press-logo">ELLE DECOR</span>
+      <span class="press-logo">ARCHITECTURAL DIGEST</span>
     </div>
   </section>
 
@@ -276,6 +124,30 @@
     </div>
   </section>
 
+  <!-- Products Catalog -->
+  <section class="catalog-section" id="sculptures">
+    <div class="container">
+      <div class="section-header">
+        <span class="subheading">Curated Floral Sculptures</span>
+        <h2 class="heading-lg">Signature SKY Collection</h2>
+        <p style="color:var(--text-secondary);">Hand-selected stems arranged by master florists for white-glove courier delivery.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCatalog('all', this)">All Sculptures</button>
+        <button class="filter-btn" onclick="filterCatalog('minimalist', this)">Minimalist Chic</button>
+        <button class="filter-btn" onclick="filterCatalog('grand', this)">Grand Declarations</button>
+        <button class="filter-btn" onclick="filterCatalog('rituals', this)">Monthly Rituals</button>
+      </div>
+
+      <!-- Catalog Grid -->
+      <div class="catalog-grid" id="catalogGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
   <!-- Atelier Bouquet Customizer Studio -->
   <section class="customizer-section container" id="customizer">
     <div class="section-header">
@@ -288,27 +160,27 @@
       <!-- Live Preview Side -->
       <div class="customizer-preview">
         <div class="preview-image-container">
-          <img id="customizerPreviewImg" src="assets/hero.jpg" alt="Custom Bouquet Live Preview">
+          <img id="customizerPreviewImg" src="assets/pal_ivory.jpg" alt="Custom Bouquet Live Preview">
         </div>
         
         <!-- Live Certificate Preview inside Customizer -->
-        <div class="certificate-preview-box" style="padding:20px; font-size:0.9rem;">
-          <div class="cert-header" style="font-size:0.95rem;">SKY FLORALS</div>
-          <div class="cert-sub" style="font-size:0.6rem; margin-bottom:12px;">Certificate of Curation</div>
+        <div class="certificate-preview-box">
+          <div class="cert-header">SKY FLORALS</div>
+          <div class="cert-sub">Certificate of Curation</div>
           
-          <div class="cert-row" style="padding:4px 0;">
+          <div class="cert-row">
             <span>Curated for</span>
             <span id="certRecipient">Emily Chasi</span>
           </div>
-          <div class="cert-row" style="padding:4px 0;">
+          <div class="cert-row">
             <span>Occasion</span>
             <span id="certOccasion">Special Celebration</span>
           </div>
-          <div class="cert-row" style="padding:4px 0;">
+          <div class="cert-row">
             <span>Collection</span>
             <span id="certCollection">Ivory & Alabaster Stems</span>
           </div>
-          <div class="cert-row" style="padding:4px 0;">
+          <div class="cert-row">
             <span>Designed</span>
             <span id="certDate">August 7, 2026</span>
           </div>
@@ -318,14 +190,14 @@
       <!-- Controls Side -->
       <div class="customizer-controls">
         <!-- Recipient & Occasion Inputs -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
           <div class="control-group">
             <div class="control-label">Recipient Name</div>
-            <input type="text" class="note-input" id="recipientInput" style="min-height:auto; padding:12px;" placeholder="e.g. Emily Chasi">
+            <input type="text" class="note-input" id="recipientInput" style="min-height:auto; padding:10px;" placeholder="e.g. Emily Chasi">
           </div>
           <div class="control-group">
             <div class="control-label">Occasion</div>
-            <input type="text" class="note-input" id="occasionInput" style="min-height:auto; padding:12px;" placeholder="e.g. Birthday Celebration">
+            <input type="text" class="note-input" id="occasionInput" style="min-height:auto; padding:10px;" placeholder="e.g. Birthday Celebration">
           </div>
         </div>
 
@@ -399,30 +271,6 @@
     </div>
   </section>
 
-  <!-- Products Catalog -->
-  <section class="catalog-section" id="sculptures">
-    <div class="container">
-      <div class="section-header">
-        <span class="subheading">Curated Floral Sculptures</span>
-        <h2 class="heading-lg">Signature SKY Collection</h2>
-        <p style="color:var(--text-secondary);">Hand-selected stems arranged by master florists for immediate delivery across New Jersey, NYC, and major regions.</p>
-      </div>
-
-      <!-- Filter Tabs -->
-      <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterCatalog('all', this)">All Sculptures</button>
-        <button class="filter-btn" onclick="filterCatalog('minimalist', this)">Minimalist Chic</button>
-        <button class="filter-btn" onclick="filterCatalog('grand', this)">Grand Declarations</button>
-        <button class="filter-btn" onclick="filterCatalog('rituals', this)">Monthly Rituals</button>
-      </div>
-
-      <!-- Catalog Grid -->
-      <div class="catalog-grid" id="catalogGrid">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-    </div>
-  </section>
-
   <!-- Unboxing Experience Showcase -->
   <section class="unboxing-section" id="unboxing">
     <div class="container unboxing-grid">
@@ -461,17 +309,17 @@
     </div>
   </section>
 
-  <!-- Delivery ZIP Code Checker -->
+  <!-- Delivery ZIP / Zone Checker -->
   <section class="container section-padding">
     <div class="zip-checker-card">
-      <span class="subheading">US Courier Verification</span>
-      <h2 class="heading-lg" style="margin-top:8px;">Check Courier Delivery in Your City</h2>
-      <p style="color:var(--text-secondary); max-width:500px; margin:12px auto 0;">
-        Enter your 5-digit US ZIP Code to confirm real-time white-glove courier availability across NJ, NY, FL, CA & TX.
+      <span class="subheading">Atelier Courier Verification</span>
+      <h2 class="heading-lg" style="margin-top:6px;">Check Courier Delivery in Your City</h2>
+      <p style="color:var(--text-secondary); max-width:520px; margin:10px auto 0;">
+        Confirm real-time white-glove courier availability across New Jersey, NYC Metro, and Loja, Ecuador.
       </p>
 
       <div class="zip-input-group">
-        <input type="text" class="zip-input" id="zipInput" placeholder="Enter ZIP Code (e.g. 07030, 10001, 90210, 33139)" maxlength="5">
+        <input type="text" class="zip-input" id="zipInput" placeholder="Enter 5-Digit US ZIP Code (e.g. 07030, 10001, 90210)">
         <button class="btn-primary" onclick="checkDeliveryZip()">Check Availability</button>
       </div>
 
@@ -513,7 +361,7 @@
             <li>Complimentary signature room scent spray</li>
             <li>15% off all additional gift orders</li>
           </ul>
-          <button class="btn-primary" onclick="addToCart({id:'sub-2', name:'The Sanctuary Subscription', price:195, image:'assets/signature_blush.jpg', meta:'Bi-Weekly Subscription'})">Join Sanctuary Club</button>
+          <button class="btn-primary" onclick="addToCart({id:'sub-2', name:'The Sanctuary Subscription', price:195, image:'assets/pal_blush.jpg', meta:'Bi-Weekly Subscription'})">Join Sanctuary Club</button>
         </div>
 
         <!-- Tier 3 -->
@@ -526,21 +374,89 @@
             <li>Custom color palette requested per week</li>
             <li>20% off all gift orders + priority holiday slots</li>
           </ul>
-          <button class="btn-secondary" onclick="addToCart({id:'sub-3', name:'The Atelier VIP Subscription', price:350, image:'assets/hero.jpg', meta:'Weekly Subscription'})">Join VIP Atelier</button>
+          <button class="btn-secondary" onclick="addToCart({id:'sub-3', name:'The Atelier VIP Subscription', price:350, image:'assets/pal_ivory.jpg', meta:'Weekly Subscription'})">Join VIP Atelier</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Editorial Press & Quotes -->
-  <section class="container section-padding">
-    <div class="press-bar">
-      <span class="press-logo">VOGUE</span>
-      <span class="press-logo">HARPER'S BAZAAR</span>
-      <span class="press-logo">ELLE DECOR</span>
-      <span class="press-logo">ARCHITECTURAL DIGEST</span>
+  <!-- DEDICATED ABOUT US / THE HOUSE MODAL -->
+  <div class="modal-overlay" id="aboutModal">
+    <div class="about-modal-card">
+      <span class="close-btn" style="position:absolute; top:24px; right:28px;" onclick="closeAboutModal()">✕</span>
+      
+      <div class="subheading" style="color:var(--accent-gold);">The House of SKY FLORALS</div>
+      <h2 class="heading-lg" style="margin-top:6px;">Quiet Sophistication & Heritage</h2>
+
+      <!-- Modal Tabs -->
+      <div class="about-tabs">
+        <button class="about-tab-btn active" id="tabBtn-story" onclick="switchAboutTab('story')">Brand Story</button>
+        <button class="about-tab-btn" id="tabBtn-mission" onclick="switchAboutTab('mission')">Mission & Vision</button>
+        <button class="about-tab-btn" id="tabBtn-values" onclick="switchAboutTab('values')">The 5 Pillars</button>
+      </div>
+
+      <!-- Tab 1: Story -->
+      <div id="tabContent-story">
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; margin-bottom:12px;">Born From Reverence For Creation</h4>
+        <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.75; margin-bottom:16px;">
+          SKY FLORALS was born from a profound admiration for the beauty of creation and the belief that flowers are among the greatest masterpieces ever designed. To us, every bloom is a work of art—thoughtfully created with purpose, character, and extraordinary beauty.
+        </p>
+        <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.75; margin-bottom:16px;">
+          Drawing aesthetic inspiration from world-renowned floral heritage—from the haute couture ateliers of Paris to the renaissance artistic balance of Florence—we serve clients across <strong>New Jersey, New York</strong>, and our atelier in <strong>Loja, Ecuador</strong>.
+        </p>
+        <div style="background:var(--bg-primary); border-left:3px solid var(--accent-gold); padding:16px 20px; font-family:var(--font-serif); font-style:italic; font-size:1rem; margin:20px 0; border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+          “At SKY FLORALS, every arrangement begins with purpose—not with petals. Every creation is interpreted through design, guided by emotion, and finished with quiet sophistication.”
+        </div>
+      </div>
+
+      <!-- Tab 2: Mission & Vision -->
+      <div id="tabContent-mission" style="display:none;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:24px; border:1px solid var(--border-light);">
+            <span class="subheading" style="color:var(--accent-gold);">Our Mission</span>
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; margin:8px 0;">To Curate Timeless Expressions</h4>
+            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6;">
+              To thoughtfully curate floral experiences that transform flowers into timeless expressions of beauty, artistry, and quiet sophistication.
+            </p>
+          </div>
+
+          <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:24px; border:1px solid var(--border-light);">
+            <span class="subheading" style="color:var(--accent-gold);">Our Vision</span>
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; margin:8px 0;">Global Excellence in Floral Artistry</h4>
+            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6;">
+              To become a globally recognized floral house that transforms the way the world experiences flowers—elevating them to timeless works of art that inspire elegance, connection, and wonder.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Values -->
+      <div id="tabContent-values" style="display:none;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+            <h5 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--accent-gold);">01. Artistry</h5>
+            <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">Composed with creativity, balance, and intentional design.</p>
+          </div>
+          <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+            <h5 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--accent-gold);">02. Sophistication</h5>
+            <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">Quiet, timeless, and intentional through every detail.</p>
+          </div>
+          <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+            <h5 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--accent-gold);">03. Integrity</h5>
+            <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">Honesty, transparency, respect, and genuine care.</p>
+          </div>
+          <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+            <h5 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--accent-gold);">04. Intentionality</h5>
+            <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">Every decision made with purpose—from bloom to presentation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px; text-align:right;">
+        <button class="btn-primary" onclick="closeAboutModal()">Return to Atelier →</button>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- Slide-Over Shopping Bag Drawer -->
   <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="if(event.target === this) closeCartDrawer()">
@@ -588,17 +504,17 @@
         </div>
 
         <div>
-          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Delivery Address (US)</label>
+          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Delivery Address</label>
           <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="Street address, Apt, Suite">
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
           <div>
-            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">City</label>
-            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Hoboken / NYC">
+            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">City / Zone</label>
+            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Hoboken NJ / Loja Centro">
           </div>
           <div>
-            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">ZIP Code</label>
+            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">ZIP / Zone Code</label>
             <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="07030">
           </div>
         </div>
@@ -629,8 +545,8 @@
       <div class="footer-col">
         <h5>Explore</h5>
         <ul class="footer-links">
-          <li><a href="#heritage">The House Story</a></li>
-          <li><a href="#values">Core Values</a></li>
+          <li><a href="javascript:void(0)" onclick="openAboutModal('story')">The House Story</a></li>
+          <li><a href="javascript:void(0)" onclick="openAboutModal('values')">Core Values</a></li>
           <li><a href="#customizer">Atelier Customizer</a></li>
           <li><a href="#quiz">Emotional Matcher</a></li>
           <li><a href="#sculptures">Signature Sculptures</a></li>
@@ -640,10 +556,8 @@
       <div class="footer-col">
         <h5>Atelier Locations</h5>
         <ul class="footer-links">
-          <li><a href="#">New Jersey & NYC</a></li>
-          <li><a href="#">Los Angeles, CA</a></li>
-          <li><a href="#">Miami & Palm Beach</a></li>
-          <li><a href="#">Loja Atelier</a></li>
+          <li><a href="javascript:void(0)" onclick="switchLocation('NJ')">🇺🇸 New Jersey & NYC</a></li>
+          <li><a href="javascript:void(0)" onclick="switchLocation('LOJA')">🇪🇨 Loja Atelier, Ecuador</a></li>
         </ul>
       </div>
 

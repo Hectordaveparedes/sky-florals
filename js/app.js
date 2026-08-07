@@ -73,6 +73,55 @@ const catalogProducts = [
 // App State
 let cart = [];
 let selectedCategory = 'all';
+let activeRegion = 'NJ'; // 'NJ' (New Jersey/NYC USA) or 'LOJA' (Loja, Ecuador)
+
+// Location Selector Switcher
+function switchLocation(region) {
+  activeRegion = region;
+  const barText = document.getElementById("locationBarText");
+  const zipInput = document.getElementById("zipInput");
+  const regionLabel = document.getElementById("regionLabel");
+
+  if (region === 'LOJA') {
+    if (barText) barText.innerText = "White-Glove Atelier Delivery Available Today in Loja & Metropolitan Area ($ USD)";
+    if (zipInput) zipInput.placeholder = "Enter Delivery Zone in Loja (e.g. Centro, El Valle, San Sebastian)";
+    if (regionLabel) regionLabel.innerText = "Loja, Ecuador Atelier";
+    showToast("Switched active region to Loja, Ecuador Atelier");
+  } else {
+    if (barText) barText.innerText = "White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)";
+    if (zipInput) zipInput.placeholder = "Enter 5-Digit US ZIP Code (e.g. 07030, 10001, 90210)";
+    if (regionLabel) regionLabel.innerText = "New Jersey & NYC Atelier";
+    showToast("Switched active region to New Jersey / NYC Atelier");
+  }
+}
+
+// About Us Modal Handler
+function openAboutModal(tab = 'story') {
+  const modal = document.getElementById("aboutModal");
+  if (modal) modal.classList.add("active");
+  switchAboutTab(tab);
+}
+
+function closeAboutModal() {
+  const modal = document.getElementById("aboutModal");
+  if (modal) modal.classList.remove("active");
+}
+
+function switchAboutTab(tabName) {
+  const tabs = document.querySelectorAll(".about-tab-btn");
+  tabs.forEach(t => t.classList.remove("active"));
+  
+  const selectedBtn = document.getElementById(`tabBtn-${tabName}`);
+  if (selectedBtn) selectedBtn.classList.add("active");
+
+  const tabStory = document.getElementById("tabContent-story");
+  const tabValues = document.getElementById("tabContent-values");
+  const tabMission = document.getElementById("tabContent-mission");
+
+  if (tabStory) tabStory.style.display = tabName === 'story' ? 'block' : 'none';
+  if (tabValues) tabValues.style.display = tabName === 'values' ? 'block' : 'none';
+  if (tabMission) tabMission.style.display = tabName === 'mission' ? 'block' : 'none';
+}
 
 // Cart Logic
 function addToCart(item) {
@@ -182,26 +231,36 @@ function filterCatalog(category, btn) {
   renderCatalog();
 }
 
-// US ZIP Code Validator
+// ZIP / Zone Delivery Checker
 function checkDeliveryZip() {
   const input = document.getElementById("zipInput");
   const msg = document.getElementById("zipStatusMsg");
   if (!input || !msg) return;
 
-  const zip = input.value.trim();
-  const validZips = ["10001", "90028", "33139", "60611", "75201", "94102", "10012", "90210", "33130", "90015", "07030"];
+  const val = input.value.trim();
   
-  if (zip.length === 5 && !isNaN(zip)) {
-    if (validZips.includes(zip) || zip.startsWith("07") || zip.startsWith("10") || zip.startsWith("90") || zip.startsWith("33") || zip.startsWith("60") || zip.startsWith("75") || zip.startsWith("94")) {
+  if (activeRegion === 'LOJA') {
+    if (val.length > 2) {
       msg.className = "zip-status-msg success";
-      msg.innerHTML = `✨ Priority White-Glove Courier Available in ZIP ${zip}! Delivery slots open for today.`;
+      msg.innerHTML = `✨ Servicio de Entregas Especializado Disponible en Loja (${val}). Entrega en 2 a 4 horas.`;
     } else {
-      msg.className = "zip-status-msg success";
-      msg.innerHTML = `✓ Standard White-Glove Shipping Available for ZIP ${zip} (1-2 Days Guaranteed Freshness).`;
+      msg.className = "zip-status-msg error";
+      msg.innerHTML = `Por favor ingresa tu sector o zona en Loja (ej: Centro, El Valle, San Sebastián).`;
     }
   } else {
-    msg.className = "zip-status-msg error";
-    msg.innerHTML = `Please enter a valid 5-digit US ZIP Code (e.g. 07030, 90210, 10001, 33139).`;
+    const validZips = ["10001", "90028", "33139", "60611", "75201", "94102", "10012", "90210", "33130", "90015", "07030"];
+    if (val.length === 5 && !isNaN(val)) {
+      if (validZips.includes(val) || val.startsWith("07") || val.startsWith("10") || val.startsWith("90") || val.startsWith("33") || val.startsWith("60") || val.startsWith("75") || val.startsWith("94")) {
+        msg.className = "zip-status-msg success";
+        msg.innerHTML = `✨ Priority White-Glove Courier Available in ZIP ${val}! Same-day delivery slots open.`;
+      } else {
+        msg.className = "zip-status-msg success";
+        msg.innerHTML = `✓ Standard White-Glove Courier Available for ZIP ${val} (1-2 Days Guaranteed Freshness).`;
+      }
+    } else {
+      msg.className = "zip-status-msg error";
+      msg.innerHTML = `Please enter a valid 5-digit US ZIP Code (e.g. 07030, 90210, 10001, 33139).`;
+    }
   }
 }
 
@@ -231,10 +290,10 @@ function submitCheckout(e) {
       <h3 class="heading-lg" style="margin-bottom:12px;">Thank You for Choosing SKY FLORALS</h3>
       <p style="color:var(--text-secondary); line-height:1.6; font-size:0.95rem;">
         Your order <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> has been received by our master floral artisans. 
-        A courier confirmation text and Cotton Certificate of Curation preview have been dispatched to your email.
+        A courier confirmation text and Cotton Certificate of Curation preview have been dispatched.
       </p>
       <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary); border:1px solid var(--border-light);">
-        <div><strong>Delivery Window:</strong> Today between 2:00 PM – 5:00 PM</div>
+        <div><strong>Delivery Region:</strong> ${activeRegion === 'LOJA' ? 'Loja Atelier Direct Courier' : 'New Jersey / NYC White-Glove Courier'}</div>
         <div style="margin-top:6px;"><strong>Recipient Experience:</strong> Natural Linen Unboxing Box with Cotton Certificate of Curation</div>
       </div>
       <button class="btn-primary" onclick="finishCheckoutOrder()">Return to Atelier</button>
@@ -276,6 +335,10 @@ window.openCheckoutModal = openCheckoutModal;
 window.closeCheckoutModal = closeCheckoutModal;
 window.submitCheckout = submitCheckout;
 window.finishCheckoutOrder = finishCheckoutOrder;
+window.switchLocation = switchLocation;
+window.openAboutModal = openAboutModal;
+window.closeAboutModal = closeAboutModal;
+window.switchAboutTab = switchAboutTab;
 
 // Initialize on DOM load
 document.addEventListener("DOMContentLoaded", () => {
