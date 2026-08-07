@@ -1,4 +1,4 @@
-// SKY FLORALS - MAIN E-COMMERCE, I18N & INTERACTIVE APP LOGIC
+// SKY FLORALS - MAIN E-COMMERCE, I18N & REGIONAL PRICING APP LOGIC
 
 // i18n Translation Dictionary (EN for New Jersey USA / ES for Loja Ecuador)
 const i18nDict = {
@@ -68,7 +68,8 @@ const i18nDict = {
     aboutTabMission: "Mission & Vision",
     aboutTabValues: "The 5 Pillars",
     bagTitle: "Your Shopping Bag",
-    btnCheckout: "Proceed to Express Checkout →"
+    btnCheckout: "Proceed to Express Checkout →",
+    courierLabel: "White-Glove Courier Delivery"
   },
   ES: {
     locationBar: "Entrega Especializada Disponible Hoy en Loja y Área Metropolitana ($ USD)",
@@ -136,17 +137,19 @@ const i18nDict = {
     aboutTabMission: "Misión y Visión",
     aboutTabValues: "Los 5 Pilares",
     bagTitle: "Tu Bolsa de Compras",
-    btnCheckout: "Proceder al Pago Expres →"
+    btnCheckout: "Proceder al Pago Expres →",
+    courierLabel: "Envío Especializado Atelier"
   }
 };
 
-// Products Catalog Data
+// Products Catalog Data with Dual Regional Pricing (US vs Loja Ecuador)
 const catalogProducts = [
   {
     id: "sky-01",
     name: "The Hailey Monochrome",
     category: "minimalist",
-    price: 165,
+    priceUS: 165,
+    priceLoja: 45,
     tag: "Bestseller",
     image: "assets/pal_blush.jpg",
     desc: "A sculptured monochrome study in blush peonies and garden roses wrapped in natural linen.",
@@ -158,7 +161,8 @@ const catalogProducts = [
     id: "sky-02",
     name: "Grand Ivory Monolith",
     category: "grand",
-    price: 265,
+    priceUS: 265,
+    priceLoja: 75,
     tag: "Signature",
     image: "assets/pal_ivory.jpg",
     desc: "32 long-stemmed white calla lilies and garden roses in a textured alabaster stone vase.",
@@ -170,7 +174,8 @@ const catalogProducts = [
     id: "sky-03",
     name: "Sanctuary Ranunculus",
     category: "minimalist",
-    price: 145,
+    priceUS: 145,
+    priceLoja: 38,
     tag: "Hailey Favorite",
     image: "assets/lifestyle.jpg",
     desc: "Crisp white ranunculus paired with silver eucalyptus. Subdued, serene, and effortlessly stylish.",
@@ -182,7 +187,8 @@ const catalogProducts = [
     id: "sky-04",
     name: "Unboxing Ritual Box",
     category: "rituals",
-    price: 195,
+    priceUS: 195,
+    priceLoja: 55,
     tag: "Luxury Gift Set",
     image: "assets/unboxing.jpg",
     desc: "Includes our signature floral sculpture, magnetic oat linen box, Cotton Certificate of Curation, and French Rose spray.",
@@ -194,7 +200,8 @@ const catalogProducts = [
     id: "sky-05",
     name: "Sunset Terracotta & Gold",
     category: "grand",
-    price: 215,
+    priceUS: 215,
+    priceLoja: 65,
     tag: "New Season",
     image: "assets/pal_terracotta.jpg",
     desc: "Warm peach tones, terracotta garden roses, and wild oats in a raw travertine stone vessel.",
@@ -206,7 +213,8 @@ const catalogProducts = [
     id: "sky-06",
     name: "Midnight Velvet Drama",
     category: "rituals",
-    price: 235,
+    priceUS: 235,
+    priceLoja: 68,
     tag: "Haute Couture",
     image: "assets/pal_midnight.jpg",
     desc: "Deep burgundy calla lilies and dark scabiosa in a matte black ceramic vase.",
@@ -216,34 +224,54 @@ const catalogProducts = [
   }
 ];
 
+// Subscription Tiers Dual Regional Pricing
+const subTiersData = {
+  sub1: { priceUS: 125, priceLoja: 30 },
+  sub2: { priceUS: 195, priceLoja: 50 },
+  sub3: { priceUS: 350, priceLoja: 85 }
+};
+
 // App State
 let cart = [];
 let selectedCategory = 'all';
 let activeRegion = 'NJ'; // 'NJ' (New Jersey/NYC USA) or 'LOJA' (Loja, Ecuador)
 let currentLang = 'EN';   // 'EN' or 'ES'
 
-// Location & Language Switcher Function
+// Location & Language & Regional Price Switcher
 function switchLocation(region) {
   activeRegion = region;
   currentLang = (region === 'LOJA') ? 'ES' : 'EN';
   
   applyTranslations();
+  updateSubscriptionPrices();
   renderCatalog();
-  if (window.updateQuizLang) window.updateQuizLang(currentLang);
+
+  if (window.updateQuizLang) window.updateQuizLang(currentLang, activeRegion);
   if (window.updateCustomizerUI) window.updateCustomizerUI();
 
   if (region === 'LOJA') {
-    showToast("Ubicación y lenguaje cambiados a Atelier Loja, Ecuador (Español)");
+    showToast("Ubicación cambiada a Loja, Ecuador Atelier (Precios Adaptados al Mercado de Ecuador)");
   } else {
-    showToast("Switched location and language to New Jersey / NYC Atelier (English)");
+    showToast("Switched location to New Jersey / NYC Atelier (US Market Pricing)");
   }
+}
+
+function updateSubscriptionPrices() {
+  const isLoja = (activeRegion === 'LOJA');
+  
+  const p1 = document.getElementById("subPrice-1");
+  const p2 = document.getElementById("subPrice-2");
+  const p3 = document.getElementById("subPrice-3");
+
+  if (p1) p1.innerHTML = `$${isLoja ? subTiersData.sub1.priceLoja : subTiersData.sub1.priceUS} <span>/${currentLang === 'ES' ? 'entrega' : 'delivery'}</span>`;
+  if (p2) p2.innerHTML = `$${isLoja ? subTiersData.sub2.priceLoja : subTiersData.sub2.priceUS} <span>/${currentLang === 'ES' ? 'entrega' : 'delivery'}</span>`;
+  if (p3) p3.innerHTML = `$${isLoja ? subTiersData.sub3.priceLoja : subTiersData.sub3.priceUS} <span>/${currentLang === 'ES' ? 'entrega' : 'delivery'}</span>`;
 }
 
 function applyTranslations() {
   const dict = i18nDict[currentLang];
   if (!dict) return;
 
-  // Elements with data-i18n attribute
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (dict[key]) {
@@ -251,7 +279,6 @@ function applyTranslations() {
     }
   });
 
-  // Specific Placeholders
   const zipInput = document.getElementById("zipInput");
   if (zipInput) {
     zipInput.placeholder = dict.zipPlaceholder;
@@ -288,11 +315,15 @@ function switchAboutTab(tabName) {
 
 // Cart Logic
 function addToCart(item) {
+  const price = (activeRegion === 'LOJA') ? (item.priceLoja || item.price) : (item.priceUS || item.price);
+  const cartItem = { ...item, price: price };
+
   const existing = cart.find(c => c.id === item.id);
   if (existing) {
     existing.qty += 1;
+    existing.price = price;
   } else {
-    cart.push({ ...item, qty: 1 });
+    cart.push({ ...cartItem, qty: 1 });
   }
   updateCartUI();
   showToast(currentLang === 'ES' ? `Agregado "${item.name}" a tu bolsa.` : `Added "${item.name}" to your Bag.`);
@@ -314,11 +345,14 @@ function updateCartUI() {
   const body = document.getElementById("cartBody");
   const totalSub = document.getElementById("cartSubtotal");
   const totalFinal = document.getElementById("cartTotal");
+  const deliveryCostLabel = document.getElementById("cartDeliveryFee");
 
   const totalItemCount = cart.reduce((sum, item) => sum + item.qty, 0);
   const subtotalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const deliveryFee = (activeRegion === 'LOJA') ? 3 : 15;
 
   if (badge) badge.innerText = totalItemCount;
+  if (deliveryCostLabel) deliveryCostLabel.innerText = `$${deliveryFee}`;
 
   if (body) {
     if (cart.length === 0) {
@@ -345,7 +379,7 @@ function updateCartUI() {
   }
 
   if (totalSub) totalSub.innerText = `$${subtotalPrice}`;
-  if (totalFinal) totalFinal.innerText = `$${subtotalPrice > 0 ? subtotalPrice + 15 : 0}`;
+  if (totalFinal) totalFinal.innerText = `$${subtotalPrice > 0 ? subtotalPrice + deliveryFee : 0}`;
 }
 
 function openCartDrawer() {
@@ -367,27 +401,30 @@ function renderCatalog() {
     ? catalogProducts 
     : catalogProducts.filter(p => p.category === selectedCategory);
 
-  grid.innerHTML = filtered.map(p => `
-    <div class="product-card">
-      <div class="product-thumb">
-        <span class="product-tag">${p.tag}</span>
-        <img src="${p.image}" alt="${p.name}">
-      </div>
-      <div class="product-info">
-        <h3 class="product-name">${p.name}</h3>
-        <p class="product-desc">${currentLang === 'ES' ? p.descEs : p.desc}</p>
-        <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
-          <span>${p.stemCount}</span> • <span>${p.longevity}</span>
+  grid.innerHTML = filtered.map(p => {
+    const currentPrice = (activeRegion === 'LOJA') ? p.priceLoja : p.priceUS;
+    return `
+      <div class="product-card">
+        <div class="product-thumb">
+          <span class="product-tag">${p.tag}</span>
+          <img src="${p.image}" alt="${p.name}">
         </div>
-        <div class="product-meta">
-          <div class="product-price">$${p.price}</div>
-          <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', price: ${p.price}, image: '${p.image}'})">
-            ${currentLang === 'ES' ? 'Agregar a Bolsa' : 'Add to Bag'}
-          </button>
+        <div class="product-info">
+          <h3 class="product-name">${p.name}</h3>
+          <p class="product-desc">${currentLang === 'ES' ? p.descEs : p.desc}</p>
+          <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
+            <span>${p.stemCount}</span> • <span>${p.longevity}</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-price">$${currentPrice} USD</div>
+            <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', priceUS: ${p.priceUS}, priceLoja: ${p.priceLoja}, image: '${p.image}'})">
+              ${currentLang === 'ES' ? 'Agregar a Bolsa' : 'Add to Bag'}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function filterCatalog(category, btn) {
@@ -409,7 +446,7 @@ function checkDeliveryZip() {
   if (activeRegion === 'LOJA') {
     if (val.length > 2) {
       msg.className = "zip-status-msg success";
-      msg.innerHTML = `✨ Servicio de Entregas Especializado Disponible en Loja (${val}). Entrega garantizada en 2 a 4 horas.`;
+      msg.innerHTML = `✨ Servicio de Entregas Especializado Disponible en Loja (${val}). Entrega garantizada en 2 a 4 horas. Costo de envío: $3 USD.`;
     } else {
       msg.className = "zip-status-msg error";
       msg.innerHTML = `Por favor ingresa tu sector o zona en Loja (ej: Centro, El Valle, San Sebastián).`;
@@ -419,10 +456,10 @@ function checkDeliveryZip() {
     if (val.length === 5 && !isNaN(val)) {
       if (validZips.includes(val) || val.startsWith("07") || val.startsWith("10") || val.startsWith("90") || val.startsWith("33") || val.startsWith("60") || val.startsWith("75") || val.startsWith("94")) {
         msg.className = "zip-status-msg success";
-        msg.innerHTML = `✨ Priority White-Glove Courier Available in ZIP ${val}! Same-day delivery slots open.`;
+        msg.innerHTML = `✨ Priority White-Glove Courier Available in ZIP ${val}! Same-day delivery slots open. Delivery fee: $15 USD.`;
       } else {
         msg.className = "zip-status-msg success";
-        msg.innerHTML = `✓ Standard White-Glove Courier Available for ZIP ${val} (1-2 Days Guaranteed Freshness).`;
+        msg.innerHTML = `✓ Standard White-Glove Courier Available for ZIP ${val} (1-2 Days Guaranteed Freshness). Delivery fee: $15 USD.`;
       }
     } else {
       msg.className = "zip-status-msg error";
@@ -459,7 +496,7 @@ function submitCheckout(e) {
         ${currentLang === 'ES' ? 'Tu orden' : 'Your order'} <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> ${currentLang === 'ES' ? 'ha sido recibida por nuestros maestros floristas.' : 'has been received by our master floral artisans.'}
       </p>
       <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary); border:1px solid var(--border-light);">
-        <div><strong>${currentLang === 'ES' ? 'Ubicación:' : 'Delivery Region:'}</strong> ${activeRegion === 'LOJA' ? 'Entrega Especializada en Loja, Ecuador' : 'New Jersey / NYC White-Glove Courier'}</div>
+        <div><strong>${currentLang === 'ES' ? 'Ubicación:' : 'Delivery Region:'}</strong> ${activeRegion === 'LOJA' ? 'Entrega Especializada en Loja, Ecuador ($3 USD Envio)' : 'New Jersey / NYC White-Glove Courier ($15 USD Shipping)'}</div>
         <div style="margin-top:6px;"><strong>${currentLang === 'ES' ? 'Experiencia:' : 'Recipient Experience:'}</strong> ${currentLang === 'ES' ? 'Caja de Lino Natural con Certificado de Curaduría en Algodón' : 'Natural Linen Unboxing Box with Cotton Certificate of Curation'}</div>
       </div>
       <button class="btn-primary" onclick="finishCheckoutOrder()">${currentLang === 'ES' ? 'Volver al Atelier' : 'Return to Atelier'}</button>
@@ -506,6 +543,7 @@ window.openAboutModal = openAboutModal;
 window.closeAboutModal = closeAboutModal;
 window.switchAboutTab = switchAboutTab;
 window.getCurrentLang = () => currentLang;
+window.getActiveRegion = () => activeRegion;
 
 // Initialize on DOM load
 document.addEventListener("DOMContentLoaded", () => {

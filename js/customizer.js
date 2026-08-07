@@ -1,4 +1,4 @@
-// SKY FLORALS - ATELIER BOUQUET CUSTOMIZER STUDIO
+// SKY FLORALS - ATELIER BOUQUET CUSTOMIZER STUDIO (DYNAMIC REGIONAL PRICING EN / ES)
 
 const customizerState = {
   palette: 'ivory',
@@ -8,34 +8,43 @@ const customizerState = {
   recipientName: 'Emily Chasi',
   occasion: 'Special Celebration',
   cardText: 'To my favorite person, with all my love.',
-  basePrice: 175
+  basePriceUS: 175,
+  basePriceLoja: 48
 };
 
 const palettesData = {
   'ivory': {
     name: 'Ivory & Alabaster Stems',
-    priceAdd: 0,
+    nameEs: 'Tallo Blanco & Alabastro',
+    priceAddUS: 0,
+    priceAddLoja: 0,
     image: 'assets/pal_ivory.jpg',
     color: '#FBF9F5',
     desc: 'White ranunculus, ivory garden roses, & calla lilies'
   },
   'blush': {
     name: 'Rhode Muted Peony Blush',
-    priceAdd: 25,
+    nameEs: 'Peonía Rosada & Rosas',
+    priceAddUS: 25,
+    priceAddLoja: 8,
     image: 'assets/pal_blush.jpg',
     color: '#EADCD6',
     desc: 'Soft pink garden roses, blush peonies, & silver dollar eucalyptus'
   },
   'terracotta': {
     name: 'Sunset Terracotta & Gold',
-    priceAdd: 30,
+    nameEs: 'Terracota Atardecer & Oro',
+    priceAddUS: 30,
+    priceAddLoja: 10,
     image: 'assets/pal_terracotta.jpg',
     color: '#D4A373',
     desc: 'Warm terracotta garden roses, honey ranunculus, & wild oats'
   },
   'midnight': {
     name: 'Midnight Velvet Drama',
-    priceAdd: 40,
+    nameEs: 'Velvet Oscuro Drama',
+    priceAddUS: 40,
+    priceAddLoja: 14,
     image: 'assets/pal_midnight.jpg',
     color: '#3D2645',
     desc: 'Deep burgundy calla lilies, dark scabiosa, & metallic accents'
@@ -43,24 +52,27 @@ const palettesData = {
 };
 
 const vesselsData = {
-  'alabaster': { name: 'Matte Alabaster Ceramic', priceAdd: 0 },
-  'crystal': { name: 'Fluted Italian Crystal', priceAdd: 20 },
-  'travertine': { name: 'Raw Travertine Stone', priceAdd: 35 }
+  'alabaster': { name: 'Matte Alabaster Ceramic', nameEs: 'Cerámica Alabastro Mate', priceAddUS: 0, priceAddLoja: 0 },
+  'crystal': { name: 'Fluted Italian Crystal', nameEs: 'Cristal Italiano Estriado', priceAddUS: 20, priceAddLoja: 6 },
+  'travertine': { name: 'Raw Travertine Stone', nameEs: 'Piedra Travertino Natural', priceAddUS: 35, priceAddLoja: 10 }
 };
 
 const ribbonsData = {
-  'silk-cream': { name: 'Raw Silk Cream Organza', priceAdd: 0 },
-  'velvet-espresso': { name: 'Espresso Velvet Ribbon', priceAdd: 10 },
-  'gold-metal': { name: 'Monogram Gold Embossed Band', priceAdd: 15 }
+  'silk-cream': { name: 'Natural Linen (#E8DFD2)', nameEs: 'Lino Natural (#E8DFD2)', priceAddUS: 0, priceAddLoja: 0 },
+  'velvet-espresso': { name: 'Espresso Velvet Ribbon', nameEs: 'Cinta de Terciopelo Espresso', priceAddUS: 10, priceAddLoja: 3 },
+  'gold-metal': { name: 'Monogram Gold Embossed Band', nameEs: 'Banda con Sello de Oro', priceAddUS: 15, priceAddLoja: 4 }
 };
 
 const scentsData = {
-  'vanilla-rose': { name: 'French Vanilla & Damask Rose Mist', priceAdd: 0 },
-  'sandalwood': { name: 'Amber & Smoked Sandalwood Infusion', priceAdd: 12 },
-  'none': { name: 'Unscented / Pure Natural Botanical', priceAdd: 0 }
+  'vanilla-rose': { name: 'French Vanilla & Damask Rose Mist', nameEs: 'Bruma Vainilla & Rosa de Damasco', priceAddUS: 0, priceAddLoja: 0 },
+  'sandalwood': { name: 'Amber & Smoked Sandalwood Infusion', nameEs: 'Infusión Sándalo Ahumado', priceAddUS: 12, priceAddLoja: 4 },
+  'none': { name: 'Unscented / Pure Natural Botanical', nameEs: 'Sin Aroma / Botánico Natural', priceAddUS: 0, priceAddLoja: 0 }
 };
 
 function updateCustomizerUI() {
+  const isLoja = (window.getActiveRegion && window.getActiveRegion() === 'LOJA');
+  const isEs = (window.getCurrentLang && window.getCurrentLang() === 'ES');
+
   // Update Preview Image smoothly
   const previewImg = document.getElementById("customizerPreviewImg");
   if (previewImg) {
@@ -78,25 +90,27 @@ function updateCustomizerUI() {
   const certCollection = document.getElementById("certCollection");
   const certDate = document.getElementById("certDate");
 
-  if (certRecipient) certRecipient.innerText = customizerState.recipientName || "Valued Recipient";
-  if (certOccasion) certOccasion.innerText = customizerState.occasion || "Meaningful Moment";
-  if (certCollection) certCollection.innerText = palettesData[customizerState.palette].name;
+  if (certRecipient) certRecipient.innerText = customizerState.recipientName || (isEs ? "Estimado Destinatario" : "Valued Recipient");
+  if (certOccasion) certOccasion.innerText = customizerState.occasion || (isEs ? "Celebración Especial" : "Meaningful Moment");
+  if (certCollection) certCollection.innerText = isEs ? palettesData[customizerState.palette].nameEs : palettesData[customizerState.palette].name;
   if (certDate) {
-    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const locale = isEs ? 'es-EC' : 'en-US';
+    const today = new Date().toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' });
     certDate.innerText = today;
   }
 
-  // Calculate Price
-  const palPrice = palettesData[customizerState.palette].priceAdd;
-  const vesPrice = vesselsData[customizerState.vessel].priceAdd;
-  const ribPrice = ribbonsData[customizerState.ribbon].priceAdd;
-  const scePrice = scentsData[customizerState.scent].priceAdd;
+  // Calculate Price based on Region (US vs Loja)
+  const palPrice = isLoja ? palettesData[customizerState.palette].priceAddLoja : palettesData[customizerState.palette].priceAddUS;
+  const vesPrice = isLoja ? vesselsData[customizerState.vessel].priceAddLoja : vesselsData[customizerState.vessel].priceAddUS;
+  const ribPrice = isLoja ? ribbonsData[customizerState.ribbon].priceAddLoja : ribbonsData[customizerState.ribbon].priceAddUS;
+  const scePrice = isLoja ? scentsData[customizerState.scent].priceAddLoja : scentsData[customizerState.scent].priceAddUS;
   
-  const totalPrice = customizerState.basePrice + palPrice + vesPrice + ribPrice + scePrice;
+  const basePrice = isLoja ? customizerState.basePriceLoja : customizerState.basePriceUS;
+  const totalPrice = basePrice + palPrice + vesPrice + ribPrice + scePrice;
   
   const priceDisplay = document.getElementById("customizerPriceDisplay");
   if (priceDisplay) {
-    priceDisplay.innerText = `$${totalPrice}`;
+    priceDisplay.innerText = `$${totalPrice} USD`;
   }
 
   // Update Active Buttons
@@ -150,28 +164,39 @@ function onOccasionInput(val) {
 }
 
 function addCustomArrangementToCart() {
+  const isLoja = (window.getActiveRegion && window.getActiveRegion() === 'LOJA');
+  const isEs = (window.getCurrentLang && window.getCurrentLang() === 'ES');
+
   const palData = palettesData[customizerState.palette];
   const vesData = vesselsData[customizerState.vessel];
   const ribData = ribbonsData[customizerState.ribbon];
   const sceData = scentsData[customizerState.scent];
 
-  const palPrice = palData.priceAdd;
-  const vesPrice = vesData.priceAdd;
-  const ribPrice = ribData.priceAdd;
-  const scePrice = sceData.priceAdd;
-  const totalPrice = customizerState.basePrice + palPrice + vesPrice + ribPrice + scePrice;
+  const palPrice = isLoja ? palData.priceAddLoja : palData.priceAddUS;
+  const vesPrice = isLoja ? vesData.priceAddLoja : vesData.priceAddUS;
+  const ribPrice = isLoja ? ribData.priceAddLoja : ribData.priceAddUS;
+  const scePrice = isLoja ? sceData.priceAddLoja : sceData.priceAddUS;
+  
+  const basePrice = isLoja ? customizerState.basePriceLoja : customizerState.basePriceUS;
+  const totalPrice = basePrice + palPrice + vesPrice + ribPrice + scePrice;
+
+  const palName = isEs ? palData.nameEs : palData.name;
 
   if (window.addToCart) {
     window.addToCart({
       id: 'custom-' + Date.now(),
-      name: `Atelier Custom Creation (${palData.name})`,
+      name: isEs ? `Creación Personalizada (${palName})` : `Atelier Custom Creation (${palName})`,
+      priceUS: totalPrice,
+      priceLoja: totalPrice,
       price: totalPrice,
       image: palData.image,
-      meta: `Curated for: ${customizerState.recipientName || 'Valued Guest'} | Includes Certificate of Curation`
+      meta: `${isEs ? 'Curado para' : 'Curated for'}: ${customizerState.recipientName || 'Guest'} | Certificate of Curation`
     });
     window.openCartDrawer();
   }
 }
+
+window.updateCustomizerUI = updateCustomizerUI;
 
 // Bind customizer events on load
 document.addEventListener("DOMContentLoaded", () => {
