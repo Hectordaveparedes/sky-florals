@@ -48,11 +48,21 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-tag">
+  <!-- High-Fashion Cinematic Hero Section with Centerpiece Video -->
+  <header class="hero-video-section container">
+    <div class="hero-video-card">
+      <!-- Background Video with AutoPlay, Loop, Muted, Playsinline, and Poster Fallback -->
+      <video class="hero-bg-video" autoplay loop muted playsinline poster="assets/hero.jpg" preload="metadata">
+        <source src="assets/video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Soft Dark Gradient Overlay for Maximum Text Contrast & Luxury Aesthetic -->
+      <div class="hero-video-overlay"></div>
+
+      <!-- Hero Glassmorphism & High-Fashion Content -->
+      <div class="hero-video-container">
+        <div class="hero-video-tag">
           <span data-i18n="heroTag">✨ The Curator of Floral Artistry</span>
         </div>
         <h1 class="heading-xl" data-i18n="heroHeadline">
@@ -61,33 +71,23 @@
         <p class="hero-description" data-i18n="heroDesc">
           At SKY FLORALS, we believe every bloom is amongst creation's greatest masterpieces. We exist to transform flowers from simple expressions of beauty into timeless works of art that inspire quiet sophistication, reverence, and wonder.
         </p>
-        <div class="hero-cta-group">
-          <a href="#customizer" class="btn-primary" data-i18n="heroCtaCustom">Design Your Sky Creation →</a>
-          <button class="btn-secondary" onclick="openAboutModal('story')" data-i18n="heroCtaAbout">Explore The House Story</button>
+        <div class="hero-cta-group" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+          <a href="#customizer" class="btn-light" data-i18n="heroCtaCustom">Design Your Sky Creation →</a>
+          <button class="btn-outline-light" onclick="openAboutModal('story')" data-i18n="heroCtaAbout">Explore The House Story</button>
         </div>
         
-        <div class="hero-trust-bar">
+        <div class="hero-video-trust">
           <div class="trust-item">
-            <span class="trust-number" data-i18n="trustFreshness">7-10 Days</span>
-            <span class="trust-label" data-i18n="trustFreshnessLabel">Guaranteed Freshness</span>
+            <div class="trust-number" data-i18n="trustFreshness">7-10 Days</div>
+            <div class="trust-label" data-i18n="trustFreshnessLabel">Guaranteed Freshness</div>
           </div>
           <div class="trust-item">
-            <span class="trust-number" data-i18n="trustCert">Certificate</span>
-            <span class="trust-label" data-i18n="trustCertLabel">Of Curation Included</span>
+            <div class="trust-number" data-i18n="trustCert">Certificate</div>
+            <div class="trust-label" data-i18n="trustCertLabel">Of Curation Included</div>
           </div>
           <div class="trust-item">
-            <span class="trust-number" data-i18n="trustWrap">100% Cotton</span>
-            <span class="trust-label" data-i18n="trustWrapLabel">Natural Linen Packaging</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-image-wrapper">
-        <div class="hero-image-card">
-          <img src="assets/hero.jpg" alt="SKY FLORALS Quiet Sophistication Arrangement">
-          <div class="floating-badge">
-            <div class="floating-badge-title">Atelier Masterpiece</div>
-            <div class="floating-badge-text">The Alabaster & Blush Peony Sculpture</div>
+            <div class="trust-number" data-i18n="trustWrap">100% Cotton</div>
+            <div class="trust-label" data-i18n="trustWrapLabel">Natural Linen Packaging</div>
           </div>
         </div>
       </div>
