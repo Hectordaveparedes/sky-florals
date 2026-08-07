@@ -1,19 +1,20 @@
-// SKY FLORALS - MAIN E-COMMERCE, I18N & REGIONAL PRICING APP LOGIC
+// SKY FLORALS - MAIN E-COMMERCE, I18N & SOURCE OF TRUTH CATALOG LOGIC
+// Source of Truth Document: SKY FLORALS Collection and Edits
 
-// i18n Translation Dictionary (EN for New Jersey USA / ES for Loja Ecuador)
+// i18n Translation Dictionary
 const i18nDict = {
   EN: {
     locationBar: "White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)",
     regionLabel: "NEW JERSEY & NYC ATELIER",
     navCustomizer: "Atelier Customizer",
     navQuiz: "Emotional Matcher",
-    navSculptures: "Sculptures",
+    navSculptures: "The Collection",
     navSubscriptions: "Subscriptions",
     navAbout: "About Us / The House",
     heroTag: "✨ The Curator of Floral Artistry",
     heroHeadline: 'Flowers Are Not Chosen From a Menu. They Are <span class="italic">Curated From a Story</span>.',
     heroDesc: "At SKY FLORALS, we believe every bloom is amongst creation's greatest masterpieces. We exist to transform flowers from simple expressions of beauty into timeless works of art that inspire quiet sophistication, reverence, and wonder.",
-    heroCtaCustom: "Design Your Sky Bouquet →",
+    heroCtaCustom: "Design Your Sky Creation →",
     heroCtaAbout: "Explore The House Story",
     trustFreshness: "7-10 Days",
     trustFreshnessLabel: "Guaranteed Freshness",
@@ -23,14 +24,14 @@ const i18nDict = {
     trustWrapLabel: "Natural Linen Packaging",
     quizSubhead: "Interactive Emotional Matcher",
     quizTitle: "Find Your Emotional Solution",
-    quizDesc: "Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.",
-    catalogSubhead: "Curated Floral Sculptures",
-    catalogTitle: "Signature SKY Collection",
-    catalogDesc: "Hand-selected stems arranged by master florists for white-glove courier delivery.",
-    filterAll: "All Sculptures",
-    filterMinimalist: "Minimalist Chic",
-    filterGrand: "Grand Declarations",
-    filterRituals: "Monthly Rituals",
+    quizDesc: "Answer 3 quick questions to discover the perfect creation from The Collection and calligraphy note tailored to your exact moment.",
+    catalogSubhead: "THE COLLECTION & CURATED EDITS",
+    catalogTitle: "Signature SKY FLORALS Creations",
+    catalogDesc: "Thoughtfully curated floral creations designed to celebrate life's most meaningful moments through artistry, elegance, and quiet sophistication.",
+    filterAll: "All Creations",
+    filterSignatureStems: "1. Signature Stems",
+    filterCuratedEdits: "2. Curated Edits",
+    filterBespoke: "3. Bespoke",
     customizerSubhead: "Live Design Studio",
     customizerTitle: "Design Your Custom Sky Creation",
     customizerDesc: "Build a bespoke arrangement with real-time Certificate of Curation preview and price breakdown.",
@@ -41,9 +42,9 @@ const i18nDict = {
     certRowDesigned: "Designed",
     lblRecipient: "Recipient Name",
     lblOccasion: "Occasion",
-    step1Palette: "1. Select Stem Palette",
+    step1Palette: "1. Select Collection / Edit",
     step2Vessel: "2. Choose Architectural Vessel",
-    step3Wrap: "3. Signature Wrap & Accent",
+    step3Wrap: "3. Signature Wrap & Add-Ons",
     step4Scent: "4. Unboxing Scent Infusion",
     lblInvestment: "Total Investment",
     btnAddCustom: "Add Custom Creation to Bag →",
@@ -76,7 +77,7 @@ const i18nDict = {
     regionLabel: "ATELIER LOJA, ECUADOR",
     navCustomizer: "Estudio Personalizado",
     navQuiz: "Buscador Emocional",
-    navSculptures: "Esculturas",
+    navSculptures: "La Colección",
     navSubscriptions: "Suscripciones",
     navAbout: "Sobre Nosotros",
     heroTag: "✨ Curaduría de Arte Floral",
@@ -92,14 +93,14 @@ const i18nDict = {
     trustWrapLabel: "Empaque de Lino Natural",
     quizSubhead: "Buscador Emocional Interactivo",
     quizTitle: "Encuentra Tu Solución Emocional",
-    quizDesc: "Responde 3 preguntas rápidas para descubrir el arreglo floral y nota de caligrafía perfectos adaptados a tu momento exacto.",
-    catalogSubhead: "Esculturas Florales Curadas",
-    catalogTitle: "Colección Insignia SKY",
-    catalogDesc: "Tallos seleccionados a mano y arreglados por maestros floristas para entrega especializada.",
-    filterAll: "Todas las Esculturas",
-    filterMinimalist: "Minimalista Chic",
-    filterGrand: "Grandes Declaraciones",
-    filterRituals: "Rituales Mensuales",
+    quizDesc: "Responde 3 preguntas rápidas para descubrir la creación ideal de La Colección y nota de caligrafía adaptadas a tu momento.",
+    catalogSubhead: "LA COLECCIÓN & EDICIONES CURADAS",
+    catalogTitle: "Creaciones Insignia SKY FLORALS",
+    catalogDesc: "Creaciones florales cuidadosamente curadas y diseñadas para celebrar los momentos más significativos a través del arte y la elegancia.",
+    filterAll: "Todas las Creaciones",
+    filterSignatureStems: "1. Signature Stems",
+    filterCuratedEdits: "2. Curated Edits",
+    filterBespoke: "3. Bespoke",
     customizerSubhead: "Estudio de Diseño en Vivo",
     customizerTitle: "Diseña Tu Creación Personalizada",
     customizerDesc: "Construye un arreglo personalizado con previsualización del Certificado de Curaduría y desglose de precio en tiempo real.",
@@ -110,9 +111,9 @@ const i18nDict = {
     certRowDesigned: "Diseñado el",
     lblRecipient: "Nombre del Destinatario",
     lblOccasion: "Ocasión del Regalo",
-    step1Palette: "1. Selecciona la Paleta de Flores",
+    step1Palette: "1. Selecciona Colección / Edición",
     step2Vessel: "2. Elige la Vasija Arquitectónica",
-    step3Wrap: "3. Envoltura e Insignia",
+    step3Wrap: "3. Envoltura y Adicionales",
     step4Scent: "4. Infusión de Aroma de Unboxing",
     lblInvestment: "Inversión Total",
     btnAddCustom: "Agregar Creación a la Bolsa →",
@@ -142,85 +143,132 @@ const i18nDict = {
   }
 };
 
-// Products Catalog Data with Dual Regional Pricing (US vs Loja Ecuador)
+// Official Product Portfolio (SOURCE OF TRUTH: SKY FLORALS Collection and Edits.docx)
 const catalogProducts = [
+  // 1. SIGNATURE STEMS
   {
     id: "sky-01",
-    name: "The Hailey Monochrome",
-    category: "minimalist",
-    priceUS: 165,
-    priceLoja: 45,
-    tag: "Bestseller",
-    image: "assets/pal_blush.jpg",
-    desc: "A sculptured monochrome study in blush peonies and garden roses wrapped in natural linen.",
-    descEs: "Un estudio escultórico monocromático en peonías rosadas y rosas de jardín envueltas en lino natural.",
-    stemCount: "18 Premium Stems",
-    longevity: "7-10 Days Fresh Guarantee"
+    name: "🌹 THE DOZEN",
+    category: "signature-stems",
+    priceUS: 40,
+    priceLoja: 40,
+    tag: "Signature Stems (12 Stems)",
+    image: "assets/pal_ivory.jpg",
+    desc: "A timeless arrangement featuring twelve stems of your chosen bloom. Thoughtfully designed with refined simplicity, making it perfect for birthdays, anniversaries, everyday gifting, or simply letting someone know they're loved.",
+    descEs: "Un arreglo atemporal de doce tallos de la flor elegida. Diseñado con sencillez refinada, perfecto para cumpleaños, aniversarios o demostraciones espontáneas de afecto.",
+    optionsText: "Available in: Roses | Gerberas | Hydrangeas | Tulips (seasonal) | Seasonal Blooms",
+    optionsTextEs: "Disponible en: Rosas | Gerberas | Hortensias | Tulipanes (temporada) | Flores de Temporada",
+    stemCount: "12 Stems",
+    longevity: "From $40"
   },
   {
     id: "sky-02",
-    name: "Grand Ivory Monolith",
-    category: "grand",
-    priceUS: 265,
-    priceLoja: 75,
-    tag: "Signature",
-    image: "assets/pal_ivory.jpg",
-    desc: "32 long-stemmed white calla lilies and garden roses in a textured alabaster stone vase.",
-    descEs: "32 calas blancas de tallo largo y rosas de jardín en un florero de piedra alabastro texturizado.",
-    stemCount: "32 Grand Stems",
-    longevity: "8-12 Days Fresh Guarantee"
+    name: "✨ THE DOUBLE",
+    category: "signature-stems",
+    priceUS: 80,
+    priceLoja: 80,
+    tag: "Signature Stems (24 Stems)",
+    image: "assets/pal_blush.jpg",
+    desc: "A fuller interpretation of your chosen bloom, featuring twenty-four stems thoughtfully arranged to create a more abundant and elevated presentation. Designed for milestones, celebrations, and unforgettable gifting.",
+    descEs: "Una interpretación más abundante de veinticuatro tallos organizados cuidadosamente para crear una presentación elevada.",
+    optionsText: "Available in: Roses | Gerberas | Hydrangeas | Tulips (seasonal) | Seasonal Blooms",
+    optionsTextEs: "Disponible en: Rosas | Gerberas | Hortensias | Tulipanes (temporada) | Flores de Temporada",
+    stemCount: "24 Stems",
+    longevity: "From $80"
   },
   {
     id: "sky-03",
-    name: "Sanctuary Ranunculus",
-    category: "minimalist",
-    priceUS: 145,
-    priceLoja: 38,
-    tag: "Hailey Favorite",
-    image: "assets/lifestyle.jpg",
-    desc: "Crisp white ranunculus paired with silver eucalyptus. Subdued, serene, and effortlessly stylish.",
-    descEs: "Ranúnculos blancos crujientes combinados con eucalipto plateado. Sereno y elegante.",
-    stemCount: "15 Stems",
-    longevity: "7 Days Fresh Guarantee"
+    name: "♾️ THE GRAND",
+    category: "signature-stems",
+    priceUS: 175,
+    priceLoja: 175,
+    tag: "Signature Stems (50-100 Stems)",
+    image: "assets/hero.jpg",
+    desc: "Our most generous stem collection, thoughtfully designed for life's grandest celebrations. Choose your preferred bloom and desired stem count, and we'll create a bespoke floral composition tailored exclusively for your occasion.",
+    descEs: "Nuestra colección de tallos más generosa. Elige tu flor y cantidad de tallos deseada para una composición a la medida.",
+    optionsText: "Available in: 50 stems | 75 stems | 100 stems | Custom quantities available upon request",
+    optionsTextEs: "Disponible en: 50 tallos | 75 tallos | 100 tallos | Cantidades personalizadas bajo pedido",
+    stemCount: "50, 75 or 100 Stems",
+    longevity: "From $175"
   },
+
+  // 2. CURATED EDITS
   {
     id: "sky-04",
-    name: "Unboxing Ritual Box",
-    category: "rituals",
-    priceUS: 195,
-    priceLoja: 55,
-    tag: "Luxury Gift Set",
-    image: "assets/unboxing.jpg",
-    desc: "Includes our signature floral sculpture, magnetic oat linen box, Cotton Certificate of Curation, and French Rose spray.",
-    descEs: "Incluye escultura floral insignia, caja magnética de lino avena, Certificado de Curaduría en algodón y spray de rosas.",
-    stemCount: "22 Curated Stems",
-    longevity: "10 Days Fresh Guarantee"
+    name: "☁️ THE SKY EDIT",
+    category: "curated-edits",
+    priceUS: 65,
+    priceLoja: 65,
+    tag: "Curated Edit (White & Ivory)",
+    image: "assets/pal_ivory.jpg",
+    desc: "Inspired by soft skies, natural light, and quiet sophistication, this signature collection features elegant whites, ivories, delicate greens, and airy textures. Every arrangement is thoughtfully curated to evoke serenity, refinement, and timeless beauty.",
+    descEs: "Inspirada en cielos suaves y luz natural. Cuenta con elegantes blancos, marfiles, verdes delicados y texturas etéreas.",
+    optionsText: "Available in: Petite | Signature | Statement",
+    optionsTextEs: "Disponible en: Petite | Signature | Statement",
+    stemCount: "Petite, Signature or Statement",
+    longevity: "From $65"
   },
   {
     id: "sky-05",
-    name: "Sunset Terracotta & Gold",
-    category: "grand",
-    priceUS: 215,
+    name: "🎀 THE BLUSH EDIT",
+    category: "curated-edits",
+    priceUS: 65,
     priceLoja: 65,
-    tag: "New Season",
-    image: "assets/pal_terracotta.jpg",
-    desc: "Warm peach tones, terracotta garden roses, and wild oats in a raw travertine stone vessel.",
-    descEs: "Cálidos tonos melocotón, rosas de jardín terracota y avena silvestre en vasija de piedra travertino.",
-    stemCount: "24 Stems",
-    longevity: "8-10 Days Fresh Guarantee"
+    tag: "Curated Edit (Blush & Champagne)",
+    image: "assets/pal_blush.jpg",
+    desc: "A romantic collection inspired by blush pinks, warm champagne hues, creamy neutrals, and delicate textures. Designed to celebrate grace, femininity, and life's most heartfelt moments with effortless elegance.",
+    descEs: "Una colección romántica inspirada en rosados blush, tonos champán cálidos y neutros cremosos.",
+    optionsText: "Available in: Petite | Signature | Statement",
+    optionsTextEs: "Disponible en: Petite | Signature | Statement",
+    stemCount: "Petite, Signature or Statement",
+    longevity: "From $65"
   },
   {
     id: "sky-06",
-    name: "Midnight Velvet Drama",
-    category: "rituals",
-    priceUS: 235,
-    priceLoja: 68,
-    tag: "Haute Couture",
+    name: "🌙 THE MIDNIGHT EDIT",
+    category: "curated-edits",
+    priceUS: 70,
+    priceLoja: 70,
+    tag: "Curated Edit (Deep Blue & Black)",
     image: "assets/pal_midnight.jpg",
-    desc: "Deep burgundy calla lilies and dark scabiosa in a matte black ceramic vase.",
-    descEs: "Calas borgoña profundas y escabiosas oscuras en un florero de cerámica negra mate.",
-    stemCount: "20 Stems",
-    longevity: "8 Days Fresh Guarantee"
+    desc: "Inspired by deep blue hues, crisp whites, and subtle black accents, this collection embodies bold sophistication with quiet confidence. Rich textures and striking contrast come together to create arrangements that feel modern, refined, and unforgettable.",
+    descEs: "Inspirada en tonos azul profundo, blancos nítidos y sutiles acentos negros. Encarna una sofisticación audaz con confianza silenciosa.",
+    optionsText: "Available in: Petite | Signature | Statement",
+    optionsTextEs: "Disponible en: Petite | Signature | Statement",
+    stemCount: "Petite, Signature or Statement",
+    longevity: "From $70"
+  },
+  {
+    id: "sky-07",
+    name: "🌿 THE SEASONAL EDIT",
+    category: "curated-edits",
+    priceUS: 65,
+    priceLoja: 65,
+    tag: "Curated Edit (Seasonal Palette)",
+    image: "assets/pal_terracotta.jpg",
+    desc: "A limited collection celebrating the beauty of every season. Thoughtfully designed using the freshest blooms available, each arrangement reflects nature's changing palette while preserving the signature SKY FLORALS aesthetic.",
+    descEs: "Una colección limitada que celebra la belleza de cada estación. Diseñada cuidadosamente utilizando las flores más frescas disponibles.",
+    optionsText: "Available in: Petite | Signature | Statement",
+    optionsTextEs: "Disponible en: Petite | Signature | Statement",
+    stemCount: "Petite, Signature or Statement",
+    longevity: "From $65"
+  },
+
+  // 3. BESPOKE
+  {
+    id: "sky-08",
+    name: "✦ THE INSPIRATION",
+    category: "bespoke",
+    priceUS: 95,
+    priceLoja: 95,
+    tag: "Bespoke Creation",
+    image: "assets/lifestyle.jpg",
+    desc: "A completely bespoke floral experience created around your story, vision, and occasion. Whether inspired by a cherished memory, meaningful celebration, or unique concept, every arrangement is thoughtfully interpreted into a one-of-a-kind floral masterpiece designed exclusively for you.",
+    descEs: "Una experiencia floral totalmente a la medida creada en torno a tu historia, visión y ocasión.",
+    optionsText: "Completely Bespoke & Tailored to Your Vision",
+    optionsTextEs: "Totalmente a la Medida y Adaptado a tu Visión",
+    stemCount: "Bespoke Tailored Selection",
+    longevity: "From $95"
   }
 ];
 
@@ -237,7 +285,7 @@ let selectedCategory = 'all';
 let activeRegion = 'NJ'; // 'NJ' (New Jersey/NYC USA) or 'LOJA' (Loja, Ecuador)
 let currentLang = 'EN';   // 'EN' or 'ES'
 
-// Location & Language & Regional Price Switcher
+// Location & Language Switcher
 function switchLocation(region) {
   activeRegion = region;
   currentLang = (region === 'LOJA') ? 'ES' : 'EN';
@@ -250,9 +298,9 @@ function switchLocation(region) {
   if (window.updateCustomizerUI) window.updateCustomizerUI();
 
   if (region === 'LOJA') {
-    showToast("Ubicación cambiada a Loja, Ecuador Atelier (Precios Adaptados al Mercado de Ecuador)");
+    showToast("Ubicación cambiada a Loja, Ecuador Atelier");
   } else {
-    showToast("Switched location to New Jersey / NYC Atelier (US Market Pricing)");
+    showToast("Switched location to New Jersey / NYC Atelier");
   }
 }
 
@@ -315,7 +363,7 @@ function switchAboutTab(tabName) {
 
 // Cart Logic
 function addToCart(item) {
-  const price = (activeRegion === 'LOJA') ? (item.priceLoja || item.price) : (item.priceUS || item.price);
+  const price = item.priceUS || item.price || 40;
   const cartItem = { ...item, price: price };
 
   const existing = cart.find(c => c.id === item.id);
@@ -357,8 +405,8 @@ function updateCartUI() {
   if (body) {
     if (cart.length === 0) {
       body.innerHTML = currentLang === 'ES'
-        ? `<div class="cart-empty">Tu bolsa de compras está vacía.<br><span style="font-size:0.85rem; color:var(--text-light);">Explora nuestras esculturas curadas para comenzar.</span></div>`
-        : `<div class="cart-empty">Your shopping bag is empty.<br><span style="font-size:0.85rem; color:var(--text-light);">Explore our curated sculptures to begin.</span></div>`;
+        ? `<div class="cart-empty">Tu bolsa de compras está vacía.<br><span style="font-size:0.85rem; color:var(--text-light);">Explora La Colección para comenzar.</span></div>`
+        : `<div class="cart-empty">Your shopping bag is empty.<br><span style="font-size:0.85rem; color:var(--text-light);">Explore The Collection to begin.</span></div>`;
     } else {
       body.innerHTML = cart.map(item => `
         <div class="cart-item">
@@ -402,7 +450,7 @@ function renderCatalog() {
     : catalogProducts.filter(p => p.category === selectedCategory);
 
   grid.innerHTML = filtered.map(p => {
-    const currentPrice = (activeRegion === 'LOJA') ? p.priceLoja : p.priceUS;
+    const currentPrice = p.priceUS;
     return `
       <div class="product-card">
         <div class="product-thumb">
@@ -413,11 +461,11 @@ function renderCatalog() {
           <h3 class="product-name">${p.name}</h3>
           <p class="product-desc">${currentLang === 'ES' ? p.descEs : p.desc}</p>
           <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">
-            <span>${p.stemCount}</span> • <span>${p.longevity}</span>
+            <span>${currentLang === 'ES' ? p.optionsTextEs : p.optionsText}</span>
           </div>
           <div class="product-meta">
-            <div class="product-price">$${currentPrice} USD</div>
-            <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', priceUS: ${p.priceUS}, priceLoja: ${p.priceLoja}, image: '${p.image}'})">
+            <div class="product-price">From $${currentPrice} USD</div>
+            <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="addToCart({id: '${p.id}', name: '${p.name}', priceUS: ${p.priceUS}, image: '${p.image}'})">
               ${currentLang === 'ES' ? 'Agregar a Bolsa' : 'Add to Bag'}
             </button>
           </div>
@@ -471,7 +519,7 @@ function checkDeliveryZip() {
 // Simulated Checkout Modal Flow
 function openCheckoutModal() {
   if (cart.length === 0) {
-    showToast(currentLang === 'ES' ? "¡Tu bolsa está vacía! Agrega un arreglo primero." : "Your shopping bag is empty! Add an arrangement first.");
+    showToast(currentLang === 'ES' ? "¡Tu bolsa está vacía! Agrega una creación primero." : "Your shopping bag is empty! Add a creation first.");
     return;
   }
   closeCartDrawer();

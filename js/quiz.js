@@ -1,4 +1,4 @@
-// SKY FLORALS - INTERACTIVE EMOTIONAL SOLUTION QUIZ WIZARD (BILINGUAL EN / ES)
+// SKY FLORALS - INTERACTIVE EMOTIONAL SOLUTION QUIZ WIZARD (SOURCE OF TRUTH)
 
 const quizDataEN = {
   step1: {
@@ -23,11 +23,11 @@ const quizDataEN = {
   },
   step3: {
     question: "What vibe defines their aesthetic taste?",
-    subtitle: "Matching the architectural vessel & stem silhouette to their style.",
+    subtitle: "Matching the architectural creation silhouette to their style.",
     options: [
-      { id: "minimal", title: "Hailey Bieber Minimalist", desc: "Monochromatic ivory calla lilies, alabaster ceramics, sleek lines." },
-      { id: "romantic", title: "Modern Romantic Blush", desc: "Fluffy muted blush garden roses, trailing eucalyptus, soft pastel tones." },
-      { id: "bold", title: "High-Fashion Editorial", desc: "Dramatic architectural stems, rich terracotta or deep velvet burgundy accents." }
+      { id: "minimal", title: "The Sky Edit (White & Ivory)", desc: "Monochromatic whites, ivories, delicate greens, and airy textures." },
+      { id: "romantic", title: "The Blush Edit (Blush & Champagne)", desc: "Blush pinks, warm champagne, creamy neutrals, and delicate textures." },
+      { id: "bold", title: "The Midnight Edit (Deep Blue & Black)", desc: "Deep blue hues, crisp whites, and subtle black accents." }
     ]
   }
 };
@@ -57,55 +57,55 @@ const quizDataES = {
     question: "¿Qué estilo define sus gustos estéticos?",
     subtitle: "Conectamos la vasija y la silueta del diseño con su estilo personal.",
     options: [
-      { id: "minimal", title: "Minimalista Blanco & Alabastro", desc: "Calas blancas monocromáticas, cerámica alabastro y líneas limpias." },
-      { id: "romantic", title: "Romántico Rosado & Peonías", desc: "Rosas de jardín rosadas, eucalipto y tonos pasteles suaves." },
-      { id: "bold", title: "Editorial Terracota o Borgoña", desc: "Tallos arquitectónicos dramáticos con acentos terracota u oscuros." }
+      { id: "minimal", title: "The Sky Edit (Blanco & Marfil)", desc: "Blancos monocromáticos, marfiles, verdes delicados y texturas etéreas." },
+      { id: "romantic", title: "The Blush Edit (Blush & Champán)", desc: "Rosados blush, tonos champán cálidos y neutros cremosos." },
+      { id: "bold", title: "The Midnight Edit (Azul Profundo & Negro)", desc: "Tonos azul profundo, blancos nítidos y sutiles acentos negros." }
     ]
   }
 };
 
 const quizSolutions = {
   "apology": {
-    name: "The Soft Reconciliation Sculpture",
-    nameEs: "Escultura de Reconciliación Suave",
-    price: 185,
+    name: "🎀 THE BLUSH EDIT",
+    nameEs: "🎀 THE BLUSH EDIT",
+    price: 65,
     tag: "Most Sentimental",
     image: "assets/pal_blush.jpg",
-    desc: "A soothing palette of muted blush peonies and white calla lilies designed to soften hearts.",
-    descEs: "Una paleta suave de peonías rosadas y calas blancas diseñada para transmitir disculpas sinceras.",
+    desc: "A romantic collection inspired by blush pinks, warm champagne hues, creamy neutrals, and delicate textures.",
+    descEs: "Una colección romántica inspirada en rosados blush, tonos champán cálidos y neutros cremosos.",
     note: "“I couldn’t find the right words, but I found these. You mean everything to me, and I’m truly sorry.”",
     noteEs: "“No encontré las palabras exactas, pero encontré esto. Significas todo para mí y lo siento de corazón.”"
   },
   "romance": {
-    name: "Grand Editorial Passion",
-    nameEs: "Gran Pasión Editorial",
-    price: 240,
-    tag: "High Fashion Pick",
+    name: "☁️ THE SKY EDIT",
+    nameEs: "☁️ THE SKY EDIT",
+    price: 65,
+    tag: "Signature Selection",
     image: "assets/pal_ivory.jpg",
-    desc: "Architectural garden roses paired with delicate stems in a travertine ceramic vessel.",
-    descEs: "Rosas de jardín arquitectónicas en vasija de travertino, diseñadas para una impresión inolvidable.",
+    desc: "Inspired by soft skies, natural light, and quiet sophistication, featuring elegant whites and ivories.",
+    descEs: "Inspirada en cielos suaves y luz natural. Cuenta con elegantes blancos, marfiles y verdes delicados.",
     note: "“In a world of noise, you are my favorite quiet place. Thinking of you always.”",
     noteEs: "“En un mundo de ruido, tú eres mi lugar favorito de paz. Pensando en ti siempre.”"
   },
   "gratitude": {
-    name: "The Atelier Ivory Monolith",
-    nameEs: "Monolito de Marfil Atelier",
-    price: 195,
-    tag: "Prestige Gift",
-    image: "assets/lifestyle.jpg",
-    desc: "Pure white ranunculus, ivory garden roses, and French lavender mist for understated appreciation.",
-    descEs: "Ranúnculos blancos puros y rosas de marfil para una declaración sobria de aprecio supremo.",
+    name: "🌙 THE MIDNIGHT EDIT",
+    nameEs: "🌙 THE MIDNIGHT EDIT",
+    price: 70,
+    tag: "Sophisticated Distinction",
+    image: "assets/pal_midnight.jpg",
+    desc: "Inspired by deep blue hues, crisp whites, and subtle black accents, embodying bold sophistication.",
+    descEs: "Inspirada en tonos azul profundo, blancos nítidos y acentos negros. Encarna una sofisticación audaz.",
     note: "“With deepest gratitude for your guidance, vision, and grace. Truly unmatched.”",
     noteEs: "“Con mi más profunda gratitud por tu guía, visión y elegancia. Verdaderamente inigualable.”"
   },
   "selflove": {
-    name: "Sanctuary Bloom Ritual",
-    nameEs: "Ritual Florecer en el Santuario",
-    price: 165,
-    tag: "Self-Care Favorite",
-    image: "assets/unboxing.jpg",
-    desc: "Scent-infused seasonal stems designed to elevate your living room or bedside table.",
-    descEs: "Tallos de temporada perfumados diseñados para elevar tu espacio o velador.",
+    name: "🌹 THE DOZEN",
+    nameEs: "🌹 THE DOZEN",
+    price: 40,
+    tag: "Single Bloom Perfection",
+    image: "assets/pal_ivory.jpg",
+    desc: "A timeless arrangement featuring twelve stems of your chosen bloom, designed with refined simplicity.",
+    descEs: "Un arreglo atemporal de doce tallos de tu flor elegida, diseñado con sencillez refinada.",
     note: "“A daily reminder to pause, breathe, and surround myself with beauty.”",
     noteEs: "“Un recordatorio diario para pausar, respirar y rodearme de belleza.”"
   }
@@ -161,7 +161,7 @@ function renderQuizStep(step) {
           <img src="${solution.image}" alt="${solution.name}">
           <div>
             <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-gold); font-weight:600;">${solution.tag}</div>
-            <h4 style="font-family:var(--font-serif); font-size:1.3rem; margin:4px 0;">${lang === 'ES' ? solution.nameEs : solution.name} — $${solution.price}</h4>
+            <h4 style="font-family:var(--font-serif); font-size:1.3rem; margin:4px 0;">${lang === 'ES' ? solution.nameEs : solution.name} — From $${solution.price}</h4>
             <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">${lang === 'ES' ? solution.descEs : solution.desc}</p>
           </div>
         </div>

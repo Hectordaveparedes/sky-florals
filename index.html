@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKY FLORALS — Quiet Sophistication & Luxury Floral Atelier</title>
-  <meta name="description" content="SKY FLORALS is a luxury floral house and curator of architectural floral experiences. Transforming flowers into timeless expressions of artistry, quiet sophistication, and meaningful connection across New Jersey, NYC, and Loja, Ecuador.">
+  <meta name="description" content="SKY FLORALS is a luxury floral studio and curator of architectural floral creations. Transforming flowers into timeless expressions of artistry, quiet sophistication, and meaningful connection across New Jersey, NYC, and Loja, Ecuador.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -33,7 +33,7 @@
     <ul class="nav-links">
       <li><a href="#customizer" class="nav-link" data-i18n="navCustomizer">Atelier Customizer</a></li>
       <li><a href="#quiz" class="nav-link" data-i18n="navQuiz">Emotional Matcher</a></li>
-      <li><a href="#sculptures" class="nav-link" data-i18n="navSculptures">Sculptures</a></li>
+      <li><a href="#sculptures" class="nav-link" data-i18n="navSculptures">The Collection</a></li>
       <li><a href="#subscriptions" class="nav-link" data-i18n="navSubscriptions">Subscriptions</a></li>
       <li><a href="javascript:void(0)" onclick="openAboutModal('story')" class="nav-link" data-i18n="navAbout" style="font-weight:500;">About Us / The House</a></li>
     </ul>
@@ -62,7 +62,7 @@
           At SKY FLORALS, we believe every bloom is amongst creation's greatest masterpieces. We exist to transform flowers from simple expressions of beauty into timeless works of art that inspire quiet sophistication, reverence, and wonder.
         </p>
         <div class="hero-cta-group">
-          <a href="#customizer" class="btn-primary" data-i18n="heroCtaCustom">Design Your Sky Bouquet →</a>
+          <a href="#customizer" class="btn-primary" data-i18n="heroCtaCustom">Design Your Sky Creation →</a>
           <button class="btn-secondary" onclick="openAboutModal('story')" data-i18n="heroCtaAbout">Explore The House Story</button>
         </div>
         
@@ -110,7 +110,7 @@
       <div class="section-header">
         <span class="subheading" data-i18n="quizSubhead">Interactive Emotional Matcher</span>
         <h2 class="heading-lg" data-i18n="quizTitle">Find Your Emotional Solution</h2>
-        <p style="color:var(--text-secondary);" data-i18n="quizDesc">Answer 3 quick questions to discover the perfect floral arrangement and calligraphy note tailored to your exact moment.</p>
+        <p style="color:var(--text-secondary);" data-i18n="quizDesc">Answer 3 quick questions to discover the perfect creation from The Collection and calligraphy note tailored to your exact moment.</p>
       </div>
 
       <div class="quiz-container">
@@ -124,26 +124,26 @@
     </div>
   </section>
 
-  <!-- Products Catalog -->
+  <!-- Products Catalog (SOURCE OF TRUTH) -->
   <section class="catalog-section" id="sculptures">
     <div class="container">
       <div class="section-header">
-        <span class="subheading" data-i18n="catalogSubhead">Curated Floral Sculptures</span>
-        <h2 class="heading-lg" data-i18n="catalogTitle">Signature SKY Collection</h2>
-        <p style="color:var(--text-secondary);" data-i18n="catalogDesc">Hand-selected stems arranged by master florists for white-glove courier delivery.</p>
+        <span class="subheading" data-i18n="catalogSubhead">THE COLLECTION & CURATED EDITS</span>
+        <h2 class="heading-lg" data-i18n="catalogTitle">Signature SKY FLORALS Creations</h2>
+        <p style="color:var(--text-secondary);" data-i18n="catalogDesc">Thoughtfully curated floral creations designed to celebrate life's most meaningful moments through artistry, elegance, and quiet sophistication.</p>
       </div>
 
-      <!-- Filter Tabs -->
+      <!-- Filter Tabs aligned with Source of Truth -->
       <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterCatalog('all', this)" data-i18n="filterAll">All Sculptures</button>
-        <button class="filter-btn" onclick="filterCatalog('minimalist', this)" data-i18n="filterMinimalist">Minimalist Chic</button>
-        <button class="filter-btn" onclick="filterCatalog('grand', this)" data-i18n="filterGrand">Grand Declarations</button>
-        <button class="filter-btn" onclick="filterCatalog('rituals', this)" data-i18n="filterRituals">Monthly Rituals</button>
+        <button class="filter-btn active" onclick="filterCatalog('all', this)" data-i18n="filterAll">All Creations</button>
+        <button class="filter-btn" onclick="filterCatalog('signature-stems', this)" data-i18n="filterSignatureStems">1. Signature Stems</button>
+        <button class="filter-btn" onclick="filterCatalog('curated-edits', this)" data-i18n="filterCuratedEdits">2. Curated Edits</button>
+        <button class="filter-btn" onclick="filterCatalog('bespoke', this)" data-i18n="filterBespoke">3. Bespoke</button>
       </div>
 
       <!-- Catalog Grid -->
       <div class="catalog-grid" id="catalogGrid">
-        <!-- Rendered dynamically by app.js -->
+        <!-- Rendered dynamically by app.js from Source of Truth -->
       </div>
     </div>
   </section>
@@ -178,7 +178,7 @@
           </div>
           <div class="cert-row">
             <span data-i18n="certRowCollection">Collection</span>
-            <span id="certCollection">Ivory & Alabaster Stems</span>
+            <span id="certCollection">☁️ THE SKY EDIT</span>
           </div>
           <div class="cert-row">
             <span data-i18n="certRowDesigned">Designed</span>
@@ -201,24 +201,27 @@
           </div>
         </div>
 
-        <!-- Palette Selection -->
+        <!-- Palette / Edit Selection aligned with Source of Truth -->
         <div class="control-group">
           <div class="control-label">
-            <span data-i18n="step1Palette">1. Select Stem Palette</span>
-            <span id="paletteLabel">Ivory & Alabaster</span>
+            <span data-i18n="step1Palette">1. Select Collection / Edit</span>
+            <span id="paletteLabel">☁️ THE SKY EDIT</span>
           </div>
           <div class="option-pills" id="palettePills">
-            <button class="pill-btn active" data-value="ivory" onclick="setPalette('ivory')">
-              <span class="color-dot" style="background:#FBF9F5;"></span> Ivory & Alabaster
+            <button class="pill-btn active" data-value="sky" onclick="setPalette('sky')">
+              <span class="color-dot" style="background:#FBF9F5;"></span> ☁️ THE SKY EDIT ($65)
             </button>
             <button class="pill-btn" data-value="blush" onclick="setPalette('blush')">
-              <span class="color-dot" style="background:#EADCD6;"></span> Muted Peony Blush
-            </button>
-            <button class="pill-btn" data-value="terracotta" onclick="setPalette('terracotta')">
-              <span class="color-dot" style="background:#D4A373;"></span> Sunset Terracotta
+              <span class="color-dot" style="background:#EADCD6;"></span> 🎀 THE BLUSH EDIT ($65)
             </button>
             <button class="pill-btn" data-value="midnight" onclick="setPalette('midnight')">
-              <span class="color-dot" style="background:#3D2645;"></span> Midnight Velvet
+              <span class="color-dot" style="background:#3D2645;"></span> 🌙 THE MIDNIGHT EDIT ($70)
+            </button>
+            <button class="pill-btn" data-value="seasonal" onclick="setPalette('seasonal')">
+              <span class="color-dot" style="background:#D4A373;"></span> 🌿 THE SEASONAL EDIT ($65)
+            </button>
+            <button class="pill-btn" data-value="inspiration" onclick="setPalette('inspiration')">
+              <span class="color-dot" style="background:#C2A676;"></span> ✦ THE INSPIRATION ($95)
             </button>
           </div>
         </div>
@@ -230,20 +233,21 @@
           </div>
           <div class="option-pills" id="vesselPills">
             <button class="pill-btn active" data-value="alabaster" onclick="setVessel('alabaster')">Matte Alabaster Ceramic</button>
-            <button class="pill-btn" data-value="crystal" onclick="setVessel('crystal')">Fluted Italian Crystal</button>
-            <button class="pill-btn" data-value="travertine" onclick="setVessel('travertine')">Raw Travertine Stone</button>
+            <button class="pill-btn" data-value="crystal" onclick="setVessel('crystal')">Fluted Italian Crystal (+$15)</button>
+            <button class="pill-btn" data-value="travertine" onclick="setVessel('travertine')">Raw Travertine Stone (+$25)</button>
           </div>
         </div>
 
-        <!-- Ribbon Accent -->
+        <!-- Wrap & Add-Ons aligned with Source of Truth -->
         <div class="control-group">
           <div class="control-label" data-i18n="step3Wrap">
-            3. Signature Wrap & Accent
+            3. Signature Wrap & Add-Ons
           </div>
           <div class="option-pills" id="ribbonPills">
             <button class="pill-btn active" data-value="silk-cream" onclick="setRibbon('silk-cream')">Natural Linen (#E8DFD2)</button>
-            <button class="pill-btn" data-value="velvet-espresso" onclick="setRibbon('velvet-espresso')">Espresso Velvet</button>
-            <button class="pill-btn" data-value="gold-metal" onclick="setRibbon('gold-metal')">Monogram Gold Band</button>
+            <button class="pill-btn" data-value="velvet-espresso" onclick="setRibbon('velvet-espresso')">Espresso Velvet (+$10)</button>
+            <button class="pill-btn" data-value="gold-metal" onclick="setRibbon('gold-metal')">Monogram Gold Band (+$15)</button>
+            <button class="pill-btn" id="fillerBtn" onclick="toggleFillers()">🌿 Premium Fillers (+$10)</button>
           </div>
         </div>
 
@@ -254,7 +258,7 @@
           </div>
           <div class="option-pills" id="scentPills">
             <button class="pill-btn active" data-value="vanilla-rose" onclick="setScent('vanilla-rose')">French Vanilla & Damask Rose</button>
-            <button class="pill-btn" data-value="sandalwood" onclick="setScent('sandalwood')">Smoked Sandalwood</button>
+            <button class="pill-btn" data-value="sandalwood" onclick="setScent('sandalwood')">Smoked Sandalwood (+$12)</button>
             <button class="pill-btn" data-value="none" onclick="setScent('none')">Unscented Natural</button>
           </div>
         </div>
@@ -263,7 +267,7 @@
         <div class="price-summary-bar">
           <div>
             <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);" data-i18n="lblInvestment">Total Investment</div>
-            <div class="price-display" id="customizerPriceDisplay">$175 USD</div>
+            <div class="price-display" id="customizerPriceDisplay">$65 USD</div>
           </div>
           <button class="btn-primary" onclick="addCustomArrangementToCart()" data-i18n="btnAddCustom">Add Custom Creation to Bag →</button>
         </div>
@@ -538,7 +542,7 @@
       <div class="footer-brand">
         <div class="footer-title">SKY FLORALS</div>
         <p class="footer-sub">
-          The premier luxury floral house and curator of quiet sophistication. Transforming floral gifting into timeless architectural art and unboxing rituals.
+          The premier luxury floral studio and curator of quiet sophistication. Transforming floral gifting into timeless architectural art and unboxing rituals.
         </p>
       </div>
 
@@ -549,7 +553,7 @@
           <li><a href="javascript:void(0)" onclick="openAboutModal('values')" data-i18n="aboutTabValues">Core Values</a></li>
           <li><a href="#customizer" data-i18n="navCustomizer">Atelier Customizer</a></li>
           <li><a href="#quiz" data-i18n="navQuiz">Emotional Matcher</a></li>
-          <li><a href="#sculptures" data-i18n="navSculptures">Signature Sculptures</a></li>
+          <li><a href="#sculptures" data-i18n="navSculptures">The Collection</a></li>
         </ul>
       </div>
 
