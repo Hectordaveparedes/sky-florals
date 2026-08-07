@@ -15,28 +15,28 @@ const palettesData = {
   'ivory': {
     name: 'Ivory & Alabaster Stems',
     priceAdd: 0,
-    image: 'assets/hero.jpg',
+    image: 'assets/pal_ivory.jpg',
     color: '#FBF9F5',
     desc: 'White ranunculus, ivory garden roses, & calla lilies'
   },
   'blush': {
     name: 'Rhode Muted Peony Blush',
     priceAdd: 25,
-    image: 'assets/signature_blush.jpg',
+    image: 'assets/pal_blush.jpg',
     color: '#EADCD6',
     desc: 'Soft pink garden roses, blush peonies, & silver dollar eucalyptus'
   },
   'terracotta': {
     name: 'Sunset Terracotta & Gold',
     priceAdd: 30,
-    image: 'assets/lifestyle.jpg',
+    image: 'assets/pal_terracotta.jpg',
     color: '#D4A373',
     desc: 'Warm terracotta garden roses, honey ranunculus, & wild oats'
   },
   'midnight': {
     name: 'Midnight Velvet Drama',
     priceAdd: 40,
-    image: 'assets/unboxing.jpg',
+    image: 'assets/pal_midnight.jpg',
     color: '#3D2645',
     desc: 'Deep burgundy calla lilies, dark scabiosa, & metallic accents'
   }
@@ -61,11 +61,11 @@ const scentsData = {
 };
 
 function updateCustomizerUI() {
-  // Update Preview Image
+  // Update Preview Image smoothly
   const previewImg = document.getElementById("customizerPreviewImg");
   if (previewImg) {
     const palData = palettesData[customizerState.palette];
-    previewImg.style.opacity = '0.4';
+    previewImg.style.opacity = '0.3';
     setTimeout(() => {
       previewImg.src = palData.image;
       previewImg.style.opacity = '1';
@@ -164,7 +164,7 @@ function addCustomArrangementToCart() {
   if (window.addToCart) {
     window.addToCart({
       id: 'custom-' + Date.now(),
-      name: `Atelier Custom Arrangement (${palData.name})`,
+      name: `Atelier Custom Creation (${palData.name})`,
       price: totalPrice,
       image: palData.image,
       meta: `Curated for: ${customizerState.recipientName || 'Valued Guest'} | Includes Certificate of Curation`

@@ -8,19 +8,19 @@ const catalogProducts = [
     category: "minimalist",
     price: 165,
     tag: "Bestseller",
-    image: "assets/signature_blush.jpg",
-    desc: "A sculptured monochrome study in blush peonies and white calla lilies. Pure aesthetic elegance.",
+    image: "assets/pal_blush.jpg",
+    desc: "A sculptured monochrome study in blush peonies and garden roses wrapped in natural linen.",
     stemCount: "18 Premium Stems",
     longevity: "7-10 Days Fresh Guarantee"
   },
   {
     id: "sky-02",
-    name: "Grand Romance Monolith",
+    name: "Grand Ivory Monolith",
     category: "grand",
     price: 265,
     tag: "Signature",
-    image: "assets/hero.jpg",
-    desc: "32 long-stemmed garden roses in a textured alabaster stone vase. Designed for massive emotional gestures.",
+    image: "assets/pal_ivory.jpg",
+    desc: "32 long-stemmed white calla lilies and garden roses in a textured alabaster stone vase.",
     stemCount: "32 Grand Stems",
     longevity: "8-12 Days Fresh Guarantee"
   },
@@ -42,31 +42,31 @@ const catalogProducts = [
     price: 195,
     tag: "Luxury Gift Set",
     image: "assets/unboxing.jpg",
-    desc: "Includes our signature floral sculpture, magnetic embossed box, wax-sealed calligraphy card, and scent spray.",
+    desc: "Includes our signature floral sculpture, magnetic oat linen box, Cotton Certificate of Curation, and French Rose spray.",
     stemCount: "22 Curated Stems",
     longevity: "10 Days Fresh Guarantee"
   },
   {
     id: "sky-05",
-    name: "Sunset Terracotta Elegance",
+    name: "Sunset Terracotta & Gold",
     category: "grand",
     price: 215,
     tag: "New Season",
-    image: "assets/hero.jpg",
-    desc: "Warm peach tones, garden roses, and autumn wild branches. An architectural showstopper.",
+    image: "assets/pal_terracotta.jpg",
+    desc: "Warm peach tones, terracotta garden roses, and wild oats in a raw travertine stone vessel.",
     stemCount: "24 Stems",
     longevity: "8-10 Days Fresh Guarantee"
   },
   {
     id: "sky-06",
-    name: "Monthly Atelier Membership",
+    name: "Midnight Velvet Drama",
     category: "rituals",
-    price: 135,
-    tag: "Subscription",
-    image: "assets/lifestyle.jpg",
-    desc: "Bi-weekly or monthly delivery of fresh seasonal stems + complimentary luxury vase rotation.",
-    stemCount: "20 Stems / Month",
-    longevity: "Fresh Stems Delivered Monthly"
+    price: 235,
+    tag: "Haute Couture",
+    image: "assets/pal_midnight.jpg",
+    desc: "Deep burgundy calla lilies and dark scabiosa in a matte black ceramic vase.",
+    stemCount: "20 Stems",
+    longevity: "8 Days Fresh Guarantee"
   }
 ];
 
@@ -189,19 +189,19 @@ function checkDeliveryZip() {
   if (!input || !msg) return;
 
   const zip = input.value.trim();
-  const validZips = ["10001", "90028", "33139", "60611", "75201", "94102", "10012", "90210", "33130", "90015"];
+  const validZips = ["10001", "90028", "33139", "60611", "75201", "94102", "10012", "90210", "33130", "90015", "07030"];
   
   if (zip.length === 5 && !isNaN(zip)) {
-    if (validZips.includes(zip) || zip.startsWith("10") || zip.startsWith("90") || zip.startsWith("33") || zip.startsWith("60") || zip.startsWith("75") || zip.startsWith("94")) {
+    if (validZips.includes(zip) || zip.startsWith("07") || zip.startsWith("10") || zip.startsWith("90") || zip.startsWith("33") || zip.startsWith("60") || zip.startsWith("75") || zip.startsWith("94")) {
       msg.className = "zip-status-msg success";
-      msg.innerHTML = `✨ Priority Courier Available in ZIP ${zip}! Same-day delivery slots open for today.`;
+      msg.innerHTML = `✨ Priority White-Glove Courier Available in ZIP ${zip}! Delivery slots open for today.`;
     } else {
       msg.className = "zip-status-msg success";
       msg.innerHTML = `✓ Standard White-Glove Shipping Available for ZIP ${zip} (1-2 Days Guaranteed Freshness).`;
     }
   } else {
     msg.className = "zip-status-msg error";
-    msg.innerHTML = `Please enter a valid 5-digit US ZIP Code (e.g. 90210, 10001, 33139).`;
+    msg.innerHTML = `Please enter a valid 5-digit US ZIP Code (e.g. 07030, 90210, 10001, 33139).`;
   }
 }
 
@@ -228,14 +228,14 @@ function submitCheckout(e) {
     modalContent.innerHTML = `
       <div style="font-size:3rem; margin-bottom:16px;">🌿</div>
       <div class="hero-tag" style="margin:0 auto 16px;">Order Confirmed</div>
-      <h3 class="heading-lg" style="margin-bottom:12px;">Thank You for Choosing SKY Florals</h3>
+      <h3 class="heading-lg" style="margin-bottom:12px;">Thank You for Choosing SKY FLORALS</h3>
       <p style="color:var(--text-secondary); line-height:1.6; font-size:0.95rem;">
         Your order <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> has been received by our master floral artisans. 
-        A courier confirmation text and live tracking link have been dispatched to your phone.
+        A courier confirmation text and Cotton Certificate of Curation preview have been dispatched to your email.
       </p>
-      <div style="background:var(--bg-secondary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary);">
+      <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary); border:1px solid var(--border-light);">
         <div><strong>Delivery Window:</strong> Today between 2:00 PM – 5:00 PM</div>
-        <div style="margin-top:6px;"><strong>Recipient Experience:</strong> Scent-Infused Unboxing Box with Calligraphy Note</div>
+        <div style="margin-top:6px;"><strong>Recipient Experience:</strong> Natural Linen Unboxing Box with Cotton Certificate of Curation</div>
       </div>
       <button class="btn-primary" onclick="finishCheckoutOrder()">Return to Atelier</button>
     `;
