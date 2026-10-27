@@ -498,22 +498,27 @@
           <span id="cartTotal">$0</span>
         </div>
 
-        <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="openCheckoutModal()" data-i18n="btnCheckout">Proceed to Express Checkout →</button>
-        <button class="btn-secondary" style="width:100%; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="orderViaWhatsApp()" data-i18n="btnOrderWhatsApp">
+        <button class="btn-primary" style="width:100%; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="orderViaWhatsApp()" data-i18n="btnOrderWhatsApp">
           <span>💬 Order via WhatsApp (+1 862 255-8720)</span>
         </button>
+        <button class="btn-secondary" style="width:100%; margin-top:8px; font-size:0.8rem;" onclick="openCheckoutModal()" data-i18n="btnAddDetailsWhatsApp">
+          📝 Add Delivery & Invoicing Details →
+        </button>
+        <div style="font-size:0.75rem; color:var(--text-secondary); text-align:center; margin-top:12px; line-height:1.4;" data-i18n="cartWhatsAppNotice">
+          🌿 Online card checkout is temporarily paused. All bespoke orders and invoices are handled with personalized care via WhatsApp Concierge (+1 862 255-8720).
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Express Checkout Modal with Invoicing & US Payment Integration -->
+  <!-- WhatsApp Concierge Checkout & Invoicing Modal -->
   <div class="modal-overlay" id="checkoutModal">
     <div class="modal-card" id="modalCardContent" style="max-width: 580px; max-height: 90vh; overflow-y: auto;">
       <span class="close-btn" style="position:absolute; top:20px; right:20px;" onclick="closeCheckoutModal()">✕</span>
-      <div class="hero-tag" style="margin:0 auto 14px;">Express Checkout & Invoicing</div>
-      <h3 class="heading-lg" style="margin-bottom:6px;">Complete Your Sky Experience</h3>
-      <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:20px;">
-        Provide your billing and courier details. An official commercial invoice and certificate will be generated upon order dispatch.
+      <div class="hero-tag" style="margin:0 auto 14px;" data-i18n="checkoutTag">WhatsApp Concierge & Invoicing</div>
+      <h3 class="heading-lg" style="margin-bottom:6px;" data-i18n="checkoutHeading">Complete Your Order via WhatsApp</h3>
+      <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:20px;" data-i18n="checkoutSub">
+        Provide your billing and courier details. An official commercial invoice will be generated and your order will be transmitted directly to our Master Florist.
       </p>
 
       <form onsubmit="handleCheckoutSubmit(event)" id="checkoutForm" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
@@ -576,72 +581,22 @@
           <input type="date" id="orderDeliveryDate" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);">
         </div>
 
-        <!-- SECTION 3: US FUNCTIONAL PAYMENT METHOD -->
-        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:600; color:var(--text-primary); border-bottom:1px solid var(--border-light); padding-bottom:4px; margin-top:8px;">
-          3. Functional US Payment Method
+        <!-- SECTION 3: ATELIER WHATSAPP DISPATCH & PAYMENT COORDINATION -->
+        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:600; color:var(--text-primary); border-bottom:1px solid var(--border-light); padding-bottom:4px; margin-top:8px;" data-i18n="secPaymentTitle">
+          3. Payment & Concierge Coordination
         </div>
 
-        <div class="payment-tabs">
-          <button type="button" class="payment-tab-btn active" id="payTabBtn-card" onclick="switchPaymentMethod('card')">
-            💳 Card / Apple Pay
-          </button>
-          <button type="button" class="payment-tab-btn" id="payTabBtn-zelle" onclick="switchPaymentMethod('zelle')">
-            ⚡ Zelle / Venmo
-          </button>
-          <button type="button" class="payment-tab-btn" id="payTabBtn-whatsapp" onclick="switchPaymentMethod('whatsapp')">
-            💬 WhatsApp Atelier
-          </button>
-        </div>
-
-        <!-- Panel 1: Card / Apple Pay (Stripe-ready with real-time formatting) -->
-        <div class="payment-panel active" id="payPanel-card">
-          <div class="card-field-group">
-            <div>
-              <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Card Number</label>
-              <input type="text" id="cardNumberInput" maxlength="19" class="zip-input" style="width:100%; letter-spacing:0.08em;" placeholder="4242 •••• •••• 4242" oninput="formatCardNumber(this)">
-            </div>
-            <div class="card-input-row">
-              <div>
-                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Expires</label>
-                <input type="text" id="cardExpInput" maxlength="5" class="zip-input" placeholder="MM/YY" oninput="formatCardExp(this)">
-              </div>
-              <div>
-                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">CVC</label>
-                <input type="text" id="cardCvcInput" maxlength="4" class="zip-input" placeholder="123">
-              </div>
-              <div>
-                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Billing ZIP</label>
-                <input type="text" id="cardZipInput" maxlength="5" class="zip-input" placeholder="07030">
-              </div>
-            </div>
+        <div style="background:var(--bg-primary); border:1px solid var(--border-light); border-radius:var(--radius-md); padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+            <span style="font-size:1.1rem;">🌿</span>
+            <span style="font-size:0.88rem; font-weight:600; color:var(--text-primary);" data-i18n="noticeWaHeading">Exclusive WhatsApp Concierge Service</span>
           </div>
-          <div style="font-size:0.72rem; color:var(--text-secondary); margin-top:8px; display:flex; align-items:center; gap:6px;">
-            <span>🔒 Encrypted 256-bit SSL Gateway. Compatible with US Debit/Credit Cards & Apple Pay.</span>
-          </div>
-        </div>
-
-        <!-- Panel 2: Zelle / Venmo (USA Direct Zero-Fee Dispatch) -->
-        <div class="payment-panel" id="payPanel-zelle">
-          <div class="zelle-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <span class="zelle-highlight" style="font-size:0.9rem;">⚡ Zelle Instant Payment (USA)</span>
-              <span style="font-size:0.7rem; background:#7414DC; color:#FFF; padding:2px 8px; border-radius:99px;">0% Fee</span>
-            </div>
-            <div>Send total investment directly via Zelle to:</div>
-            <div style="font-size:1.05rem; font-weight:700; margin:6px 0; color:var(--text-primary); letter-spacing:0.04em;">
-              +1 (862) 255-8720
-            </div>
-            <div style="font-size:0.78rem; color:var(--text-secondary);">
-              <strong>Recipient Name:</strong> SKY FLORALS LLC<br>
-              Memo: Include your name & delivery date. Your commercial invoice will be confirmed immediately.
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 3: WhatsApp Concierge Order -->
-        <div class="payment-panel" id="payPanel-whatsapp">
-          <div style="font-size:0.84rem; line-height:1.5; color:var(--text-secondary);">
-            🌿 Your order details and recipient information will be transmitted directly to the Master Florist at <strong>+1 (862) 255-8720</strong>. You will receive an official invoice and immediate payment link via WhatsApp.
+          <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-bottom:10px;" data-i18n="noticeWaText">
+            Online direct card charging is currently disabled. Your order, recipient details, and formal invoice will be transmitted directly to our Master Florist at <strong>+1 (862) 255-8720</strong>. Payment will be coordinated directly via Zelle (SKY FLORALS LLC), bank transfer, or custom secure payment link.
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-secondary); padding:8px 12px; border-radius:var(--radius-sm); font-size:0.78rem;">
+            <span>Official WhatsApp:</span>
+            <strong style="color:var(--accent-gold); letter-spacing:0.04em;">+1 (862) 255-8720</strong>
           </div>
         </div>
 
@@ -653,14 +608,10 @@
           </label>
         </div>
 
-        <!-- SUBMIT BUTTONS -->
-        <button type="submit" class="btn-primary" id="checkoutPrimaryBtn" style="width:100%; margin-top:6px;">
-          Confirm Order & Generate Invoice →
-        </button>
-
-        <button type="button" class="btn-secondary" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="triggerWhatsAppFromCheckout()">
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" class="btn-primary" id="checkoutPrimaryBtn" style="width:100%; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;" data-i18n="btnSubmitWhatsApp">
           <span>💬</span>
-          <span>Send Order via WhatsApp (+1 862 255-8720)</span>
+          <span>Send Order via WhatsApp (+1 862 255-8720) & Generate Invoice →</span>
         </button>
       </form>
     </div>

@@ -73,13 +73,21 @@ const i18nDict = {
     aboutTabMission: "Mission & Vision",
     aboutTabValues: "The 5 Pillars",
     bagTitle: "Your Shopping Bag",
-    btnCheckout: "Proceed to Express Checkout →",
+    btnCheckout: "Proceed to WhatsApp Order →",
     courierLabel: "White-Glove Courier Delivery",
     topBarWhatsApp: "Orders WhatsApp: +1 (862) 255-8720",
     waConciergeLabel: "WhatsApp Orders & Concierge",
     btnOrderWhatsApp: "💬 Order via WhatsApp (+1 862 255-8720)",
+    btnAddDetailsWhatsApp: "📝 Add Delivery & Invoicing Details →",
+    cartWhatsAppNotice: "Online card checkout is temporarily paused. All bespoke orders and invoices are handled with personalized care via WhatsApp Concierge (+1 862 255-8720).",
+    checkoutTag: "WhatsApp Concierge & Invoicing",
+    checkoutHeading: "Complete Your Order via WhatsApp",
+    checkoutSub: "Provide your billing and courier details. An official commercial invoice will be generated and your order will be transmitted directly to our Master Florist.",
+    secPaymentTitle: "3. Payment & Concierge Coordination",
+    noticeWaHeading: "Exclusive WhatsApp Concierge Service",
+    noticeWaText: "Online direct card charging is currently disabled. Your order, recipient details, and formal invoice will be transmitted directly to our Master Florist at +1 (862) 255-8720. Payment will be coordinated directly via Zelle (SKY FLORALS LLC), bank transfer, or custom secure payment link.",
+    btnSubmitWhatsApp: "Send Order via WhatsApp (+1 862 255-8720) & Generate Invoice →",
     btnConfirmWhatsApp: "Send Order via WhatsApp (+1 862 255-8720)",
-    btnPayCard: "Pay Online / Card / Apple Pay",
     footerWhatsApp: "WhatsApp Orders: +1 (862) 255-8720"
   },
   ES: {
@@ -148,13 +156,21 @@ const i18nDict = {
     aboutTabMission: "Misión y Visión",
     aboutTabValues: "Los 5 Pilares",
     bagTitle: "Tu Bolsa de Compras",
-    btnCheckout: "Proceder al Pago Expres →",
+    btnCheckout: "Proceder a Pedido por WhatsApp →",
     courierLabel: "Envío Especializado Atelier",
     topBarWhatsApp: "Pedidos por WhatsApp: +1 (862) 255-8720",
     waConciergeLabel: "Pedidos por WhatsApp & Concierge",
     btnOrderWhatsApp: "💬 Ordenar por WhatsApp (+1 862 255-8720)",
+    btnAddDetailsWhatsApp: "📝 Completar Datos de Envío & Factura →",
+    cartWhatsAppNotice: "Las compras directas con tarjeta están temporalmente pausadas. Todos los pedidos y facturas se coordinan de forma personalizada por WhatsApp (+1 862 255-8720).",
+    checkoutTag: "Concierge WhatsApp & Facturación",
+    checkoutHeading: "Completa Tu Pedido por WhatsApp",
+    checkoutSub: "Completa tus datos de entrega y facturación. Se generará una factura comercial oficial y tu pedido será transmitido directamente a nuestro Master Florist.",
+    secPaymentTitle: "3. Coordinación de Pago y Concierge",
+    noticeWaHeading: "Atención Exclusiva vía WhatsApp Concierge",
+    noticeWaText: "Las compras online automáticas están deshabilitadas. Tu pedido y factura serán transmitidos directamente a nuestro Master Florist al +1 (862) 255-8720. El pago se coordina por Zelle (SKY FLORALS LLC), transferencia o link de pago seguro.",
+    btnSubmitWhatsApp: "Enviar Pedido a WhatsApp (+1 862 255-8720) y Generar Factura →",
     btnConfirmWhatsApp: "Enviar Pedido por WhatsApp (+1 862 255-8720)",
-    btnPayCard: "Pagar con Tarjeta / Apple Pay",
     footerWhatsApp: "Pedidos por WhatsApp: +1 (862) 255-8720"
   }
 };
@@ -553,40 +569,12 @@ function openCheckoutModal() {
 }
 
 // ========================================================
-// 1. PAYMENT METHODS & FORM FORMATTING (USA FUNCTIONAL)
+// 1. WHATSAPP CONCIERGE ORDERING & PAYMENT COORDINATION
 // ========================================================
-let selectedPaymentMethod = 'card'; // 'card', 'zelle', 'whatsapp'
+let selectedPaymentMethod = 'whatsapp';
 
 function switchPaymentMethod(method) {
-  selectedPaymentMethod = method;
-  
-  // Update Tabs
-  document.querySelectorAll(".payment-tab-btn").forEach(btn => btn.classList.remove("active"));
-  const activeBtn = document.getElementById(`payTabBtn-${method}`);
-  if (activeBtn) activeBtn.classList.add("active");
-
-  // Update Panels
-  document.querySelectorAll(".payment-panel").forEach(panel => panel.classList.remove("active"));
-  const activePanel = document.getElementById(`payPanel-${method}`);
-  if (activePanel) activePanel.classList.add("active");
-
-  // Update Primary CTA text
-  const primaryBtn = document.getElementById("checkoutPrimaryBtn");
-  if (primaryBtn) {
-    if (method === 'card') {
-      primaryBtn.innerHTML = currentLang === 'ES' 
-        ? "Confirmar y Pagar con Tarjeta / Apple Pay →" 
-        : "Confirm & Pay via Card / Apple Pay →";
-    } else if (method === 'zelle') {
-      primaryBtn.innerHTML = currentLang === 'ES' 
-        ? "He enviado el pago por Zelle — Generar Factura →" 
-        : "I Have Sent Zelle Payment — Generate Invoice →";
-    } else {
-      primaryBtn.innerHTML = currentLang === 'ES' 
-        ? "Enviar Pedido a WhatsApp y Generar Factura →" 
-        : "Send to WhatsApp & Generate Invoice →";
-    }
-  }
+  selectedPaymentMethod = 'whatsapp';
 }
 
 function formatCardNumber(el) {
@@ -991,12 +979,10 @@ function handleCheckoutSubmit(e) {
   const tax = Number((subtotal * taxRate).toFixed(2));
   const grandTotal = Number((subtotal + deliveryFee + tax).toFixed(2));
 
-  let methodLabel = "Credit Card (Stripe SSL Gateway USA)";
-  if (selectedPaymentMethod === 'zelle') {
-    methodLabel = "Zelle Instant Transfer (SKY FLORALS LLC)";
-  } else if (selectedPaymentMethod === 'whatsapp') {
-    methodLabel = "WhatsApp Concierge Confirmation";
-  }
+  const isEs = currentLang === 'ES';
+  const methodLabel = isLoja 
+    ? "WhatsApp Concierge (Transferencia / Enlace de Pago)"
+    : "WhatsApp Concierge (Zelle SKY FLORALS LLC / Secure Link)";
 
   const clientData = {
     name: clientName,
@@ -1017,18 +1003,12 @@ function handleCheckoutSubmit(e) {
   // 2. Generate Commercial Invoice
   generateInvoice(clientData, cart, subtotal, deliveryFee, tax, grandTotal, methodLabel);
 
-  // 3. Dispatch according to payment method
-  if (selectedPaymentMethod === 'whatsapp') {
-    triggerWhatsAppFromCheckout(clientData, grandTotal);
-  } else if (selectedPaymentMethod === 'card') {
-    showToast(currentLang === 'ES' 
-      ? "¡Pago con tarjeta procesado con éxito! Se ha generado tu factura." 
-      : "Card payment authorized successfully! Your official invoice has been generated.");
-  } else if (selectedPaymentMethod === 'zelle') {
-    showToast(currentLang === 'ES' 
-      ? "Registro de pago Zelle recibido. Revisa y descarga tu factura." 
-      : "Zelle payment registered. Your official invoice is ready.");
-  }
+  // 3. Dispatch to WhatsApp Concierge
+  triggerWhatsAppFromCheckout(clientData, grandTotal);
+
+  showToast(isEs 
+    ? "¡Pedido enviado a WhatsApp con éxito! Se ha generado tu factura." 
+    : "Order transmitted to WhatsApp successfully! Your official invoice is generated.");
 
   // Clear Cart & Close Checkout Modal
   cart = [];
