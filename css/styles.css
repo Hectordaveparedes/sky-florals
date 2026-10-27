@@ -1432,8 +1432,8 @@ a {
 /* Toast Notifications */
 .toast-container {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 88px;
+  right: 28px;
   z-index: 400;
   display: flex;
   flex-direction: column;
@@ -1457,6 +1457,419 @@ a {
 @keyframes slideInRight {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+/* Floating Luxury WhatsApp Concierge Pill */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 350;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  padding: 8px 18px 8px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.whatsapp-float-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
+  border-color: var(--accent-gold);
+  color: var(--text-white);
+}
+
+.wa-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(37, 211, 102, 0.45);
+}
+
+.wa-text-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.wa-label {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.wa-number {
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-white);
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+  border: 1px solid #20BA5A;
+}
+
+.btn-whatsapp:hover {
+  background-color: #20BA5A;
+  color: #FFFFFF;
+}
+
+/* Cookie Consent Banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  max-width: 440px;
+  background: var(--bg-dark);
+  color: var(--text-white);
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 380;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+.cookie-banner.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+.cookie-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cookie-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+}
+
+.cookie-text a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cookie-btn-accept {
+  background: var(--text-white);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: var(--transition-fast);
+}
+
+.cookie-btn-accept:hover {
+  background: var(--accent-linen);
+}
+
+.cookie-btn-decline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: var(--transition-fast);
+}
+
+.cookie-btn-decline:hover {
+  color: var(--text-white);
+  border-color: var(--text-white);
+}
+
+/* Payment Method Selection in Checkout */
+.payment-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.payment-tab-btn {
+  padding: 10px 6px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: center;
+}
+
+.payment-tab-btn.active {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.payment-panel {
+  display: none;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.payment-panel.active {
+  display: block;
+}
+
+.card-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-input-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+}
+
+.zelle-box {
+  background: rgba(116, 20, 220, 0.06);
+  border: 1px solid rgba(116, 20, 220, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.zelle-highlight {
+  font-weight: 600;
+  color: #7414DC;
+}
+
+/* Form Checkbox Styling */
+.form-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 8px 0;
+}
+
+.form-checkbox-row input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* Invoice Modal & Printable Receipt */
+.invoice-modal-card {
+  background: #FFFFFF;
+  color: #1F1F1F;
+  border-radius: var(--radius-lg);
+  max-width: 780px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 40px;
+  box-shadow: var(--shadow-glass);
+  text-align: left;
+  position: relative;
+  border: 1px solid var(--border-light);
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #1F1F1F;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.invoice-brand {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.invoice-badge-paid {
+  display: inline-block;
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.invoice-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 28px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+}
+
+.invoice-table th {
+  background: var(--bg-primary);
+  padding: 10px 12px;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #1F1F1F;
+  text-align: left;
+}
+
+.invoice-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.invoice-totals {
+  width: 280px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+  padding-top: 12px;
+}
+
+.invoice-totals .total-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoice-totals .grand-total {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-top: 2px solid #1F1F1F;
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+/* Client Database Admin Panel */
+.admin-modal-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  max-width: 960px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 36px;
+  box-shadow: var(--shadow-glass);
+  text-align: left;
+  position: relative;
+}
+
+.client-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  margin-top: 16px;
+}
+
+.client-table th {
+  background: var(--bg-primary);
+  padding: 10px 14px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+}
+
+.client-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+/* Print Specific Rules for Invoices */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #invoiceModal, #invoiceModal * {
+    visibility: visible;
+  }
+  #invoiceModal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    padding: 0;
+  }
+  .invoice-modal-card {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    max-width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
 }
 
 /* Footer */
@@ -1589,5 +2002,32 @@ footer {
   }
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+  .whatsapp-float-btn {
+    bottom: 18px;
+    right: 18px;
+    padding: 7px 14px 7px 10px;
+    gap: 8px;
+  }
+  .wa-icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+  .wa-icon-wrapper svg {
+    width: 17px;
+    height: 17px;
+  }
+  .wa-label {
+    font-size: 0.58rem;
+  }
+  .wa-number {
+    font-size: 0.76rem;
+  }
+  .toast-container {
+    bottom: 78px;
+    right: 18px;
+  }
+  .nav-wa-text {
+    display: none;
   }
 }

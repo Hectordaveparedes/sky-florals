@@ -15,12 +15,18 @@
       <span class="pulse-dot"></span>
       <span id="locationBarText" data-i18n="locationBar">White-Glove Courier Delivery Available Today in New Jersey, NYC & Metro Regions ($ USD)</span>
     </span>
-    <div style="display:flex; align-items:center; gap:12px;">
-      <span style="font-size:0.7rem; opacity:0.85;">ATELIER REGION:</span>
-      <select class="location-dropdown" onchange="switchLocation(this.value)">
-        <option value="NJ">🇺🇸 New Jersey & NYC Metro (English)</option>
-        <option value="LOJA">🇪🇨 Loja, Ecuador Atelier (Español)</option>
-      </select>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <a href="https://wa.me/18622558720" target="_blank" style="display:flex; align-items:center; gap:6px; color:var(--text-white); text-decoration:none; font-size:0.72rem; letter-spacing:0.06em;">
+        <span>💬</span>
+        <span data-i18n="topBarWhatsApp">Orders WhatsApp: +1 (862) 255-8720</span>
+      </a>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:0.7rem; opacity:0.85;">ATELIER REGION:</span>
+        <select class="location-dropdown" onchange="switchLocation(this.value)">
+          <option value="NJ">🇺🇸 New Jersey & NYC Metro (English)</option>
+          <option value="LOJA">🇪🇨 Loja, Ecuador Atelier (Español)</option>
+        </select>
+      </div>
     </div>
   </div>
 
@@ -38,6 +44,10 @@
       <li><a href="javascript:void(0)" onclick="openAboutModal('story')" class="nav-link" data-i18n="navAbout" style="font-weight:500;">About Us / The House</a></li>
     </ul>
     <div class="nav-actions">
+      <a href="https://wa.me/18622558720" target="_blank" class="btn-icon" style="color:var(--text-primary); text-decoration:none;" title="WhatsApp Orders: +1 (862) 255-8720">
+        <span>💬</span>
+        <span class="nav-wa-text">+1 (862) 255-8720</span>
+      </a>
       <button class="btn-icon" onclick="openAboutModal('story')" title="About SKY FLORALS">
         <span data-i18n="navAbout">Our House</span>
       </button>
@@ -489,52 +499,395 @@
         </div>
 
         <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="openCheckoutModal()" data-i18n="btnCheckout">Proceed to Express Checkout →</button>
+        <button class="btn-secondary" style="width:100%; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="orderViaWhatsApp()" data-i18n="btnOrderWhatsApp">
+          <span>💬 Order via WhatsApp (+1 862 255-8720)</span>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Express Checkout Modal -->
+  <!-- Express Checkout Modal with Invoicing & US Payment Integration -->
   <div class="modal-overlay" id="checkoutModal">
-    <div class="modal-card" id="modalCardContent">
+    <div class="modal-card" id="modalCardContent" style="max-width: 580px; max-height: 90vh; overflow-y: auto;">
       <span class="close-btn" style="position:absolute; top:20px; right:20px;" onclick="closeCheckoutModal()">✕</span>
-      <div class="hero-tag" style="margin:0 auto 16px;">Express Checkout</div>
-      <h3 class="heading-lg" style="margin-bottom:8px;">Complete Your Sky Experience</h3>
-      <p style="color:var(--text-secondary); font-size:0.88rem; margin-bottom:24px;">Enter delivery details for immediate courier dispatch.</p>
+      <div class="hero-tag" style="margin:0 auto 14px;">Express Checkout & Invoicing</div>
+      <h3 class="heading-lg" style="margin-bottom:6px;">Complete Your Sky Experience</h3>
+      <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:20px;">
+        Provide your billing and courier details. An official commercial invoice and certificate will be generated upon order dispatch.
+      </p>
 
-      <form onsubmit="submitCheckout(event)" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
-        <div>
-          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Recipient Full Name</label>
-          <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Emily Chasi">
+      <form onsubmit="handleCheckoutSubmit(event)" id="checkoutForm" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
+        
+        <!-- SECTION 1: PURCHASER & INVOICING DETAILS (CLIENT DATABASE) -->
+        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:600; color:var(--text-primary); border-bottom:1px solid var(--border-light); padding-bottom:4px;">
+          1. Client & Billing Information (For Official Invoice)
         </div>
 
-        <div>
-          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Delivery Address</label>
-          <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="Street address, Apt, Suite">
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
           <div>
-            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">City / Zone</label>
-            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Hoboken NJ / Loja Centro">
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Client Full Name *</label>
+            <input type="text" id="billingName" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Emily Chasi">
           </div>
           <div>
-            <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">ZIP / Zone Code</label>
-            <input type="text" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="07030">
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Client Email (For Invoice) *</label>
+            <input type="email" id="billingEmail" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="emily@example.com">
           </div>
         </div>
 
-        <div>
-          <label style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Preferred Delivery Date</label>
-          <input type="date" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Phone / WhatsApp *</label>
+            <input type="tel" id="billingPhone" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="+1 (862) 555-0199">
+          </div>
+          <div>
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Tax ID / EIN / SSN / Cédula</label>
+            <input type="text" id="billingTaxId" class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="Optional for business invoice">
+          </div>
         </div>
 
-        <button type="submit" class="btn-primary" style="width:100%; margin-top:12px;">Confirm & Pay via Apple Pay / Card</button>
+        <!-- SECTION 2: WHITE-GLOVE COURIER DISPATCH -->
+        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:600; color:var(--text-primary); border-bottom:1px solid var(--border-light); padding-bottom:4px; margin-top:8px;">
+          2. Recipient & Delivery Details
+        </div>
+
+        <div>
+          <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Recipient Name *</label>
+          <input type="text" id="orderRecipientName" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Emily Chasi">
+        </div>
+
+        <div>
+          <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Delivery Address (Street, Apt, Suite) *</label>
+          <input type="text" id="orderDeliveryAddress" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="123 Hudson Street, Apt 4B">
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">City / Zone *</label>
+            <input type="text" id="orderCityZone" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="e.g. Hoboken NJ / Loja Centro">
+          </div>
+          <div>
+            <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">ZIP / Postal Code *</label>
+            <input type="text" id="orderZipCode" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);" placeholder="07030">
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Preferred Delivery Date *</label>
+          <input type="date" id="orderDeliveryDate" required class="zip-input" style="width:100%; border-radius:var(--radius-sm);">
+        </div>
+
+        <!-- SECTION 3: US FUNCTIONAL PAYMENT METHOD -->
+        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:600; color:var(--text-primary); border-bottom:1px solid var(--border-light); padding-bottom:4px; margin-top:8px;">
+          3. Functional US Payment Method
+        </div>
+
+        <div class="payment-tabs">
+          <button type="button" class="payment-tab-btn active" id="payTabBtn-card" onclick="switchPaymentMethod('card')">
+            💳 Card / Apple Pay
+          </button>
+          <button type="button" class="payment-tab-btn" id="payTabBtn-zelle" onclick="switchPaymentMethod('zelle')">
+            ⚡ Zelle / Venmo
+          </button>
+          <button type="button" class="payment-tab-btn" id="payTabBtn-whatsapp" onclick="switchPaymentMethod('whatsapp')">
+            💬 WhatsApp Atelier
+          </button>
+        </div>
+
+        <!-- Panel 1: Card / Apple Pay (Stripe-ready with real-time formatting) -->
+        <div class="payment-panel active" id="payPanel-card">
+          <div class="card-field-group">
+            <div>
+              <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Card Number</label>
+              <input type="text" id="cardNumberInput" maxlength="19" class="zip-input" style="width:100%; letter-spacing:0.08em;" placeholder="4242 •••• •••• 4242" oninput="formatCardNumber(this)">
+            </div>
+            <div class="card-input-row">
+              <div>
+                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Expires</label>
+                <input type="text" id="cardExpInput" maxlength="5" class="zip-input" placeholder="MM/YY" oninput="formatCardExp(this)">
+              </div>
+              <div>
+                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">CVC</label>
+                <input type="text" id="cardCvcInput" maxlength="4" class="zip-input" placeholder="123">
+              </div>
+              <div>
+                <label style="font-size:0.7rem; text-transform:uppercase; color:var(--text-secondary);">Billing ZIP</label>
+                <input type="text" id="cardZipInput" maxlength="5" class="zip-input" placeholder="07030">
+              </div>
+            </div>
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-secondary); margin-top:8px; display:flex; align-items:center; gap:6px;">
+            <span>🔒 Encrypted 256-bit SSL Gateway. Compatible with US Debit/Credit Cards & Apple Pay.</span>
+          </div>
+        </div>
+
+        <!-- Panel 2: Zelle / Venmo (USA Direct Zero-Fee Dispatch) -->
+        <div class="payment-panel" id="payPanel-zelle">
+          <div class="zelle-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="zelle-highlight" style="font-size:0.9rem;">⚡ Zelle Instant Payment (USA)</span>
+              <span style="font-size:0.7rem; background:#7414DC; color:#FFF; padding:2px 8px; border-radius:99px;">0% Fee</span>
+            </div>
+            <div>Send total investment directly via Zelle to:</div>
+            <div style="font-size:1.05rem; font-weight:700; margin:6px 0; color:var(--text-primary); letter-spacing:0.04em;">
+              +1 (862) 255-8720
+            </div>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">
+              <strong>Recipient Name:</strong> SKY FLORALS LLC<br>
+              Memo: Include your name & delivery date. Your commercial invoice will be confirmed immediately.
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: WhatsApp Concierge Order -->
+        <div class="payment-panel" id="payPanel-whatsapp">
+          <div style="font-size:0.84rem; line-height:1.5; color:var(--text-secondary);">
+            🌿 Your order details and recipient information will be transmitted directly to the Master Florist at <strong>+1 (862) 255-8720</strong>. You will receive an official invoice and immediate payment link via WhatsApp.
+          </div>
+        </div>
+
+        <!-- SECTION 4: MANDATORY PRIVACY & COOKIE CONSENT -->
+        <div class="form-checkbox-row">
+          <input type="checkbox" id="legalConsentCheck" required>
+          <label for="legalConsentCheck">
+            I agree to the <a href="javascript:void(0)" onclick="openPrivacyModal()" style="text-decoration:underline; font-weight:600; color:var(--text-primary);">Privacy Policy</a>, <a href="javascript:void(0)" onclick="openTermsModal()" style="text-decoration:underline; font-weight:600; color:var(--text-primary);">Terms of Service</a>, and consent to electronic commercial invoice issuance and customer profile retention.
+          </label>
+        </div>
+
+        <!-- SUBMIT BUTTONS -->
+        <button type="submit" class="btn-primary" id="checkoutPrimaryBtn" style="width:100%; margin-top:6px;">
+          Confirm Order & Generate Invoice →
+        </button>
+
+        <button type="button" class="btn-secondary" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="triggerWhatsAppFromCheckout()">
+          <span>💬</span>
+          <span>Send Order via WhatsApp (+1 862 255-8720)</span>
+        </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Official Commercial Invoice Modal -->
+  <div class="modal-overlay" id="invoiceModal">
+    <div class="invoice-modal-card" id="invoiceCard">
+      <span class="close-btn no-print" style="position:absolute; top:24px; right:28px;" onclick="closeInvoiceModal()">✕</span>
+      
+      <div class="invoice-header">
+        <div>
+          <div class="invoice-brand">SKY FLORALS</div>
+          <div style="font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-secondary); margin-top:2px;">
+            House of Floral Artistry & Quiet Sophistication
+          </div>
+          <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:6px;">
+            New Jersey Atelier & NYC Metro • Loja, Ecuador<br>
+            Tel / WhatsApp: +1 (862) 255-8720 • concierge@skyflorals.com
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:1.1rem; font-family:var(--font-serif); font-weight:600;" id="invNumber">INV-2026-00104</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin:4px 0;" id="invDate">October 26, 2026</div>
+          <span class="invoice-badge-paid" id="invPaymentStatus">PAID / CONFIRMED</span>
+        </div>
+      </div>
+
+      <div class="invoice-parties">
+        <div>
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary); font-weight:600;">BILLED TO (CLIENT):</div>
+          <div style="font-size:1rem; font-weight:600; margin:4px 0;" id="invClientName">Emily Chasi</div>
+          <div id="invClientEmail">emily@example.com</div>
+          <div id="invClientPhone">+1 (862) 555-0199</div>
+          <div id="invClientTaxId">Tax ID / EIN: N/A</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary); font-weight:600;">SHIPPED TO (RECIPIENT):</div>
+          <div style="font-size:1rem; font-weight:600; margin:4px 0;" id="invRecipientName">Emily Chasi</div>
+          <div id="invDeliveryAddress">123 Hudson Street, Apt 4B</div>
+          <div id="invDeliveryCity">Hoboken, NJ 07030</div>
+          <div id="invDeliveryDate">Delivery Date: October 28, 2026</div>
+        </div>
+      </div>
+
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Item / Creation Description</th>
+            <th style="text-align:center;">Qty</th>
+            <th style="text-align:right;">Unit Price</th>
+            <th style="text-align:right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="invItemsBody">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+
+      <div class="invoice-totals">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span id="invSubtotal">$0.00 USD</span>
+        </div>
+        <div class="total-row">
+          <span>White-Glove Courier:</span>
+          <span id="invShipping">$15.00 USD</span>
+        </div>
+        <div class="total-row">
+          <span id="invTaxLabel">Sales Tax (NJ 6.625%):</span>
+          <span id="invTax">$0.00 USD</span>
+        </div>
+        <div class="total-row grand-total">
+          <span>Total Investment:</span>
+          <span id="invGrandTotal">$0.00 USD</span>
+        </div>
+      </div>
+
+      <div style="margin-top:32px; padding-top:20px; border-top:1px solid var(--border-light); font-size:0.78rem; color:var(--text-secondary); line-height:1.6;">
+        <div><strong>Payment Method:</strong> <span id="invMethodName">Credit Card / Apple Pay (Stripe Gateway USA)</span></div>
+        <div style="margin-top:4px;">Includes Cotton Certificate of Curation & French Damask Rose Unboxing Mist. Thank you for choosing SKY FLORALS.</div>
+      </div>
+
+      <div class="no-print" style="margin-top:28px; display:flex; gap:12px; justify-content:flex-end;">
+        <button class="btn-secondary" onclick="printInvoice()">
+          🖨️ Print / Download PDF
+        </button>
+        <button class="btn-primary" onclick="closeInvoiceModal()">
+          Done →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Database & CRM Admin Modal -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="admin-modal-card">
+      <span class="close-btn" style="position:absolute; top:24px; right:28px;" onclick="closeAdminModal()">✕</span>
+      <div class="subheading" style="color:var(--accent-gold);">Atelier Management</div>
+      <h2 class="heading-lg" style="margin-top:4px;">Client Base & Order Management</h2>
+      <p style="color:var(--text-secondary); font-size:0.88rem; margin-top:4px;">
+        Direct client database captured via checkout, invoices, and WhatsApp with verified Privacy & Cookie consent.
+      </p>
+
+      <!-- Metrics Row -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin:24px 0;">
+        <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+          <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-secondary); letter-spacing:0.08em;">Total Clients</div>
+          <div style="font-family:var(--font-serif); font-size:1.8rem; font-weight:600;" id="adminTotalClients">0</div>
+        </div>
+        <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+          <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-secondary); letter-spacing:0.08em;">Total Orders</div>
+          <div style="font-family:var(--font-serif); font-size:1.8rem; font-weight:600;" id="adminTotalOrders">0</div>
+        </div>
+        <div style="background:var(--bg-primary); padding:18px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+          <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-secondary); letter-spacing:0.08em;">Total Invoiced</div>
+          <div style="font-family:var(--font-serif); font-size:1.8rem; font-weight:600; color:#059669;" id="adminTotalRevenue">$0 USD</div>
+        </div>
+      </div>
+
+      <!-- Action & Filter Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <input type="text" id="adminSearchInput" oninput="renderAdminClients()" class="zip-input" style="max-width:320px; font-size:0.84rem; padding:8px 16px;" placeholder="Search by name, email, or tax ID...">
+        
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" style="padding:10px 20px; font-size:0.78rem;" onclick="exportClientsCSV()">
+            📥 Export Client Base (Excel / CSV)
+          </button>
+          <button class="btn-secondary" style="padding:10px 18px; font-size:0.78rem;" onclick="clearClientDatabase()">
+            Reset DB
+          </button>
+        </div>
+      </div>
+
+      <!-- Clients Table -->
+      <div style="overflow-x:auto;">
+        <table class="client-table" id="adminClientTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Client Name</th>
+              <th>Contact (Email / Phone)</th>
+              <th>Tax ID / EIN</th>
+              <th>Delivery Region / ZIP</th>
+              <th>Total Orders</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminClientTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-overlay" id="privacyModal">
+    <div class="about-modal-card">
+      <span class="close-btn" style="position:absolute; top:24px; right:28px;" onclick="closePrivacyModal()">✕</span>
+      <div class="subheading" style="color:var(--accent-gold);">SKY FLORALS LLC — Legal & Transparency</div>
+      <h2 class="heading-lg" style="margin-top:6px;" data-i18n="privacyHeading">Privacy Policy & Client Data Protection</h2>
+      <div style="margin-top:20px; font-size:0.9rem; color:var(--text-secondary); line-height:1.7; display:flex; flex-direction:column; gap:16px;">
+        <p><strong>1. Quiet Luxury & Data Discretion:</strong> At SKY FLORALS, your personal and billing privacy is treated with the highest intentionality. We collect only the information required to fulfill your floral order, dispatch white-glove courier delivery, issue legal commercial invoices, and provide bespoke concierge service.</p>
+        <p><strong>2. Information We Collect:</strong> When you place an order, design in our Atelier studio, or request an invoice, we collect your Full Name, Email, Phone number, Billing & Delivery addresses, and optional Tax Identification Number (EIN, SSN, or Cédula/RUC) for official invoice issuance.</p>
+        <p><strong>3. Payment & Invoicing Compliance:</strong> All payment transactions (Credit Card, Apple Pay, Zelle, Stripe) adhere to PCI-DSS standards with 256-bit SSL encryption. We generate itemized commercial invoices for USA clients (incorporating applicable State Sales Tax) and Ecuador clients upon dispatch.</p>
+        <p><strong>4. Cookie & Local Storage Ritual:</strong> We use strictly essential cookies and secure browser storage to maintain your active shopping bag, remember your selected Atelier Region (New Jersey vs. Loja), and preserve your custom Certificate of Curation details.</p>
+        <p><strong>5. Client Data Rights:</strong> You may request a complete export of your client record or request deletion at any time by contacting our Atelier Concierge at <strong>+1 (862) 255-8720</strong> or via WhatsApp.</p>
+      </div>
+      <div style="margin-top:28px; text-align:right;">
+        <button class="btn-primary" onclick="closePrivacyModal()">Acknowledge & Close →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service Modal -->
+  <div class="modal-overlay" id="termsModal">
+    <div class="about-modal-card">
+      <span class="close-btn" style="position:absolute; top:24px; right:28px;" onclick="closeTermsModal()">✕</span>
+      <div class="subheading" style="color:var(--accent-gold);">SKY FLORALS LLC — Client Agreement</div>
+      <h2 class="heading-lg" style="margin-top:6px;" data-i18n="termsHeading">Terms of Service & Courier Conditions</h2>
+      <div style="margin-top:20px; font-size:0.9rem; color:var(--text-secondary); line-height:1.7; display:flex; flex-direction:column; gap:16px;">
+        <p><strong>1. White-Glove Courier Delivery:</strong> Deliveries across New Jersey, NYC Metro, and Loja, Ecuador are hand-carried by specialized couriers to preserve sculptural integrity. Delivery windows are confirmed via SMS/WhatsApp.</p>
+        <p><strong>2. 7-10 Days Freshness Guarantee:</strong> Every stem is harvested with precision. Should your arrangement experience premature wilting within 7 days despite proper water care, our Atelier will replace it with our compliments.</p>
+        <p><strong>3. Bespoke & Customizer Creations:</strong> Bespoke commissions and personalized Cotton Certificates of Curation enter curation immediately upon confirmation. Changes must be requested at least 24 hours prior to scheduled delivery.</p>
+        <p><strong>4. Invoicing & Billing:</strong> Every confirmed order receives an official electronic invoice. Prices are in USD.</p>
+      </div>
+      <div style="margin-top:28px; text-align:right;">
+        <button class="btn-primary" onclick="closeTermsModal()">Acknowledge & Close →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Consent Banner (US & Global Compliance) -->
+  <div class="cookie-banner hidden" id="cookieBanner">
+    <div class="cookie-title">
+      <span>🍪</span>
+      <span data-i18n="cookieTitle">Quiet Luxury & Privacy Consent</span>
+    </div>
+    <p class="cookie-text" data-i18n="cookieText">
+      SKY FLORALS uses strictly encrypted local storage and essential cookies to curate your bespoke floral experience, preserve your shopping bag, and issue authentic Certificates of Curation. By browsing our Atelier, you agree to our <a href="javascript:void(0)" onclick="openPrivacyModal()">Privacy Policy</a> and <a href="javascript:void(0)" onclick="openTermsModal()">Terms of Service</a>.
+    </p>
+    <div class="cookie-actions">
+      <button class="cookie-btn-accept" onclick="acceptCookies()" data-i18n="cookieAccept">Accept & Continue</button>
+      <button class="cookie-btn-decline" onclick="declineCookies()" data-i18n="cookieDecline">Essential Only</button>
     </div>
   </div>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Floating Luxury WhatsApp Concierge -->
+  <a href="https://wa.me/18622558720?text=Hello%20SKY%20FLORALS%2C%20I%20would%20like%20to%20inquire%20about%20an%20order." 
+     target="_blank" 
+     class="whatsapp-float-btn" 
+     id="whatsappFloatBtn" 
+     title="Order via WhatsApp: +1 (862) 255-8720">
+    <div class="wa-icon-wrapper">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.13.332.202.043.073.043.419-.101.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.158.572 4.183 1.571 5.928l-1.571 5.828 6.005-1.576c1.705.94 3.662 1.48 5.751 1.48 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12zm0 21.84c-1.892 0-3.665-.548-5.163-1.492l-.37-.234-3.568.937.953-3.486-.254-.404c-1.077-1.713-1.648-3.708-1.648-5.781 0-5.424 4.412-9.84 9.84-9.84 5.425 0 9.84 4.416 9.84 9.84 0 5.424-4.415 9.84-9.84 9.84z"/>
+      </svg>
+    </div>
+    <div class="wa-text-group">
+      <span class="wa-label" data-i18n="waConciergeLabel">WhatsApp Orders</span>
+      <span class="wa-number">+1 (862) 255-8720</span>
+    </div>
+  </a>
 
   <!-- Footer -->
   <footer>
@@ -558,27 +911,30 @@
       </div>
 
       <div class="footer-col">
+        <h5>Orders & Concierge</h5>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/18622558720" target="_blank" style="color:var(--accent-gold); font-weight:500;">💬 WhatsApp: +1 (862) 255-8720</a></li>
+          <li><a href="tel:+18622558720">Call Atelier: +1 (862) 255-8720</a></li>
+          <li><span>White-Glove Courier Dispatch</span></li>
+          <li><span>Direct Florist Consultation</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
         <h5>Atelier Locations</h5>
         <ul class="footer-links">
           <li><a href="javascript:void(0)" onclick="switchLocation('NJ')">🇺🇸 New Jersey & NYC</a></li>
           <li><a href="javascript:void(0)" onclick="switchLocation('LOJA')">🇪🇨 Loja Atelier, Ecuador</a></li>
         </ul>
       </div>
-
-      <div class="footer-col footer-newsletter">
-        <h5>Join the Sky Club</h5>
-        <p style="color:#A8A29E; font-size:0.82rem; margin-bottom:12px;">Enjoy 10% off your first luxury floral curation.</p>
-        <input type="email" placeholder="Enter your email address...">
-        <button class="btn-primary" style="width:100%; padding:12px; font-size:0.78rem;">Subscribe →</button>
-      </div>
     </div>
 
     <div class="container footer-bottom">
       <div>© 2026 SKY FLORALS House of Floral Artistry. All rights reserved.</div>
-      <div style="display:flex; gap:20px;">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Courier Status</a>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <a href="javascript:void(0)" onclick="openPrivacyModal()">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="openTermsModal()">Terms of Service</a>
+        <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--accent-gold); font-weight:500;">🔒 Atelier CRM / Client Database</a>
       </div>
     </div>
   </footer>

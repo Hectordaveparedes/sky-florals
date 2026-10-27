@@ -1,6 +1,10 @@
 // SKY FLORALS - MAIN E-COMMERCE, I18N & SOURCE OF TRUTH CATALOG LOGIC
 // Source of Truth Document: SKY FLORALS Collection and Edits
 
+// WhatsApp Concierge & Orders Configuration
+const WHATSAPP_NUMBER = "18622558720";
+const WHATSAPP_DISPLAY = "+1 (862) 255-8720";
+
 // i18n Translation Dictionary
 const i18nDict = {
   EN: {
@@ -70,7 +74,13 @@ const i18nDict = {
     aboutTabValues: "The 5 Pillars",
     bagTitle: "Your Shopping Bag",
     btnCheckout: "Proceed to Express Checkout →",
-    courierLabel: "White-Glove Courier Delivery"
+    courierLabel: "White-Glove Courier Delivery",
+    topBarWhatsApp: "Orders WhatsApp: +1 (862) 255-8720",
+    waConciergeLabel: "WhatsApp Orders & Concierge",
+    btnOrderWhatsApp: "💬 Order via WhatsApp (+1 862 255-8720)",
+    btnConfirmWhatsApp: "Send Order via WhatsApp (+1 862 255-8720)",
+    btnPayCard: "Pay Online / Card / Apple Pay",
+    footerWhatsApp: "WhatsApp Orders: +1 (862) 255-8720"
   },
   ES: {
     locationBar: "Entrega Especializada Disponible Hoy en Loja y Área Metropolitana ($ USD)",
@@ -139,7 +149,13 @@ const i18nDict = {
     aboutTabValues: "Los 5 Pilares",
     bagTitle: "Tu Bolsa de Compras",
     btnCheckout: "Proceder al Pago Expres →",
-    courierLabel: "Envío Especializado Atelier"
+    courierLabel: "Envío Especializado Atelier",
+    topBarWhatsApp: "Pedidos por WhatsApp: +1 (862) 255-8720",
+    waConciergeLabel: "Pedidos por WhatsApp & Concierge",
+    btnOrderWhatsApp: "💬 Ordenar por WhatsApp (+1 862 255-8720)",
+    btnConfirmWhatsApp: "Enviar Pedido por WhatsApp (+1 862 255-8720)",
+    btnPayCard: "Pagar con Tarjeta / Apple Pay",
+    footerWhatsApp: "Pedidos por WhatsApp: +1 (862) 255-8720"
   }
 };
 
@@ -330,6 +346,15 @@ function applyTranslations() {
   const zipInput = document.getElementById("zipInput");
   if (zipInput) {
     zipInput.placeholder = dict.zipPlaceholder;
+  }
+
+  const waFloat = document.getElementById("whatsappFloatBtn");
+  if (waFloat) {
+    const isEs = currentLang === 'ES';
+    const text = isEs 
+      ? `Hola SKY FLORALS, deseo consultar sobre un pedido / disponibilidad para entrega.` 
+      : `Hello SKY FLORALS, I would like to inquire about an order / courier delivery availability.`;
+    waFloat.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }
 }
 
@@ -527,36 +552,577 @@ function openCheckoutModal() {
   if (modal) modal.classList.add("active");
 }
 
-function closeCheckoutModal() {
-  const modal = document.getElementById("checkoutModal");
+// ========================================================
+// 1. PAYMENT METHODS & FORM FORMATTING (USA FUNCTIONAL)
+// ========================================================
+let selectedPaymentMethod = 'card'; // 'card', 'zelle', 'whatsapp'
+
+function switchPaymentMethod(method) {
+  selectedPaymentMethod = method;
+  
+  // Update Tabs
+  document.querySelectorAll(".payment-tab-btn").forEach(btn => btn.classList.remove("active"));
+  const activeBtn = document.getElementById(`payTabBtn-${method}`);
+  if (activeBtn) activeBtn.classList.add("active");
+
+  // Update Panels
+  document.querySelectorAll(".payment-panel").forEach(panel => panel.classList.remove("active"));
+  const activePanel = document.getElementById(`payPanel-${method}`);
+  if (activePanel) activePanel.classList.add("active");
+
+  // Update Primary CTA text
+  const primaryBtn = document.getElementById("checkoutPrimaryBtn");
+  if (primaryBtn) {
+    if (method === 'card') {
+      primaryBtn.innerHTML = currentLang === 'ES' 
+        ? "Confirmar y Pagar con Tarjeta / Apple Pay →" 
+        : "Confirm & Pay via Card / Apple Pay →";
+    } else if (method === 'zelle') {
+      primaryBtn.innerHTML = currentLang === 'ES' 
+        ? "He enviado el pago por Zelle — Generar Factura →" 
+        : "I Have Sent Zelle Payment — Generate Invoice →";
+    } else {
+      primaryBtn.innerHTML = currentLang === 'ES' 
+        ? "Enviar Pedido a WhatsApp y Generar Factura →" 
+        : "Send to WhatsApp & Generate Invoice →";
+    }
+  }
+}
+
+function formatCardNumber(el) {
+  let val = el.value.replace(/\D/g, '').substring(0, 16);
+  let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+  el.value = formatted;
+}
+
+function formatCardExp(el) {
+  let val = el.value.replace(/\D/g, '').substring(0, 4);
+  if (val.length >= 2) {
+    el.value = val.substring(0, 2) + '/' + val.substring(2);
+  } else {
+    el.value = val;
+  }
+}
+
+// ========================================================
+// 2. COOKIE CONSENT & LEGAL POLICY MODALS
+// ========================================================
+function checkCookieConsent() {
+  const consent = localStorage.getItem("sky_cookie_consent");
+  const banner = document.getElementById("cookieBanner");
+  if (!consent && banner) {
+    setTimeout(() => banner.classList.remove("hidden"), 1200);
+  }
+}
+
+function acceptCookies() {
+  localStorage.setItem("sky_cookie_consent", "all");
+  const banner = document.getElementById("cookieBanner");
+  if (banner) banner.classList.add("hidden");
+  showToast(currentLang === 'ES' ? "Preferencias de cookies guardadas." : "Privacy & Cookie preferences saved.");
+}
+
+function declineCookies() {
+  localStorage.setItem("sky_cookie_consent", "essential");
+  const banner = document.getElementById("cookieBanner");
+  if (banner) banner.classList.add("hidden");
+  showToast(currentLang === 'ES' ? "Cookies esenciales activadas." : "Essential cookies preserved.");
+}
+
+function openPrivacyModal() {
+  const modal = document.getElementById("privacyModal");
+  if (modal) modal.classList.add("active");
+}
+
+function closePrivacyModal() {
+  const modal = document.getElementById("privacyModal");
   if (modal) modal.classList.remove("active");
 }
 
-function submitCheckout(e) {
-  e.preventDefault();
-  const modalContent = document.getElementById("modalCardContent");
-  if (modalContent) {
-    modalContent.innerHTML = `
-      <div style="font-size:3rem; margin-bottom:16px;">🌿</div>
-      <div class="hero-tag" style="margin:0 auto 16px;">${currentLang === 'ES' ? 'Pedido Confirmado' : 'Order Confirmed'}</div>
-      <h3 class="heading-lg" style="margin-bottom:12px;">${currentLang === 'ES' ? 'Gracias por Elegir SKY FLORALS' : 'Thank You for Choosing SKY FLORALS'}</h3>
-      <p style="color:var(--text-secondary); line-height:1.6; font-size:0.95rem;">
-        ${currentLang === 'ES' ? 'Tu orden' : 'Your order'} <strong>#SKY-${Math.floor(100000 + Math.random() * 900000)}</strong> ${currentLang === 'ES' ? 'ha sido recibida por nuestros maestros floristas.' : 'has been received by our master floral artisans.'}
-      </p>
-      <div style="background:var(--bg-primary); border-radius:var(--radius-md); padding:20px; margin:24px 0; text-align:left; font-size:0.85rem; color:var(--text-primary); border:1px solid var(--border-light);">
-        <div><strong>${currentLang === 'ES' ? 'Ubicación:' : 'Delivery Region:'}</strong> ${activeRegion === 'LOJA' ? 'Entrega Especializada en Loja, Ecuador ($3 USD Envio)' : 'New Jersey / NYC White-Glove Courier ($15 USD Shipping)'}</div>
-        <div style="margin-top:6px;"><strong>${currentLang === 'ES' ? 'Experiencia:' : 'Recipient Experience:'}</strong> ${currentLang === 'ES' ? 'Caja de Lino Natural con Certificado de Curaduría en Algodón' : 'Natural Linen Unboxing Box with Cotton Certificate of Curation'}</div>
-      </div>
-      <button class="btn-primary" onclick="finishCheckoutOrder()">${currentLang === 'ES' ? 'Volver al Atelier' : 'Return to Atelier'}</button>
-    `;
-  }
-  cart = [];
-  updateCartUI();
+function openTermsModal() {
+  const modal = document.getElementById("termsModal");
+  if (modal) modal.classList.add("active");
 }
 
-function finishCheckoutOrder() {
+function closeTermsModal() {
+  const modal = document.getElementById("termsModal");
+  if (modal) modal.classList.remove("active");
+}
+
+// ========================================================
+// 3. CLIENT DATABASE & ATELIER CRM
+// ========================================================
+const CRM_STORAGE_KEY = "sky_client_database";
+const CRM_WEBHOOK_URL = ""; // Optional webhook for Google Sheets / Zapier / Make integration
+
+function getClientDatabase() {
+  const raw = localStorage.getItem(CRM_STORAGE_KEY);
+  if (raw) {
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      console.error("Error parsing CRM storage", e);
+    }
+  }
+
+  // Initial Seed Records for realistic demonstration
+  const seed = [
+    {
+      id: "CLI-001",
+      name: "Sophia Martinez",
+      email: "sophia.m@luxuryresidence.com",
+      phone: "+1 (862) 555-0142",
+      taxId: "EIN-84-2918231",
+      address: "740 Park Ave, Apt 12A, New York, NY 10021",
+      region: "New Jersey & NYC Metro",
+      ordersCount: 3,
+      totalSpent: 625,
+      lastOrderDate: "2026-10-24",
+      consentDate: "2026-10-24T14:22:00Z"
+    },
+    {
+      id: "CLI-002",
+      name: "David Andrade",
+      email: "d.andrade@lojaestudio.ec",
+      phone: "+593 99 284 9182",
+      taxId: "RUC 1104829102001",
+      address: "Av. Orillas del Zamora y 10 de Agosto, Loja",
+      region: "Atelier Loja, Ecuador",
+      ordersCount: 2,
+      totalSpent: 130,
+      lastOrderDate: "2026-10-25",
+      consentDate: "2026-10-25T11:15:00Z"
+    }
+  ];
+  localStorage.setItem(CRM_STORAGE_KEY, JSON.stringify(seed));
+  return seed;
+}
+
+function saveClientRecord(clientData, orderTotal) {
+  let clients = getClientDatabase();
+  const existing = clients.find(c => 
+    c.email.toLowerCase() === clientData.email.toLowerCase() || 
+    c.phone === clientData.phone
+  );
+
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  if (existing) {
+    existing.name = clientData.name || existing.name;
+    existing.taxId = clientData.taxId || existing.taxId;
+    existing.address = clientData.address || existing.address;
+    existing.region = clientData.region || existing.region;
+    existing.ordersCount = (existing.ordersCount || 1) + 1;
+    existing.totalSpent = (existing.totalSpent || 0) + Number(orderTotal);
+    existing.lastOrderDate = todayStr;
+  } else {
+    const newClient = {
+      id: "CLI-" + String(clients.length + 1).padStart(3, '0'),
+      name: clientData.name,
+      email: clientData.email,
+      phone: clientData.phone,
+      taxId: clientData.taxId || "N/A",
+      address: clientData.address,
+      region: clientData.region,
+      ordersCount: 1,
+      totalSpent: Number(orderTotal),
+      lastOrderDate: todayStr,
+      consentDate: new Date().toISOString()
+    };
+    clients.unshift(newClient);
+  }
+
+  localStorage.setItem(CRM_STORAGE_KEY, JSON.stringify(clients));
+
+  // Optional Webhook Pipe to Google Sheets / Make / Zapier
+  if (CRM_WEBHOOK_URL) {
+    try {
+      fetch(CRM_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ client: clientData, total: orderTotal, timestamp: new Date() })
+      }).catch(err => console.log("Webhook push notice:", err));
+    } catch(e) {}
+  }
+}
+
+function openAdminModal() {
+  const modal = document.getElementById("adminModal");
+  if (modal) {
+    modal.classList.add("active");
+    renderAdminClients();
+  }
+}
+
+function closeAdminModal() {
+  const modal = document.getElementById("adminModal");
+  if (modal) modal.classList.remove("active");
+}
+
+function renderAdminClients() {
+  const tbody = document.getElementById("adminClientTableBody");
+  const query = (document.getElementById("adminSearchInput")?.value || "").toLowerCase().trim();
+  const clients = getClientDatabase();
+
+  const filtered = clients.filter(c => 
+    c.name.toLowerCase().includes(query) || 
+    c.email.toLowerCase().includes(query) || 
+    (c.taxId && c.taxId.toLowerCase().includes(query)) ||
+    c.phone.includes(query)
+  );
+
+  const totalClients = clients.length;
+  const totalOrders = clients.reduce((acc, c) => acc + (c.ordersCount || 1), 0);
+  const totalRevenue = clients.reduce((acc, c) => acc + (c.totalSpent || 0), 0);
+
+  const elClients = document.getElementById("adminTotalClients");
+  const elOrders = document.getElementById("adminTotalOrders");
+  const elRev = document.getElementById("adminTotalRevenue");
+
+  if (elClients) elClients.innerText = totalClients;
+  if (elOrders) elOrders.innerText = totalOrders;
+  if (elRev) elRev.innerText = `$${totalRevenue.toLocaleString()} USD`;
+
+  if (tbody) {
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:24px; color:var(--text-secondary);">No clients found matching "${query}".</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(c => `
+      <tr>
+        <td style="font-size:0.75rem; color:var(--text-secondary);">${c.lastOrderDate || 'Recent'}</td>
+        <td><strong>${c.name}</strong></td>
+        <td>
+          <div>${c.email}</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary);">${c.phone}</div>
+        </td>
+        <td><span style="font-family:monospace; background:var(--bg-cloud); padding:2px 6px; border-radius:4px;">${c.taxId || 'N/A'}</span></td>
+        <td><span style="font-size:0.75rem;">${c.region}</span></td>
+        <td>
+          <strong>${c.ordersCount || 1} orders</strong>
+          <div style="color:#059669; font-weight:600;">$${c.totalSpent || 0} USD</div>
+        </td>
+        <td>
+          <a href="https://wa.me/${c.phone.replace(/\D/g, '')}" target="_blank" class="btn-icon" style="padding:4px 10px; font-size:0.7rem; text-decoration:none;">
+            💬 WhatsApp
+          </a>
+        </td>
+      </tr>
+    `).join('');
+  }
+}
+
+function exportClientsCSV() {
+  const clients = getClientDatabase();
+  if (clients.length === 0) {
+    showToast("No client records to export.");
+    return;
+  }
+
+  const headers = ["Client ID", "Full Name", "Email Address", "Phone Number", "Tax ID / EIN", "Address", "Region", "Total Orders", "Total Spent (USD)", "Last Order Date", "Consent Timestamp"];
+  const rows = clients.map(c => [
+    `"${c.id}"`,
+    `"${c.name}"`,
+    `"${c.email}"`,
+    `"${c.phone}"`,
+    `"${c.taxId || ''}"`,
+    `"${(c.address || '').replace(/"/g, '""')}"`,
+    `"${c.region}"`,
+    `"${c.ordersCount || 1}"`,
+    `"${c.totalSpent || 0}"`,
+    `"${c.lastOrderDate}"`,
+    `"${c.consentDate || ''}"`
+  ]);
+
+  const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `sky_florals_clients_${new Date().toISOString().split('T')[0]}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  showToast(currentLang === 'ES' ? "Base de datos exportada en formato Excel / CSV." : "Client database exported as Excel / CSV.");
+}
+
+function clearClientDatabase() {
+  if (confirm(currentLang === 'ES' ? "¿Deseas restablecer la base de clientes local?" : "Do you want to reset the local client database?")) {
+    localStorage.removeItem(CRM_STORAGE_KEY);
+    renderAdminClients();
+    showToast("Database reset.");
+  }
+}
+
+// ========================================================
+// 4. COMMERCIAL INVOICE GENERATION & PRINT
+// ========================================================
+let currentInvoiceData = null;
+
+function generateInvoice(clientData, items, subtotal, deliveryFee, tax, total, methodLabel) {
+  const invNumber = `INV-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+  const locale = currentLang === 'ES' ? 'es-EC' : 'en-US';
+  const dateStr = new Date().toLocaleDateString(locale, {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  const invoice = {
+    number: invNumber,
+    date: dateStr,
+    client: clientData,
+    items: [...items],
+    subtotal: subtotal,
+    deliveryFee: deliveryFee,
+    tax: tax,
+    total: total,
+    method: methodLabel
+  };
+
+  currentInvoiceData = invoice;
+
+  // Populate Invoice DOM
+  const elNum = document.getElementById("invNumber");
+  const elDate = document.getElementById("invDate");
+  const elClientName = document.getElementById("invClientName");
+  const elClientEmail = document.getElementById("invClientEmail");
+  const elClientPhone = document.getElementById("invClientPhone");
+  const elClientTaxId = document.getElementById("invClientTaxId");
+
+  const elRecipientName = document.getElementById("invRecipientName");
+  const elDeliveryAddress = document.getElementById("invDeliveryAddress");
+  const elDeliveryCity = document.getElementById("invDeliveryCity");
+  const elDeliveryDate = document.getElementById("invDeliveryDate");
+
+  const elItemsBody = document.getElementById("invItemsBody");
+  const elSubtotal = document.getElementById("invSubtotal");
+  const elShipping = document.getElementById("invShipping");
+  const elTax = document.getElementById("invTax");
+  const elTaxLabel = document.getElementById("invTaxLabel");
+  const elGrandTotal = document.getElementById("invGrandTotal");
+  const elMethod = document.getElementById("invMethodName");
+
+  if (elNum) elNum.innerText = invoice.number;
+  if (elDate) elDate.innerText = invoice.date;
+  if (elClientName) elClientName.innerText = clientData.name;
+  if (elClientEmail) elClientEmail.innerText = clientData.email;
+  if (elClientPhone) elClientPhone.innerText = clientData.phone;
+  if (elClientTaxId) elClientTaxId.innerText = `Tax ID / EIN: ${clientData.taxId || 'N/A'}`;
+
+  if (elRecipientName) elRecipientName.innerText = clientData.recipientName || clientData.name;
+  if (elDeliveryAddress) elDeliveryAddress.innerText = clientData.address;
+  if (elDeliveryCity) elDeliveryCity.innerText = `${clientData.city}, ${clientData.zip}`;
+  if (elDeliveryDate) elDeliveryDate.innerText = `Delivery Date: ${clientData.deliveryDate || 'Priority Dispatch'}`;
+
+  if (elItemsBody) {
+    elItemsBody.innerHTML = items.map(item => `
+      <tr>
+        <td>
+          <div style="font-weight:600;">${item.name}</div>
+          ${item.meta ? `<div style="font-size:0.75rem; color:var(--text-secondary);">${item.meta}</div>` : ''}
+        </td>
+        <td style="text-align:center;">${item.qty}</td>
+        <td style="text-align:right;">$${item.price.toFixed(2)}</td>
+        <td style="text-align:right; font-weight:600;">$${(item.price * item.qty).toFixed(2)}</td>
+      </tr>
+    `).join('');
+  }
+
+  if (elSubtotal) elSubtotal.innerText = `$${subtotal.toFixed(2)} USD`;
+  if (elShipping) elShipping.innerText = `$${deliveryFee.toFixed(2)} USD`;
+  if (elTaxLabel) elTaxLabel.innerText = activeRegion === 'LOJA' ? 'IVA / Municipal Tax:' : 'State Sales Tax (NJ 6.625%):';
+  if (elTax) elTax.innerText = `$${tax.toFixed(2)} USD`;
+  if (elGrandTotal) elGrandTotal.innerText = `$${total.toFixed(2)} USD`;
+  if (elMethod) elMethod.innerText = methodLabel;
+
+  return invoice;
+}
+
+function openInvoiceModal() {
+  const modal = document.getElementById("invoiceModal");
+  if (modal) modal.classList.add("active");
+}
+
+function closeInvoiceModal() {
+  const modal = document.getElementById("invoiceModal");
+  if (modal) modal.classList.remove("active");
+}
+
+function printInvoice() {
+  window.print();
+}
+
+// ========================================================
+// 5. UNIFIED CHECKOUT & WHATSAPP SUBMIT FLOW
+// ========================================================
+function handleCheckoutSubmit(e) {
+  if (e) e.preventDefault();
+
+  if (cart.length === 0) {
+    showToast(currentLang === 'ES' ? "Tu bolsa de compras está vacía." : "Your shopping bag is empty.");
+    return;
+  }
+
+  // Legal Consent Check
+  const consentBox = document.getElementById("legalConsentCheck");
+  if (consentBox && !consentBox.checked) {
+    alert(currentLang === 'ES' 
+      ? "Por favor acepta las políticas de privacidad y términos para continuar con la factura." 
+      : "Please accept the Privacy Policy & Terms to proceed with invoice issuance.");
+    return;
+  }
+
+  const clientName = document.getElementById("billingName")?.value.trim() || "Valued Client";
+  const clientEmail = document.getElementById("billingEmail")?.value.trim() || "concierge@skyflorals.com";
+  const clientPhone = document.getElementById("billingPhone")?.value.trim() || "+1 (862) 255-8720";
+  const clientTaxId = document.getElementById("billingTaxId")?.value.trim() || "";
+
+  const recipientName = document.getElementById("orderRecipientName")?.value.trim() || clientName;
+  const address = document.getElementById("orderDeliveryAddress")?.value.trim() || "";
+  const city = document.getElementById("orderCityZone")?.value.trim() || "";
+  const zip = document.getElementById("orderZipCode")?.value.trim() || "";
+  const deliveryDate = document.getElementById("orderDeliveryDate")?.value || "";
+
+  const isLoja = activeRegion === 'LOJA';
+  const deliveryFee = isLoja ? 3 : 15;
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  // US State Sales Tax (NJ ~6.625%), 0 for Loja
+  const taxRate = isLoja ? 0.00 : 0.06625;
+  const tax = Number((subtotal * taxRate).toFixed(2));
+  const grandTotal = Number((subtotal + deliveryFee + tax).toFixed(2));
+
+  let methodLabel = "Credit Card (Stripe SSL Gateway USA)";
+  if (selectedPaymentMethod === 'zelle') {
+    methodLabel = "Zelle Instant Transfer (SKY FLORALS LLC)";
+  } else if (selectedPaymentMethod === 'whatsapp') {
+    methodLabel = "WhatsApp Concierge Confirmation";
+  }
+
+  const clientData = {
+    name: clientName,
+    email: clientEmail,
+    phone: clientPhone,
+    taxId: clientTaxId,
+    recipientName: recipientName,
+    address: address,
+    city: city,
+    zip: zip,
+    deliveryDate: deliveryDate,
+    region: isLoja ? "Atelier Loja, Ecuador" : "New Jersey & NYC Metro"
+  };
+
+  // 1. Save to Client CRM Database
+  saveClientRecord(clientData, grandTotal);
+
+  // 2. Generate Commercial Invoice
+  generateInvoice(clientData, cart, subtotal, deliveryFee, tax, grandTotal, methodLabel);
+
+  // 3. Dispatch according to payment method
+  if (selectedPaymentMethod === 'whatsapp') {
+    triggerWhatsAppFromCheckout(clientData, grandTotal);
+  } else if (selectedPaymentMethod === 'card') {
+    showToast(currentLang === 'ES' 
+      ? "¡Pago con tarjeta procesado con éxito! Se ha generado tu factura." 
+      : "Card payment authorized successfully! Your official invoice has been generated.");
+  } else if (selectedPaymentMethod === 'zelle') {
+    showToast(currentLang === 'ES' 
+      ? "Registro de pago Zelle recibido. Revisa y descarga tu factura." 
+      : "Zelle payment registered. Your official invoice is ready.");
+  }
+
+  // Clear Cart & Close Checkout Modal
+  cart = [];
+  updateCartUI();
   closeCheckoutModal();
-  setTimeout(() => location.reload(), 500);
+
+  // Open Invoice View
+  setTimeout(() => {
+    openInvoiceModal();
+  }, 400);
+}
+
+function triggerWhatsAppFromCheckout(providedClient = null, grandTotal = null) {
+  const clientName = document.getElementById("billingName")?.value.trim() || "";
+  const clientEmail = document.getElementById("billingEmail")?.value.trim() || "";
+  const clientTaxId = document.getElementById("billingTaxId")?.value.trim() || "";
+  const recipientName = document.getElementById("orderRecipientName")?.value.trim() || clientName;
+  const address = document.getElementById("orderDeliveryAddress")?.value.trim() || "";
+  const city = document.getElementById("orderCityZone")?.value.trim() || "";
+  const zip = document.getElementById("orderZipCode")?.value.trim() || "";
+  const date = document.getElementById("orderDeliveryDate")?.value || "";
+
+  orderViaWhatsApp({
+    clientName: clientName,
+    clientEmail: clientEmail,
+    taxId: clientTaxId,
+    name: recipientName,
+    address: address,
+    city: city,
+    zip: zip,
+    date: date
+  });
+}
+
+function orderViaWhatsApp(formDetails = null) {
+  if (cart.length === 0 && !currentInvoiceData) {
+    showToast(currentLang === 'ES' ? "¡Tu bolsa está vacía! Agrega una creación primero." : "Your shopping bag is empty! Add a creation first.");
+    return;
+  }
+
+  const isEs = currentLang === 'ES';
+  const isLoja = activeRegion === 'LOJA';
+  const deliveryFee = isLoja ? 3 : 15;
+  const items = cart.length > 0 ? cart : (currentInvoiceData ? currentInvoiceData.items : []);
+  const subtotalPrice = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const totalPrice = subtotalPrice + deliveryFee;
+
+  let text = isEs 
+    ? `✨ *NUEVO PEDIDO CON FACTURA — SKY FLORALS*\n` 
+    : `✨ *NEW ORDER & INVOICE REQUEST — SKY FLORALS*\n`;
+
+  text += `━━━━━━━━━━━━━━━━━━━━\n`;
+  text += isEs ? `*Ubicación:* ${isLoja ? 'Atelier Loja, Ecuador' : 'New Jersey & NYC Metro'}\n\n` 
+               : `*Region:* ${isLoja ? 'Atelier Loja, Ecuador' : 'New Jersey & NYC Metro'}\n\n`;
+
+  text += isEs ? `*CREACIONES SELECCIONADAS:*\n` : `*CURATED CREATIONS:*\n`;
+  items.forEach(item => {
+    text += `• ${item.qty}x ${item.name} ($${item.price * item.qty} USD)\n`;
+    if (item.meta) {
+      text += `  _${item.meta}_\n`;
+    }
+  });
+
+  text += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `Subtotal: $${subtotalPrice.toFixed(2)} USD\n`;
+  text += `${isEs ? 'Envío Especializado' : 'Courier Delivery'}: $${deliveryFee.toFixed(2)} USD\n`;
+  text += `*TOTAL: $${totalPrice.toFixed(2)} USD*\n`;
+
+  if (formDetails) {
+    text += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+    text += isEs ? `*DATOS PARA FACTURA Y ENVÍO:*\n` : `*BILLING & INVOICE DETAILS:*\n`;
+    if (formDetails.clientName) text += `• ${isEs ? 'Cliente' : 'Client'}: ${formDetails.clientName}\n`;
+    if (formDetails.clientEmail) text += `• Email: ${formDetails.clientEmail}\n`;
+    if (formDetails.taxId) text += `• ${isEs ? 'RUC / Tax ID' : 'Tax ID / EIN'}: ${formDetails.taxId}\n`;
+    if (formDetails.name) text += `• ${isEs ? 'Destinatario' : 'Recipient'}: ${formDetails.name}\n`;
+    if (formDetails.address) text += `• ${isEs ? 'Dirección' : 'Address'}: ${formDetails.address}\n`;
+    if (formDetails.city) text += `• ${isEs ? 'Ciudad/Zona' : 'City/Zone'}: ${formDetails.city} (${formDetails.zip || ''})\n`;
+    if (formDetails.date) text += `• ${isEs ? 'Fecha Entrega' : 'Delivery Date'}: ${formDetails.date}\n`;
+  }
+
+  text += `\n${isEs ? 'Agradezco confirmación de disponibilidad para el despacho del pedido y emisión de factura.' : 'Please confirm availability to finalize courier dispatch and formal invoice.'}`;
+
+  const encoded = encodeURIComponent(text);
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  window.open(url, '_blank');
+}
+
+function openWhatsAppConcierge() {
+  const isEs = currentLang === 'ES';
+  const text = isEs 
+    ? `Hola SKY FLORALS, deseo consultar sobre un pedido / disponibilidad para entrega.` 
+    : `Hello SKY FLORALS, I would like to inquire about an order / courier delivery availability.`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
 }
 
 // Toast System
@@ -584,12 +1150,38 @@ window.filterCatalog = filterCatalog;
 window.checkDeliveryZip = checkDeliveryZip;
 window.openCheckoutModal = openCheckoutModal;
 window.closeCheckoutModal = closeCheckoutModal;
-window.submitCheckout = submitCheckout;
-window.finishCheckoutOrder = finishCheckoutOrder;
 window.switchLocation = switchLocation;
 window.openAboutModal = openAboutModal;
 window.closeAboutModal = closeAboutModal;
 window.switchAboutTab = switchAboutTab;
+
+// WhatsApp & Checkout exports
+window.orderViaWhatsApp = orderViaWhatsApp;
+window.openWhatsAppConcierge = openWhatsAppConcierge;
+window.switchPaymentMethod = switchPaymentMethod;
+window.formatCardNumber = formatCardNumber;
+window.formatCardExp = formatCardExp;
+window.handleCheckoutSubmit = handleCheckoutSubmit;
+window.triggerWhatsAppFromCheckout = triggerWhatsAppFromCheckout;
+
+// Cookie & Legal exports
+window.acceptCookies = acceptCookies;
+window.declineCookies = declineCookies;
+window.openPrivacyModal = openPrivacyModal;
+window.closePrivacyModal = closePrivacyModal;
+window.openTermsModal = openTermsModal;
+window.closeTermsModal = closeTermsModal;
+
+// Invoice & CRM exports
+window.openInvoiceModal = openInvoiceModal;
+window.closeInvoiceModal = closeInvoiceModal;
+window.printInvoice = printInvoice;
+window.openAdminModal = openAdminModal;
+window.closeAdminModal = closeAdminModal;
+window.renderAdminClients = renderAdminClients;
+window.exportClientsCSV = exportClientsCSV;
+window.clearClientDatabase = clearClientDatabase;
+
 window.getCurrentLang = () => currentLang;
 window.getActiveRegion = () => activeRegion;
 
@@ -597,4 +1189,6 @@ window.getActiveRegion = () => activeRegion;
 document.addEventListener("DOMContentLoaded", () => {
   renderCatalog();
   updateCartUI();
+  checkCookieConsent();
+  getClientDatabase(); // Ensure CRM is initialized
 });
